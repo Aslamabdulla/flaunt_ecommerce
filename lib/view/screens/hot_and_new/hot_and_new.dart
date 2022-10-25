@@ -14,13 +14,14 @@ class HotAndNewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return GetBuilder<HotAndNewController>(
         init: HotAndNewController(),
         builder: (controller) {
           return Container(
               child: PageView.builder(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   itemCount: pageViewCategories.length,
                   controller: controller.pageviewController,

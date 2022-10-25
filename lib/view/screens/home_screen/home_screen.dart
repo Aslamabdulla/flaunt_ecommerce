@@ -15,8 +15,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: Drawer(
         elevation: 1,
@@ -50,6 +50,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SafeArea(
               child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,

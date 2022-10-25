@@ -17,8 +17,8 @@ class GridViewCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: GridView.custom(

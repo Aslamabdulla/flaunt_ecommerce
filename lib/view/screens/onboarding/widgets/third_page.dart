@@ -9,9 +9,9 @@ class ThirdPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var height = size.height;
-    var width = size.width;
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
     return Container(
         height: height,
         width: width,
@@ -43,22 +43,22 @@ class ThirdPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    CircleAvatar(
-                      backgroundColor: kWhite,
-                      radius: 30,
-                      child: Center(
-                        child: IconButton(
-                          onPressed: () => Get.offAll(
-                              () => const OnBoardingSecondScreen(),
-                              transition: Transition.rightToLeft,
-                              duration: Duration(milliseconds: 400)),
-                          icon: const Icon(
-                            Icons.chevron_right,
-                            color: kBlack,
-                          ),
-                        ),
-                      ),
-                    )
+                    // CircleAvatar(
+                    //   backgroundColor: kWhite,
+                    //   radius: 30,
+                    //   child: Center(
+                    //     child: IconButton(
+                    //       onPressed: () => Get.offAll(
+                    //           () => const OnBoardingSecondScreen(),
+                    //           transition: Transition.rightToLeft,
+                    //           duration: Duration(milliseconds: 400)),
+                    //       icon: const Icon(
+                    //         Icons.chevron_right,
+                    //         color: kBlack,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ],

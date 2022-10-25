@@ -10,9 +10,9 @@ class OnBoardingSecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var width = size.width;
-    var height = size.height;
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
     return Scaffold(
       body: Container(
         height: height,
@@ -43,16 +43,16 @@ class OnBoardingSecondScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SizedBox(),
-                      CircleAvatar(
-                        backgroundColor: kBlack,
-                        radius: 30,
-                        child: IconButton(
-                            onPressed: () =>
-                                Get.to(() => const OnboardingFinalScreen()),
-                            icon: const Icon(
-                              Icons.chevron_right,
-                            )),
-                      )
+                      // CircleAvatar(
+                      //   backgroundColor: kBlack,
+                      //   radius: 30,
+                      //   child: IconButton(
+                      //       onPressed: () =>
+                      //           Get.to(() => const OnboardingFinalScreen()),
+                      //       icon: const Icon(
+                      //         Icons.chevron_right,
+                      //       )),
+                      // )
                     ],
                   )
                 ],

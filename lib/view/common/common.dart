@@ -122,6 +122,19 @@ final List<List<String>> categoriesList = [
   gridCategories,
 ];
 
+List<IconData> iconFlauntPay = [
+  Icons.currency_rupee,
+  Icons.qr_code_scanner_outlined,
+  Icons.receipt_long,
+  Icons.help_outline_outlined,
+];
+List<String> textFlauntPay = [
+  "Add Money",
+  "Scan & Pay",
+  "Recent Transactions",
+  "Get Help"
+];
+
 List<StepperData> stepperData = [
   StepperData(
     title: "Order Accepted",
@@ -236,6 +249,14 @@ textStyleSize(double size, FontWeight fontWeight) =>
 
 final boxGradientDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
+  gradient: const LinearGradient(colors: [
+    Color.fromRGBO(43, 154, 184, 1),
+    Color.fromRGBO(60, 174, 200, .5)
+  ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+);
+
+final boxGradientDecorFlauntPay = BoxDecoration(
+  borderRadius: BorderRadius.circular(20),
   gradient: const LinearGradient(colors: [
     Color.fromRGBO(43, 154, 184, 1),
     Color.fromRGBO(60, 174, 200, .5)

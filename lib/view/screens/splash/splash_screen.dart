@@ -11,9 +11,9 @@ class SplashScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       splashTimer();
     });
-    var size = MediaQuery.of(context).size;
-    var height = size.height;
-    var width = size.width;
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
 
     return Scaffold(
       body: Container(
