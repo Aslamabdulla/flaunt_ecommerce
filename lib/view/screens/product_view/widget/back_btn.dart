@@ -13,13 +13,13 @@ class FavouriteButtonAppbar extends StatelessWidget {
       child: Container(
         height: 30,
         width: 30,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             shape: BoxShape.circle,
             gradient: LinearGradient(colors: [
               Color.fromRGBO(43, 154, 184, 1),
               Color.fromRGBO(60, 174, 200, .4),
             ])),
-        child: Center(
+        child: const Center(
           child: Icon(Icons.chevron_left),
         ),
       ),

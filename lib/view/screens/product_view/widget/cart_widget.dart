@@ -13,12 +13,13 @@ class CountAndCartWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CounterCartWidget(),
+        const CounterCartWidget(),
         ElevatedButton.icon(
-            style: buttonStyleCart(250, 50, Color.fromRGBO(43, 154, 184, 1)),
+            style:
+                buttonStyleCart(250, 50, const Color.fromRGBO(43, 154, 184, 1)),
             onPressed: () {},
-            icon: Icon(Icons.local_mall),
-            label: Text("Add to Cart"))
+            icon: const Icon(Icons.local_mall),
+            label: const Text("Add to Cart"))
       ],
     );
   }

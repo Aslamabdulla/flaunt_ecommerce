@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
-import 'package:flaunt_ecommenrce/view/payment_success/payment_success.dart';
+import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/text_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
 import 'package:flutter/material.dart';
