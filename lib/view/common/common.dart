@@ -238,6 +238,15 @@ List<Color> colors = const [
   Color.fromRGBO(218, 222, 228, .8),
   Color.fromRGBO(211, 245, 100, .8),
 ];
+List<Color> colorsProduct = const [
+  Color.fromRGBO(245, 204, 233, .8),
+  Color.fromRGBO(211, 245, 245, .8),
+  Color.fromRGBO(218, 222, 228, .8),
+  Color.fromRGBO(211, 245, 100, .8),
+  Color.fromRGBO(211, 245, 245, .8),
+  Color.fromRGBO(218, 222, 228, .8),
+  Color.fromRGBO(211, 245, 100, .8),
+];
 buttonStyleCart(double width, double height, Color color) => ButtonStyle(
     minimumSize: MaterialStateProperty.all(Size(width, height)),
     shape: MaterialStateProperty.all(

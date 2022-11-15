@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const kRedAccent = Colors.redAccent;
 const kWhite = Colors.white;
 const kBlack = Colors.black;
 const kGrey = Colors.grey;

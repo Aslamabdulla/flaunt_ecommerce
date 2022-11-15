@@ -19,4 +19,26 @@ class FirebaseDatabase {
         .collection('subcategories')
         .snapshots();
   }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readproducts(
+      String category, String subCategory) {
+    return _firestore
+        .collection("categories")
+        .doc(category)
+        .collection("subcategories")
+        .doc(subCategory)
+        .collection("products")
+        .snapshots();
+  }
+
+  static Stream<DocumentSnapshot<Object?>> getItem(
+      String docId, String category, String subCategory) {
+    DocumentReference documentReference = _mainCollection
+        .doc(category)
+        .collection("subcategories")
+        .doc(subCategory)
+        .collection("products")
+        .doc(docId);
+    return documentReference.snapshots();
+  }
 }

@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/model/product_model.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -10,9 +13,11 @@ import 'package:flaunt_ecommenrce/view/screens/product_view/product_view.dart';
 
 class GridViewCategoryWidget extends StatelessWidget {
   final List<String> imagesList;
-  const GridViewCategoryWidget({
+  AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
+  GridViewCategoryWidget({
     Key? key,
     required this.imagesList,
+    required this.snapshot,
   }) : super(key: key);
 
   @override
@@ -39,60 +44,89 @@ class GridViewCategoryWidget extends StatelessWidget {
             ],
           ),
           childrenDelegate: SliverChildBuilderDelegate(
-            addSemanticIndexes: false,
-            childCount: imagesList.length,
-            (context, index) => image(index, imagesList),
-          ),
+              childCount: snapshot.data!.docs.length, (context, index) {
+            var productInfo =
+                snapshot.data!.docs[index].data() as Map<String, dynamic>;
+            String firebaseId = snapshot.data!.docs[index].id;
+
+            String category = productInfo['category'];
+            String subCategory = productInfo['subCategory'];
+
+            return image(index, snapshot, productInfo);
+          }),
         ));
   }
 }
 
-Widget image(int index, List<String> imagesList) => GestureDetector(
-      onTap: (() {
-        Get.to(() => ProduductView());
-      }),
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(imagesList[index]), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              padding: EdgeInsets.only(left: 15),
-              width: 200,
-              height: 60,
-              decoration: glassDecorationGrid,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Levis Women Tshirt",
-                        style: gridstyle,
-                      ),
-                      Text(
-                        "₹1850",
-                        style: gridstyleSub,
-                      ),
-                      kHeight5
-                    ],
-                  ),
-                  Icon(Icons.favorite_outline_outlined)
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+Widget image(
+    int index, AsyncSnapshot snapshot, Map<String, dynamic> productInfo) {
+  String firebaseId = snapshot.data!.docs[index].id;
 
+  String category = productInfo['category'];
+  String subCategory = productInfo['subCategory'];
+  String brandName = productInfo['brand'];
+  String id = snapshot.data!.docs[index].id;
+  String title = productInfo['name'];
+  String description = productInfo['description'];
+  String price = productInfo['price'];
+  String quantity = productInfo['quantity'];
+  String productId = productInfo['productId'];
+  List imageUrl = productInfo['imageUrl'];
+  List colors = productInfo['colors'];
+  return GestureDetector(
+    onTap: (() {
+      Get.to(() => ProductViewScreen(
+            category: category,
+            docId: id,
+            itemIndex: index,
+            subCategory: subCategory,
+          ));
+    }),
+    child: Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: NetworkImage(
+              imageUrl[0],
+            ),
+            fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 15),
+            width: 200,
+            height: 60,
+            decoration: glassDecorationGrid,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Levis Women Tshirt",
+                      style: gridstyle,
+                    ),
+                    Text(
+                      "₹1850",
+                      style: gridstyleSub,
+                    ),
+                    kHeight5
+                  ],
+                ),
+                Icon(Icons.favorite_outline_outlined)
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 //  Stack(
 //               children: [
 //                 Container(

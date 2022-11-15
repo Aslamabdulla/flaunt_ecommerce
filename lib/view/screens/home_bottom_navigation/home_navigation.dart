@@ -24,6 +24,7 @@ class HomeNavigationPage extends StatelessWidget {
     ];
     return GetX(
         init: BottomController(),
+        autoRemove: false,
         builder: (BottomController bottomController) {
           return Scaffold(
             resizeToAvoidBottomInset: false,

@@ -61,4 +61,10 @@ class LoginController extends GetxController {
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   focusNode.dispose();
+  //   super.dispose();
+  // }
 }

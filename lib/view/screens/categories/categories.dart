@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
@@ -59,10 +62,32 @@ class CategoriesScreen extends StatelessWidget {
           ),
           SafeArea(
             child: SingleChildScrollView(
-              child: CategoryListWidget(
-                  category: category,
-                  offerTopTileBg: offerTopTileBg,
-                  index: index),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseDatabase.readproducts(category, subCategory),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: Text("ERROR OCCURED"),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(
+                        child: CupertinoActivityIndicator(),
+                      );
+                    } else if (snapshot.data == null) {
+                      return const Center(
+                        child: Text("NO ITEM"),
+                      );
+                    } else if (snapshot.hasData) {
+                      return CategoryListWidget(
+                          snapshot: snapshot,
+                          subCategory: subCategory,
+                          category: category,
+                          offerTopTileBg: offerTopTileBg,
+                          index: index);
+                    }
+                    return const Center(child: CupertinoActivityIndicator());
+                  }),
             ),
           ),
         ],

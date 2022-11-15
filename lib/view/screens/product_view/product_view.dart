@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cart_stepper/cart_stepper.dart';
 import 'package:counter_button/counter_button.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';

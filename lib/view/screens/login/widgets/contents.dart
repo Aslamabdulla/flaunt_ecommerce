@@ -97,7 +97,7 @@ class ColumnWidget extends StatelessWidget {
         kHeight10,
         GestureDetector(
           onTap: () {
-            PinputExample();
+            Get.to(() => FilledRoundedPinPut());
           },
           child: const LoginMethodButtons(
             text: "Continue with Mobile   ",

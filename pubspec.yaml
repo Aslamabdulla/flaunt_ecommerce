@@ -32,12 +32,13 @@ dependencies:
   anim_search_bar: ^2.0.2
   another_stepper: ^1.0.4
   bottom_bar_with_sheet: ^2.4.0
-  carousel_slider: ^4.1.1
+  flutter_carousel_slider: ^1.0.9
   cart_stepper: ^3.0.2
   chips_choice: ^3.0.0
   cloud_firestore: ^4.0.5
   counter_button: ^1.0.1
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
   firebase_auth: ^4.1.2
   firebase_core: ^2.2.0
   firebase_storage: ^11.0.5
