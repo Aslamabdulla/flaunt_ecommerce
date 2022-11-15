@@ -6,7 +6,7 @@ import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flaunt_ecommenrce/controller/bottom_controller/hot_and_new_controller/hot_and_view_controller.dart';
+import 'package:flaunt_ecommenrce/controller/hot_and_new_controller/hot_and_view_controller.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 
 class HotAndNewScreen extends StatelessWidget {

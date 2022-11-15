@@ -14,12 +14,14 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'widgets/category_list_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  final List<String> category;
+  final String category;
+  final String subCategory;
   final List<String> offerTopTileBg;
   int index;
   CategoriesScreen({
     Key? key,
     required this.category,
+    required this.subCategory,
     required this.offerTopTileBg,
     required this.index,
   }) : super(key: key);

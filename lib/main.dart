@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_board_first.dart';
 import 'package:flaunt_ecommenrce/view/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 

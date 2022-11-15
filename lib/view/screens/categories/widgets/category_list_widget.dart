@@ -15,7 +15,7 @@ class CategoryListWidget extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  final List<String> category;
+  final String category;
   final List<String> offerTopTileBg;
   int index;
 
@@ -23,14 +23,14 @@ class CategoryListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
-          "CATEGORIES",
+        Text(
+          category.toUpperCase(),
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         kHeight15,
-        CategoriesUpperTile(offerTopTileBg: offerTopTileBg),
+        CategoriesUpperTile(offerTopTileBg: imagesNoBackgroundMen),
         RowWidget(
-          text: categoriesName[index],
+          text: "FOR $category".toUpperCase(),
           top: 10,
           left: 10,
           fontSize: 18,
@@ -38,7 +38,7 @@ class CategoryListWidget extends StatelessWidget {
         ),
         kHeight15,
         GridViewCategoryWidget(
-          imagesList: category,
+          imagesList: gridMenCategories,
         ),
         kHeight15,
       ],

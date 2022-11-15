@@ -32,12 +32,15 @@ dependencies:
   anim_search_bar: ^2.0.2
   another_stepper: ^1.0.4
   bottom_bar_with_sheet: ^2.4.0
- 
   carousel_slider: ^4.1.1
   cart_stepper: ^3.0.2
   chips_choice: ^3.0.0
+  cloud_firestore: ^4.0.5
   counter_button: ^1.0.1
   cupertino_icons: ^1.0.2
+  firebase_auth: ^4.1.2
+  firebase_core: ^2.2.0
+  firebase_storage: ^11.0.5
   flutter:
     sdk: flutter
   flutter_animated_icons: ^1.0.1
@@ -45,7 +48,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.2
   font_awesome_flutter: ^10.2.1
   get: ^4.6.5
+  google_sign_in: ^5.4.2
   liquid_swipe: ^3.0.0
+  pinput: ^2.2.16
 
 dev_dependencies:
   flutter_lints: ^2.0.0

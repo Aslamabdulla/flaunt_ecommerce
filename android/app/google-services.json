@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "565612190758",
+    "project_id": "flaunt-e9ed3",
+    "storage_bucket": "flaunt-e9ed3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565612190758:android:8b0ea2b5416be16cba1ae7",
+        "android_client_info": {
+          "package_name": "com.example.flaunt_ecommenrce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565612190758-hq3k4st8mpgmb7sopkg7ds0qo69ntp6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZjXcF1rFhlOnucqEJW1CX24ovyIxl0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565612190758-hq3k4st8mpgmb7sopkg7ds0qo69ntp6r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "565612190758-4odsmhdh3eqsb45bkbof161a5r32blro.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fluantSeller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565612190758:android:06be056eca4eae56ba1ae7",
+        "android_client_info": {
+          "package_name": "com.example.fluant_seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565612190758-cd95dd21ameqhiddlgctg67l68dvg8ed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluant_seller",
+            "certificate_hash": "0d19fa1e6895fa871cfb6522992307a2f1a13956"
+          }
+        },
+        {
+          "client_id": "565612190758-hq3k4st8mpgmb7sopkg7ds0qo69ntp6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZjXcF1rFhlOnucqEJW1CX24ovyIxl0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565612190758-hq3k4st8mpgmb7sopkg7ds0qo69ntp6r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "565612190758-4odsmhdh3eqsb45bkbof161a5r32blro.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fluantSeller"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

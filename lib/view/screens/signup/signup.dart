@@ -124,7 +124,7 @@ class SignUpPage extends StatelessWidget {
                   SignUpWidget(
                       text1: "Already have an account?",
                       text2: " Login Now",
-                      fnctn: () => Get.to(() => HomeNavigationPage())),
+                      fnctn: () => Get.back()),
                 ],
               ),
             )
