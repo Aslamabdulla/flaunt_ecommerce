@@ -2,16 +2,25 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flaunt_ecommenrce/services/firebase_services.dart';
-import 'package:flaunt_ecommenrce/view/common/common.dart';
-import 'package:flaunt_ecommenrce/view/constants/constants.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/leading_icon_widget.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
+import 'package:flaunt_ecommenrce/view/screens/my_cart/my_cart.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/brand_name_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/carousel_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_color_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_description_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_image_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
+import 'package:flaunt_ecommenrce/view/common/common.dart';
+import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/cart_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/leading_icon_widget.dart';
 
 import 'widget/stack_decoration.dart';
 import 'widget/title_widget_product.dart';
@@ -39,6 +48,7 @@ class ProductViewScreen extends StatelessWidget {
     final height = size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        extendBody: true,
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () => Get.back(),
@@ -51,14 +61,15 @@ class ProductViewScreen extends StatelessWidget {
             stream: FirebaseDatabase.getItem(docId, category, subCategory),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                return CupertinoActivityIndicator();
+                return const CupertinoActivityIndicator();
               } else if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text("ERROR OCCURED"),
                 );
               } else {
                 var productInfo = snapshot.data!.data() as Map<String, dynamic>;
-
+                String id = snapshot.data!.id;
+                print(id);
                 String subCategory = productInfo['subCategory'];
                 String title = productInfo['name'];
                 String description = productInfo['description'];
@@ -71,170 +82,131 @@ class ProductViewScreen extends StatelessWidget {
                 String category = productInfo['category'];
                 String brandName = productInfo['brand'];
 
-                return Container(
-                  height: height,
-                  width: width,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 30),
-                          height: height / 2,
-                          width: width,
-                          child: CarouselSlider.builder(
-                            unlimitedMode: true,
-                            slideTransform: const CubeTransform(),
-                            slideIndicator: CircularSlideIndicator(
-                                padding: const EdgeInsets.only(bottom: 40)),
-                            slideBuilder: (index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        alignment: Alignment.topCenter,
-                                        image: NetworkImage(imageUrl[index]),
-                                        fit: BoxFit.cover)),
-                              );
-                            },
-                            itemCount: 2,
-                          ),
-                        ),
-                      ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 15),
-                          height: height / 2,
-                          width: width,
-                          decoration: stackDecoration,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8, right: 8, top: 0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(brandName,
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600)),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.edit,
-                                          color: kRedAccent,
-                                          size: 20,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 8, right: 8),
-                                child: TitleWidget(
-                                    width: width, title: title, price: price),
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                width: width,
-                                child: Text(
-                                  description,
-                                  maxLines: 5,
-                                ),
-                              ),
-                              kHeight5,
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                          border: Border.all(width: .5),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: const Center(
-                                        child: Text(
-                                          "COLORS",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                    ),
-                                    kHeight10,
-                                    Row(
-                                      children: List.generate(
-                                          4,
-                                          (index) => Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 5),
-                                                child: CircleAvatar(
-                                                  backgroundColor:
-                                                      colorsProduct[index],
-                                                ),
-                                              )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              kHeight10,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    width: width * .45,
-                                    height: height * .06,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(width: .5),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text(
-                                          "CATEGORY : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(category.toUpperCase())
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: width * .45,
-                                    height: height * .06,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(width: .5),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text(
-                                          "QUANTITY : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        Text(quantity.toString())
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ))
-                    ],
-                  ),
+                return Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  children: [
+                    CarouselWidget(
+                        height: height, width: width, imageUrl: imageUrl),
+                    Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 15),
+                        height: height / 2,
+                        width: width,
+                        decoration: stackDecoration,
+                        child: Column(
+                          children: [
+                            BrandNameWidget(
+                              brandName: brandName,
+                              categoryName: category,
+                            ),
+                            TitleWidget(
+                                width: width, title: title, price: price),
+                            DescriptionWidget(
+                                width: width, description: description),
+                            kHeight5,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                ColorWidget(),
+                                QuantityWidget(
+                                    width: width,
+                                    height: height,
+                                    quantity: quantity),
+                              ],
+                            ),
+                            kHeight10,
+                            Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: CountAndCartWidget(
+                                  id: id,
+                                  category: category,
+                                  subCategory: subCategory,
+                                  docId: docId,
+                                  quantity: int.parse(quantity)),
+                            ),
+                            kHeight15,
+                            ElevatedButton.icon(
+                                style: buttonStyleCart(width * .8, 50, kBlack),
+                                onPressed: () {
+                                  Get.to(() => MyCartScreen(),
+                                      transition: Transition.rightToLeft,
+                                      duration: Duration(milliseconds: 500));
+                                },
+                                icon: const Icon(Icons.local_mall),
+                                label: const Text(
+                                  "CHECKOUT",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ))
+                          ],
+                        ))
+                  ],
                 );
               }
             }));
+  }
+}
+
+class CategoryWidget extends StatelessWidget {
+  const CategoryWidget({
+    Key? key,
+    required this.width,
+    required this.height,
+    required this.category,
+  }) : super(key: key);
+
+  final double width;
+  final double height;
+  final String category;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          "CATEGORY : ",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
+  }
+}
+
+class QuantityWidget extends StatelessWidget {
+  const QuantityWidget({
+    Key? key,
+    required this.width,
+    required this.height,
+    required this.quantity,
+  }) : super(key: key);
+
+  final double width;
+  final double height;
+  final String quantity;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width * .35,
+      height: height * .06,
+      decoration: BoxDecoration(
+          border: Border.all(width: .5),
+          borderRadius: BorderRadius.circular(20)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "QUANTITY : ",
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          Text(quantity)
+        ],
+      ),
+    );
   }
 }

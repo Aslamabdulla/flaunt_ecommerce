@@ -79,19 +79,19 @@ class CheckoutScreen extends StatelessWidget {
                       TotalPriceRowWidget(
                           left: 30,
                           leading: "Amount",
-                          trailing: "₹3000",
+                          trailing: 0.toString(),
                           size1: 15,
                           size2: 16),
                       TotalPriceRowWidget(
                           left: 30,
                           leading: "Gateway Fees",
-                          trailing: "₹0",
+                          trailing: 0.toString(),
                           size1: 15,
                           size2: 16),
                       TotalPriceRowWidget(
                           left: 30,
                           leading: "GST on Gateway Fees",
-                          trailing: "₹0",
+                          trailing: 0.toString(),
                           size1: 15,
                           size2: 16),
                       SizedBox(
@@ -103,7 +103,7 @@ class CheckoutScreen extends StatelessWidget {
                       TotalPriceRowWidget(
                           left: 35,
                           leading: "TOTAL",
-                          trailing: "₹3000",
+                          trailing: 0.toString(),
                           size1: 18,
                           size2: 18),
                       kHeight30,

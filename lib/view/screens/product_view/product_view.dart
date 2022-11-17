@@ -75,7 +75,6 @@ class ProduductView extends StatelessWidget {
                   kHeight15,
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const CountAndCartWidget(),
                   ),
                 ],
               ),

@@ -46,7 +46,7 @@ class ClipperPath extends CustomClipper<Path> {
 ///
 List<Widget> widgets = [
   kHeight10,
-  const TopCategories(),
+  CircleCategories(),
   kHeight15,
   const DiscountOffers(),
   Chips(),
@@ -75,7 +75,7 @@ List<Widget> widgets = [
   kHeight10,
   const RecentlyViewedWidget(),
   kHeight10,
-  CircleCategories(),
+  const TopCategories(),
   const OfferTile(image: "assets/images/offer.png"),
   const RowWidget(
       text: "Trending Clothes",

@@ -1,19 +1,28 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/controller/cart_controller/cart_controller.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/model/product.dart';
+import 'package:flaunt_ecommenrce/model/product_model.dart';
+
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
+import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flaunt_ecommenrce/view/common/common.dart';
-import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/promo_code.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/promo_tile_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/counter_cart.dart';
+
 import 'package:get/get.dart';
 
 class MyCartScreen extends StatelessWidget {
@@ -21,9 +30,14 @@ class MyCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      cartController.sum.value = 0;
+    });
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     TextEditingController offerController = TextEditingController();
+    double total = 0;
+    // double sum = 0;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -42,50 +56,132 @@ class MyCartScreen extends StatelessWidget {
           ),
           SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  RowWidget(
-                    text: "MY CART",
-                    top: 15,
-                    left: 15,
-                    fontSize: 18,
-                    mainAxis: MainAxisAlignment.spaceBetween,
-                  ),
-                  CartListTileWidget(images: cartImages),
-                  kHeight15,
-                  PromoCodeTileWidget(
-                    offerController: offerController,
-                  ),
-                  TotalPriceRowWidget(
-                      left: 25,
-                      leading: "Sub Total",
-                      trailing: "₹3000",
-                      size1: 15,
-                      size2: 16),
-                  TotalPriceRowWidget(
-                      left: 25,
-                      leading: "Shipping Fee",
-                      trailing: "Free",
-                      size1: 12,
-                      size2: 14),
-                  TotalPriceRowWidget(
-                      left: 25,
-                      leading: "Total",
-                      trailing: "₹3000",
-                      size1: 16,
-                      size2: 18),
-                  kHeight20,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: LoginButtonWidget(
-                      name: "Proceed To Checkout",
-                      height: height * .06,
-                      width: width,
-                      fnctn: () => Get.to(() => CheckoutScreen()),
-                    ),
-                  )
-                ],
-              ),
+              child: StreamBuilder(
+                  stream: FirebaseDatabase.readCart(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text("ITEM ALREADY IN CART"),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return Center(
+                        child: CupertinoActivityIndicator(),
+                      );
+                    } else if (snapshot.data == null) {
+                      return Center(
+                        child: Text("NO ITEM IN CART"),
+                      );
+                    } else {
+                      return GetBuilder<CartController>(
+                          init: CartController(),
+                          builder: (cartCtrl) {
+                            return Column(
+                              children: [
+                                RowWidget(
+                                  text: "MY CART",
+                                  top: 15,
+                                  left: 15,
+                                  fontSize: 18,
+                                  mainAxis: MainAxisAlignment.spaceBetween,
+                                ),
+                                ListView.separated(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    itemBuilder: (context, index) {
+                                      // var cart =
+                                      //     snapshot.data!.docs.map((e) => Product(
+                                      //           productId: e["productId"],
+                                      //           brand: e["brand"],
+                                      //           name: e["name"],
+                                      //           category: e["category"],
+                                      //           colors: e["colors"],
+                                      //           description: e["description"],
+                                      //           imageUrl: e["imageurl"],
+                                      //           isHotAndNew: e["isHotAndNew"],
+                                      //           isTrending: e["isTrending"],
+                                      //           isSummerCollection:
+                                      //               e["isSummerCollection"],
+                                      //           isNewArrival: e["isNewArrival"],
+                                      //           isHotSales: e["isHotSales"],
+                                      //           isPopularBrands: e["isPopularBrands"],
+                                      //           subCategory: e["subCategory"],
+                                      //         ));
+                                      // print(cart);
+                                      final cartProducts =
+                                          ProductModel.fromJson(
+                                              json: snapshot.data!.docs[index]
+                                                  .data());
+                                      final String price = cartProducts.price;
+                                      final String quantity =
+                                          cartProducts.quantity;
+
+                                      final double itemPrice =
+                                          double.parse(price);
+                                      final int itemQuantity =
+                                          int.parse(quantity);
+                                      total = itemPrice * itemQuantity;
+
+                                      cartController.stringToDouble(
+                                          price, quantity);
+                                      final List imageUrl =
+                                          cartProducts.imageUrl;
+
+                                      return CartListTileWidget(
+                                        snapshot: snapshot,
+                                        images: imageUrl,
+                                        index: index,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                    itemCount: snapshot.data!.docs.length),
+                                kHeight15,
+                                PromoCodeTileWidget(
+                                  offerController: offerController,
+                                ),
+                                TotalPriceRowWidget(
+                                    left: 25,
+                                    leading: "Sub Total",
+                                    trailing: 2500.toString(),
+                                    size1: 15,
+                                    size2: 16),
+                                TotalPriceRowWidget(
+                                    left: 25,
+                                    leading: "Shipping Fee",
+                                    trailing: 0.toString(),
+                                    size1: 12,
+                                    size2: 14),
+                                ValueListenableBuilder(
+                                    valueListenable:
+                                        cartCtrl.priceCartListenable,
+                                    builder: (context, value, _) {
+                                      return TotalPriceRowWidget(
+                                          left: 25,
+                                          leading: "Total",
+                                          trailing: value.toString(),
+                                          size1: 16,
+                                          size2: 18);
+                                    }),
+                                kHeight20,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: LoginButtonWidget(
+                                    name: "Proceed To Checkout",
+                                    height: height * .06,
+                                    width: width,
+                                    fnctn: () => Get.to(() => CheckoutScreen()),
+                                  ),
+                                ),
+                                kHeight15,
+                              ],
+                            );
+                          });
+                    }
+                  }),
             ),
           ),
         ],

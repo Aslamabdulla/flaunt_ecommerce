@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 const kRedAccent = Colors.redAccent;
 const kWhite = Colors.white;
 const kBlack = Colors.black;
+const kGreenAccent = Colors.greenAccent;
 const kGrey = Colors.grey;
 const kLightBlue = Color.fromRGBO(110, 219, 221, 1);
+const kDarkBlue = Color.fromRGBO(110, 219, 221, 1);
 const kHeight5 = SizedBox(
   height: 5,
 );

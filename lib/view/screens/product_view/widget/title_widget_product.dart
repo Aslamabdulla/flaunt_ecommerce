@@ -1,3 +1,4 @@
+import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class TitleWidget extends StatelessWidget {
@@ -25,11 +26,15 @@ class TitleWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: width * .26,
+          width: width * .25,
           child: Text(
             "₹${price.toString()}",
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            textAlign: TextAlign.end,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

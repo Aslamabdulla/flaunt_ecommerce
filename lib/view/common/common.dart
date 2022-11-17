@@ -250,7 +250,7 @@ List<Color> colorsProduct = const [
 buttonStyleCart(double width, double height, Color color) => ButtonStyle(
     minimumSize: MaterialStateProperty.all(Size(width, height)),
     shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
     backgroundColor: MaterialStateProperty.all(color));
 
 textStyleSize(double size, FontWeight fontWeight) =>

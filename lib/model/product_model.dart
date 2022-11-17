@@ -7,20 +7,20 @@ import 'package:equatable/equatable.dart';
 List<String> colors = ["[F5A127]"];
 
 class Product extends Equatable {
-  final String productId;
-  final String brand;
-  final String name;
-  final String category;
-  final String subCategory;
-  final List<String> colors;
-  final String description;
-  final List<dynamic> imageUrl;
-  final bool isHotAndNew;
-  final bool isTrending;
-  final bool isSummerCollection;
-  final bool isNewArrival;
-  final bool isHotSales;
-  final bool isPopularBrands;
+  String productId;
+  String brand;
+  String name;
+  String category;
+  String subCategory;
+  List<dynamic> colors;
+  String description;
+  List<dynamic> imageUrl;
+  bool isHotAndNew;
+  bool isTrending;
+  bool isSummerCollection;
+  bool isNewArrival;
+  bool isHotSales;
+  bool isPopularBrands;
   String price;
   String quantity;
   Product({
@@ -70,7 +70,7 @@ class Product extends Equatable {
       String? brand,
       String? name,
       String? category,
-      List<String>? colors,
+      List<dynamic>? colors,
       String? description,
       List<dynamic>? imageUrl,
       bool? isHotAndNew,

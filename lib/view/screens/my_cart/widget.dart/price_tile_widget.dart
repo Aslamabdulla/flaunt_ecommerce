@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class TotalPriceRowWidget extends StatelessWidget {
   final String leading;
-  final String trailing;
+  String trailing;
   final double size1;
   final double size2;
   final double left;
 
-  const TotalPriceRowWidget({
+  TotalPriceRowWidget({
     Key? key,
     required this.leading,
     required this.trailing,
@@ -34,7 +34,7 @@ class TotalPriceRowWidget extends StatelessWidget {
             height: 25,
             width: 100,
             child: Text(
-              trailing,
+              "₹${trailing.toString()}",
               textAlign: TextAlign.center,
               style: textStyleSize(size2, FontWeight.w600),
             ),
