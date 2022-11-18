@@ -2,39 +2,38 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:flaunt_ecommenrce/controller/cart_controller/cart_controller.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/model/product.dart';
 import 'package:flaunt_ecommenrce/model/product_model.dart';
-
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
-
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
-
+import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/promo_tile_widget.dart';
 
-import 'package:get/get.dart';
-
 class MyCartScreen extends StatelessWidget {
-  const MyCartScreen({super.key});
+  final double totalBill;
+  const MyCartScreen({
+    Key? key,
+    required this.totalBill,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      cartController.sum.value = 0;
-    });
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
+    final height = Get.height;
+    final width = Get.width;
+
     TextEditingController offerController = TextEditingController();
     double total = 0;
     // double sum = 0;
@@ -89,25 +88,6 @@ class MyCartScreen extends StatelessWidget {
                                     shrinkWrap: true,
                                     primary: false,
                                     itemBuilder: (context, index) {
-                                      // var cart =
-                                      //     snapshot.data!.docs.map((e) => Product(
-                                      //           productId: e["productId"],
-                                      //           brand: e["brand"],
-                                      //           name: e["name"],
-                                      //           category: e["category"],
-                                      //           colors: e["colors"],
-                                      //           description: e["description"],
-                                      //           imageUrl: e["imageurl"],
-                                      //           isHotAndNew: e["isHotAndNew"],
-                                      //           isTrending: e["isTrending"],
-                                      //           isSummerCollection:
-                                      //               e["isSummerCollection"],
-                                      //           isNewArrival: e["isNewArrival"],
-                                      //           isHotSales: e["isHotSales"],
-                                      //           isPopularBrands: e["isPopularBrands"],
-                                      //           subCategory: e["subCategory"],
-                                      //         ));
-                                      // print(cart);
                                       final cartProducts =
                                           ProductModel.fromJson(
                                               json: snapshot.data!.docs[index]
@@ -116,14 +96,14 @@ class MyCartScreen extends StatelessWidget {
                                       final String quantity =
                                           cartProducts.quantity;
 
-                                      final double itemPrice =
-                                          double.parse(price);
-                                      final int itemQuantity =
-                                          int.parse(quantity);
-                                      total = itemPrice * itemQuantity;
+                                      // final double itemPrice =
+                                      //     double.parse(price);
+                                      // final int itemQuantity =
+                                      //     int.parse(quantity);
+                                      // total = itemPrice * itemQuantity;
 
-                                      cartController.stringToDouble(
-                                          price, quantity);
+                                      // cartController.stringToDouble(
+                                      //     price, quantity);
                                       final List imageUrl =
                                           cartProducts.imageUrl;
 
@@ -156,12 +136,12 @@ class MyCartScreen extends StatelessWidget {
                                     size2: 14),
                                 ValueListenableBuilder(
                                     valueListenable:
-                                        cartCtrl.priceCartListenable,
+                                        cartController.priceCartListenable,
                                     builder: (context, value, _) {
                                       return TotalPriceRowWidget(
                                           left: 25,
                                           leading: "Total",
-                                          trailing: value.toString(),
+                                          trailing: totalBill.toString(),
                                           size1: 16,
                                           size2: 18);
                                     }),

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/credit_card/credit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,9 @@ class HomeScreen extends StatelessWidget {
         actions: [
           kWidth10,
           IconButtonWidget(
-              fnctn: () => Get.to(() => MyCartScreen()),
+              fnctn: () => Get.to(() => MyCartScreen(
+                    totalBill: cartController.priceCartListenable.value,
+                  )),
               icon: Icons.shopping_basket),
           IconButtonWidget(
               fnctn: () => Get.to(() => CreditCardScreen()), icon: Icons.mic),

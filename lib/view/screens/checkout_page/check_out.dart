@@ -20,8 +20,8 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = Get.height;
+    final width = Get.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

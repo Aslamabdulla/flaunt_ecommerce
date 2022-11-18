@@ -129,8 +129,13 @@ class ProductViewScreen extends StatelessWidget {
                             kHeight15,
                             ElevatedButton.icon(
                                 style: buttonStyleCart(width * .8, 50, kBlack),
-                                onPressed: () {
-                                  Get.to(() => MyCartScreen(),
+                                onPressed: () async {
+                                  cartController.priceCartListenable.value =
+                                      await cartController.sum.value;
+                                  Get.to(
+                                      () => MyCartScreen(
+                                          totalBill: cartController
+                                              .priceCartListenable.value),
                                       transition: Transition.rightToLeft,
                                       duration: Duration(milliseconds: 500));
                                 },

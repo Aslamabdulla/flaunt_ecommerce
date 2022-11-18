@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/model/product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
@@ -11,7 +12,7 @@ import 'package:get/get.dart';
 class CartListTileWidget extends StatelessWidget {
   final List images;
   final int index;
-  AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
+  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot;
   CartListTileWidget({
     Key? key,
     required this.images,
@@ -21,19 +22,21 @@ class CartListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cartProducts =
-        snapshot.data!.docs[index].data() as Map<String, dynamic>;
+    final cartProducts =
+        ProductModel.fromJson(json: snapshot.data!.docs[index].data());
+    // var cartProducts =
+    //     snapshot.data!.docs[index].data() as Map<String, dynamic>;
     var id = snapshot.data!.docs[index].id;
     print(id);
-    final String category = cartProducts["category"];
-    final List imageUrl = cartProducts['imageUrl'];
-    final String price = cartProducts["price"];
-    final String quantity = cartProducts["quantity"];
-    final List color = cartProducts["colors"];
-    final String name = cartProducts['name'];
-    final String brand = cartProducts['brand'];
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final String category = cartProducts["category"];
+    // final List imageUrl = cartProducts['imageUrl'];
+    // final String price = cartProducts["price"];
+    // final String quantity = cartProducts["quantity"];
+    // final List color = cartProducts["colors"];
+    // final String name = cartProducts['name'];
+    // final String brand = cartProducts['brand'];
+    final height = Get.width;
+    final width = Get.width;
     return Row(
       children: [
         Container(
@@ -43,7 +46,7 @@ class CartListTileWidget extends StatelessWidget {
           height: height / 5,
           width: width / 3,
           child: Image.network(
-            imageUrl[0],
+            cartProducts.imageUrl[0],
             fit: BoxFit.cover,
           ),
         ),
@@ -56,7 +59,7 @@ class CartListTileWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(brand.toUpperCase()),
+                  Text(cartProducts.brand.toUpperCase()),
                   IconButton(
                       onPressed: () {
                         Get.defaultDialog(
@@ -84,7 +87,7 @@ class CartListTileWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    cartProducts.name,
                     style: textStyleSize(18, FontWeight.w600),
                   ),
                 ],
@@ -97,7 +100,7 @@ class CartListTileWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    brand,
+                    cartProducts.category,
                     style: textStyleSize(16, FontWeight.w500),
                   ),
                   kWidth20,
@@ -119,12 +122,12 @@ class CartListTileWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "₹$price",
+                  cartProducts.price,
                   style: textStyleSize(18, FontWeight.w600),
                 ),
                 kWidth20,
                 Text(
-                  "Qty : $quantity",
+                  "Qty : ${cartProducts.quantity}",
                   style: textStyleSize(18, FontWeight.w600),
                 ),
               ],

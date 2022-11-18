@@ -7,11 +7,16 @@ import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final user = FirebaseAuth.instance.currentUser!;
 final CollectionReference _mainCollection = _firestore.collection("categories");
 final CollectionReference _cartCollection = _firestore.collection("cart");
+final CollectionReference _adminOrderCollection =
+    _firestore.collection("orderAdmin");
+final CollectionReference _userOrderCollection =
+    _firestore.collection("orderUser");
 Map<String, dynamic> data = {};
 
 class FirebaseDatabase {
@@ -67,6 +72,10 @@ class FirebaseDatabase {
       product.toMap(),
     );
   }
+
+  // static Future<Map<String, dynamic>> createOrders() async {
+  //   Map<String, dynamic> orderData = <String, dynamic>{"orderId": "orderid"};
+  // }
 
   static Future<Map<String, dynamic>> getCartItem(
       String docId, String category, String subCategory, String id) async {
