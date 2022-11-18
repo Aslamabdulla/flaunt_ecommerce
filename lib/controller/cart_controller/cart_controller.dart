@@ -14,13 +14,12 @@ import 'package:flaunt_ecommenrce/model/product.dart';
 class CartController extends GetxController {
   @override
   void onInit() {
-    totalCPrice();
     super.onInit();
+    totalPriceCartOnStart();
   }
 
   @override
   void onReady() {
-    totalCPrice();
     super.onReady();
   }
 
@@ -45,6 +44,27 @@ class CartController extends GetxController {
     update();
   }
 
+  totalPriceCartOnStart() async {
+    var price = 0.0;
+    var quantity = 0;
+    var total = 0.0;
+    _firebaseFirestore
+        .collection("cart")
+        .doc(user.email)
+        .collection("products")
+        .get()
+        .then((value) {
+      value.docs.map((e) {
+        price = double.parse(e["price"]);
+        quantity = int.parse(e['quantity']);
+        total = price * quantity;
+        cartController.priceCartListenable.value =
+            cartController.priceCartListenable.value + total;
+      });
+    });
+    print(cartController.priceCartListenable.value);
+  }
+
   totalCPrice() async {
     var cartitems = await _firebaseFirestore
         .collection('cart')
@@ -65,7 +85,7 @@ class CartController extends GetxController {
             var tempTotal = tempPrice * tempQuantity;
             cartSum.value = tempTotal + cartSum.value;
           }
-          print(cartSum.value.toString());
+
           sum.value = cartSum.value;
         }
         return Text(cartSum.value.toString());
@@ -84,8 +104,21 @@ class CartController extends GetxController {
 
   addtoCart(
       String docId, String category, String subCategory, String id) async {
+    var quantity = 0;
+    quantity = cartController.productCountCart.value;
+    var price = 0.0;
+
+    var total = 0.0;
     final product =
         FirebaseDatabase.getCartItem(docId, category, subCategory, id);
+    var productInfo = await product.then((value) {
+      price = double.parse(value['price']);
+
+      total = price * quantity;
+      cartController.priceCartListenable.value =
+          cartController.priceCartListenable.value + total;
+      print(total);
+    });
 
     cartItems.add(product);
 
@@ -94,14 +127,12 @@ class CartController extends GetxController {
     update();
   }
 
-  stringToDouble(String value, String qty) {
-    quantity.value = int.parse(qty);
-    itemPrice.value = double.parse(value);
-    itemPrice.value = quantity.value * itemPrice.value;
-    sum.value = sum.value + itemPrice.value;
-    priceCartListenable.value = sum.value;
-    priceCartListenable.notifyListeners();
-  }
+  // stringToDouble(String value, String qty) {
+  //   quantity.value = int.parse(qty);
+  //   itemPrice.value = double.parse(value);
+  //   itemPrice.value = quantity.value * itemPrice.value;
+  //   sum.value = sum.value + itemPrice.value;
+  // }
 
   stringToInt(String value) {}
   Future<void> deleteItem({
@@ -133,6 +164,7 @@ class CartController extends GetxController {
           ? Get.snackbar("PROMPT", "ITEM ALREADY IN CART")
           : await addtoCart(docId, category, subCategory, id);
     });
+
     // void addProductTocart(Product product) {
     //   try {
     //     if (isItemAlredyAdded(product)) {
@@ -143,12 +175,6 @@ class CartController extends GetxController {
     //     }
     //   } catch (e) {}
     // // }
-
-    @override
-    void onClose() {
-      sum.value = 0;
-      super.onClose();
-    }
   }
 
   Future<void> updateToCart(String docId, String category, String subCategory,
@@ -161,5 +187,10 @@ class CartController extends GetxController {
           .doc(id)
           .set(product.toJson());
     } catch (e) {}
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
   }
 }
