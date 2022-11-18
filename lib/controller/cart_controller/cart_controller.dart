@@ -15,7 +15,7 @@ class CartController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    totalPriceCartOnStart();
+    // totalPriceCartOnStart();
   }
 
   @override
@@ -27,7 +27,7 @@ class CartController extends GetxController {
   RxInt productCountCart = 1.obs;
   RxList cartItems = [].obs;
   RxDouble totalCartPrice = 0.0.obs;
-  RxList<Product> productList = RxList<Product>([]);
+  RxList<ProductModel> productList = RxList<ProductModel>([]);
   RxDouble itemPrice = 0.0.obs;
   RxDouble totalPrice = 0.0.obs;
   RxInt quantity = 0.obs;
@@ -44,54 +44,54 @@ class CartController extends GetxController {
     update();
   }
 
-  totalPriceCartOnStart() async {
-    var price = 0.0;
-    var quantity = 0;
-    var total = 0.0;
-    _firebaseFirestore
-        .collection("cart")
-        .doc(user.email)
-        .collection("products")
-        .get()
-        .then((value) {
-      value.docs.map((e) {
-        price = double.parse(e["price"]);
-        quantity = int.parse(e['quantity']);
-        total = price * quantity;
-        cartController.priceCartListenable.value =
-            cartController.priceCartListenable.value + total;
-      });
-    });
-    print(cartController.priceCartListenable.value);
-  }
+  // totalPriceCartOnStart() async {
+  //   var price = 0.0;
+  //   var quantity = 0;
+  //   var total = 0.0;
+  //   _firebaseFirestore
+  //       .collection("cart")
+  //       .doc(user.email)
+  //       .collection("products")
+  //       .get()
+  //       .then((value) {
+  //     value.docs.map((e) {
+  //       price = double.parse(e["price"]);
+  //       quantity = int.parse(e['quantity']);
+  //       total = price * quantity;
+  //       cartController.priceCartListenable.value =
+  //           cartController.priceCartListenable.value + total;
+  //     });
+  //   });
+  //   print(cartController.priceCartListenable.value);
+  // }
 
-  totalCPrice() async {
-    var cartitems = await _firebaseFirestore
-        .collection('cart')
-        .doc(user.email)
-        .collection("products")
-        .snapshots();
-    StreamBuilder(
-      stream: cartitems,
-      builder: (context, snapshot) {
-        if (snapshot.data != null) {
-          for (int i = 0; i <= snapshot.data!.docs.length; i++) {
-            var cartSnapshot =
-                snapshot.data!.docs[i].data() as Map<String, dynamic>;
-            String price = cartSnapshot['price'];
-            String quantity = cartSnapshot['quantity'];
-            var tempPrice = double.parse(price);
-            var tempQuantity = int.parse(quantity);
-            var tempTotal = tempPrice * tempQuantity;
-            cartSum.value = tempTotal + cartSum.value;
-          }
+  // totalCPrice() async {
+  //   var cartitems = await _firebaseFirestore
+  //       .collection('cart')
+  //       .doc(user.email)
+  //       .collection("products")
+  //       .snapshots();
+  //   StreamBuilder(
+  //     stream: cartitems,
+  //     builder: (context, snapshot) {
+  //       if (snapshot.data != null) {
+  //         for (int i = 0; i <= snapshot.data!.docs.length; i++) {
+  //           var cartSnapshot =
+  //               snapshot.data!.docs[i].data() as Map<String, dynamic>;
+  //           String price = cartSnapshot['price'];
+  //           String quantity = cartSnapshot['quantity'];
+  //           var tempPrice = double.parse(price);
+  //           var tempQuantity = int.parse(quantity);
+  //           var tempTotal = tempPrice * tempQuantity;
+  //           cartSum.value = tempTotal + cartSum.value;
+  //         }
 
-          sum.value = cartSum.value;
-        }
-        return Text(cartSum.value.toString());
-      },
-    );
-  }
+  //         sum.value = cartSum.value;
+  //       }
+  //       return Text(cartSum.value.toString());
+  //     },
+  //   );
+  // }
 
   decreaseQuantity(int quantity) {
     if (productCountCart.value > 1) {
@@ -134,7 +134,6 @@ class CartController extends GetxController {
   //   sum.value = sum.value + itemPrice.value;
   // }
 
-  stringToInt(String value) {}
   Future<void> deleteItem({
     required String docId,
   }) async {

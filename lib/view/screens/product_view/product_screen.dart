@@ -130,8 +130,6 @@ class ProductViewScreen extends StatelessWidget {
                             ElevatedButton.icon(
                                 style: buttonStyleCart(width * .8, 50, kBlack),
                                 onPressed: () async {
-                                  cartController.priceCartListenable.value =
-                                      await cartController.sum.value;
                                   Get.to(
                                       () => MyCartScreen(
                                           totalBill: cartController

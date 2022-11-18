@@ -35,8 +35,11 @@ class CartListTileWidget extends StatelessWidget {
     // final List color = cartProducts["colors"];
     // final String name = cartProducts['name'];
     // final String brand = cartProducts['brand'];
-    final height = Get.width;
+    final height = Get.height;
     final width = Get.width;
+    cartController.priceCartListenable.value =
+        cartProducts.total! + cartController.priceCartListenable.value;
+    print(cartController.priceCartListenable.value);
     return Row(
       children: [
         Container(
@@ -54,32 +57,11 @@ class CartListTileWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             kHeight5,
-            Container(
-              width: width / 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(cartProducts.brand.toUpperCase()),
-                  IconButton(
-                      onPressed: () {
-                        Get.defaultDialog(
-                            textCancel: "Cancel",
-                            textConfirm: "Remove",
-                            onConfirm: () {
-                              cartController.deleteItem(docId: id);
-                              Get.back();
-                            },
-                            title: "CONFIRM",
-                            content: Container(
-                              child: Text("DO YOU WANT TO REMOVE"),
-                            ));
-                      },
-                      icon: Icon(
-                        Icons.delete_outline_outlined,
-                        color: Colors.red,
-                      ))
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(cartProducts.brand.toUpperCase()),
+              ],
             ),
             Container(
               width: width / 2,
@@ -93,7 +75,6 @@ class CartListTileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            kHeight5,
             Container(
               width: width / 2.2,
               child: Row(
@@ -122,17 +103,46 @@ class CartListTileWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  cartProducts.price,
-                  style: textStyleSize(18, FontWeight.w600),
+                  "₹${cartProducts.price}",
+                  style: textStyleSize(14, FontWeight.w400),
                 ),
                 kWidth20,
                 Text(
                   "Qty : ${cartProducts.quantity}",
-                  style: textStyleSize(18, FontWeight.w600),
+                  style: textStyleSize(14, FontWeight.w400),
                 ),
               ],
             ),
-            kHeight15,
+            SizedBox(
+              width: width / 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "TOTAL : ₹${cartProducts.total.toString()}",
+                    style: textStyleSize(18, FontWeight.w600),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Get.defaultDialog(
+                            textCancel: "Cancel",
+                            textConfirm: "Remove",
+                            onConfirm: () {
+                              cartController.deleteItem(docId: id);
+                              Get.back();
+                            },
+                            title: "CONFIRM",
+                            content: Container(
+                              child: Text("DO YOU WANT TO REMOVE"),
+                            ));
+                      },
+                      icon: Icon(
+                        Icons.delete_outline_outlined,
+                        color: Colors.red,
+                      ))
+                ],
+              ),
+            )
           ],
         )
       ],

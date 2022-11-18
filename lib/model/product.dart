@@ -17,6 +17,7 @@ class ProductModel {
   bool isPopularBrand;
   String price;
   String quantity;
+  double? total;
 
   ProductModel({
     required this.productId,
@@ -35,6 +36,7 @@ class ProductModel {
     required this.isHotSales,
     required this.isPopularBrand,
     required this.quantity,
+    this.total,
   });
 
   Map<String, dynamic> toJson() {
@@ -55,6 +57,7 @@ class ProductModel {
       "isHotSales": isHotSales,
       "isPopularBrand": isPopularBrand,
       "quantity": quantity,
+      "total": total
     };
   }
 
@@ -78,6 +81,7 @@ class ProductModel {
       isHotSales: json["isHotSales"],
       isPopularBrand: json["isPopularBrand"],
       quantity: json["quantity"],
+      total: json['total'],
     );
   }
 }

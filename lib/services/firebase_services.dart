@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/model/product.dart';
 import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/animation.dart';
@@ -58,7 +59,7 @@ class FirebaseDatabase {
   }
 
   static Future<void> addToCart(
-      Product product, String userId, String id) async {
+      ProductModel product, String userId, String id) async {
     Map<String, dynamic> data = <String, dynamic>{
       "useId": userId,
       "time": DateTime.now()
@@ -69,7 +70,7 @@ class FirebaseDatabase {
     // };
     final cartPath = _cartCollection.doc(userId).collection("products").doc(id);
     cartPath.set(
-      product.toMap(),
+      product.toJson(),
     );
   }
 
@@ -103,7 +104,7 @@ class FirebaseDatabase {
           "quantity": cartController.productCountCart.value
         };
         data = doc.data() as Map<String, dynamic>;
-        final product = Product(
+        final product = ProductModel(
             subCategory: subCategory,
             productId: docId,
             brand: data['brand'],
@@ -117,9 +118,11 @@ class FirebaseDatabase {
             isSummerCollection: false,
             isNewArrival: false,
             isHotSales: false,
-            isPopularBrands: false,
+            isPopularBrand: false,
             price: data['price'],
-            quantity: cartController.productCountCart.value.toString());
+            quantity: cartController.productCountCart.value.toString(),
+            total: double.parse(data['price']) *
+                cartController.productCountCart.value);
         cartController.productList.add(product);
         log(product.toString());
         print(cartController.productList.length);
