@@ -82,7 +82,8 @@ class FirebaseDatabase {
       String docId, String category, String subCategory, String id) async {
     Map<String, dynamic> userData = <String, dynamic>{
       "useId": user.email,
-      "time": DateTime.now()
+      "time": DateTime.now(),
+      "total": "total",
     };
     final cartPath = _cartCollection.doc(user.email);
     await cartPath.set(userData);
@@ -97,12 +98,7 @@ class FirebaseDatabase {
 
     await documentReference.get().then(
       (DocumentSnapshot doc) {
-        data = <String, dynamic>{
-          "docId": docId,
-          "category": category,
-          "subCategory": subCategory,
-          "quantity": cartController.productCountCart.value
-        };
+        data = <String, dynamic>{};
         data = doc.data() as Map<String, dynamic>;
         final product = ProductModel(
             subCategory: subCategory,
@@ -144,5 +140,20 @@ class FirebaseDatabase {
         .doc(user.email)
         .collection("products")
         .snapshots();
+  }
+
+  static Future<void> updateToCart({
+    required ProductModel productModel,
+  }) async {
+    try {
+      await _firestore
+          .collection('cart')
+          .doc(user.email)
+          .collection("products")
+          .doc(productModel.productId)
+          .set(productModel.toJson());
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("ERROR", "ERROR OCCURED");
+    }
   }
 }

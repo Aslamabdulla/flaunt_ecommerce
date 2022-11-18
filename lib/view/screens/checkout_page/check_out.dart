@@ -1,22 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
-import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/text_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
+import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/address_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/payment_button.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/payment_methods.dart';
+import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/text_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
-import 'package:get/get.dart';
+import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({super.key});
+  final double billableprice;
+  const CheckoutScreen({
+    Key? key,
+    required this.billableprice,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +70,7 @@ class CheckoutScreen extends StatelessWidget {
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
                   kHeight10,
-                  PaymentMethods(),
+                  PaymentMethods(billablePrice: billableprice),
                   Column(
                     children: [
                       RowWidget(
@@ -82,18 +87,16 @@ class CheckoutScreen extends StatelessWidget {
                           trailing: 0.toString(),
                           size1: 15,
                           size2: 16),
-                      TotalPriceRowWidget(
-                          left: 30,
+                      ShippingRowWidget(
                           leading: "Gateway Fees",
-                          trailing: 0.toString(),
                           size1: 15,
-                          size2: 16),
-                      TotalPriceRowWidget(
-                          left: 30,
+                          size2: 16,
+                          left: 30),
+                      ShippingRowWidget(
                           leading: "GST on Gateway Fees",
-                          trailing: 0.toString(),
                           size1: 15,
-                          size2: 16),
+                          size2: 16,
+                          left: 30),
                       SizedBox(
                         width: width - 30,
                         child: Divider(

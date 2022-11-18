@@ -24,6 +24,7 @@ class CartController extends GetxController {
   }
 
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  RxDouble totalPriceCart = 0.0.obs;
   RxInt productCountCart = 1.obs;
   RxList cartItems = [].obs;
   RxDouble totalCartPrice = 0.0.obs;
@@ -115,8 +116,7 @@ class CartController extends GetxController {
       price = double.parse(value['price']);
 
       total = price * quantity;
-      cartController.priceCartListenable.value =
-          cartController.priceCartListenable.value + total;
+
       print(total);
     });
 

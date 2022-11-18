@@ -1,4 +1,6 @@
+import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/payment_methods.dart';
+import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -24,20 +26,23 @@ class PaymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
-    Get.snackbar("SUCCESS", "YOUR ORDER ID IS ${response.orderId}");
+    Get.snackbar("SUCCESS", "YOUR ORDER ID IS PLACED SUCCESSFULLY ",
+        colorText: kGreenAccent);
+    Get.to(() => PaymentSuccessScreen());
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    Get.snackbar("SUCCESS", "YOUR ORDER ID IS ${response.message}");
+    Get.snackbar("FAILED", " ${response.message}", colorText: kRedAccent);
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     // Do something when an external wallet is selected
   }
-  void dispatchPayment(int amount, String name, String wallet, String email) {
+  void dispatchPayment(
+      double amount, String name, String wallet, String email) {
     var options = {
       'key': 'rzp_test_oOOCFeNPdprroz',
-      'amount': amount,
+      'amount': amount * 100,
       'name': 'Flaunt',
       'description': 'Flaunt Puchase Product',
       'prefill': {

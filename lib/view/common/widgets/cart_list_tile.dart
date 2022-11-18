@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/model/product.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
@@ -37,9 +38,10 @@ class CartListTileWidget extends StatelessWidget {
     // final String brand = cartProducts['brand'];
     final height = Get.height;
     final width = Get.width;
-    cartController.priceCartListenable.value =
-        cartProducts.total! + cartController.priceCartListenable.value;
-    print(cartController.priceCartListenable.value);
+
+    // cartController.priceCartListenable.value =
+    //     cartProducts.total! + cartController.priceCartListenable.value;
+    // print(cartController.priceCartListenable.value);
     return Row(
       children: [
         Container(
@@ -107,10 +109,7 @@ class CartListTileWidget extends StatelessWidget {
                   style: textStyleSize(14, FontWeight.w400),
                 ),
                 kWidth20,
-                Text(
-                  "Qty : ${cartProducts.quantity}",
-                  style: textStyleSize(14, FontWeight.w400),
-                ),
+                CounterCartProducts(cartProducts: cartProducts)
               ],
             ),
             SizedBox(
@@ -145,6 +144,87 @@ class CartListTileWidget extends StatelessWidget {
             )
           ],
         )
+      ],
+    );
+  }
+}
+
+class CounterCartProducts extends StatelessWidget {
+  const CounterCartProducts({
+    Key? key,
+    required this.cartProducts,
+  }) : super(key: key);
+
+  final ProductModel cartProducts;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CartCountButtonWidget(
+            icon: Icons.remove,
+            fnctn: () async {
+              if (int.parse(cartProducts.quantity) > 1) {
+                await FirebaseDatabase.updateToCart(
+                    productModel: ProductModel(
+                        productId: cartProducts.productId,
+                        brand: cartProducts.brand,
+                        name: cartProducts.name,
+                        price: cartProducts.price,
+                        category: cartProducts.category,
+                        subCategory: cartProducts.subCategory,
+                        colors: cartProducts.colors,
+                        description: cartProducts.description,
+                        imageUrl: cartProducts.imageUrl,
+                        isHotAndNew: cartProducts.isHotAndNew,
+                        isTrending: cartProducts.isTrending,
+                        isSummerCollection: cartProducts.isSummerCollection,
+                        isNewArrival: cartProducts.isNewArrival,
+                        isHotSales: cartProducts.isHotSales,
+                        isPopularBrand: cartProducts.isPopularBrand,
+                        quantity:
+                            (int.parse(cartProducts.quantity) - 1).toString(),
+                        total: double.parse(cartProducts.price) *
+                            (int.parse(cartProducts.quantity) - 1)));
+              } else {
+                Get.snackbar("PROMPT", "Minimum Limit Reached");
+              }
+            }),
+        kWidth5,
+        Text(
+          cartProducts.quantity,
+          style: TextStyle(fontSize: 18),
+        ),
+        kWidth5,
+        CartCountButtonWidget(
+            icon: Icons.add,
+            fnctn: () async {
+              if (int.parse(cartProducts.quantity) < 10) {
+                await FirebaseDatabase.updateToCart(
+                    productModel: ProductModel(
+                        productId: cartProducts.productId,
+                        brand: cartProducts.brand,
+                        name: cartProducts.name,
+                        price: cartProducts.price,
+                        category: cartProducts.category,
+                        subCategory: cartProducts.subCategory,
+                        colors: cartProducts.colors,
+                        description: cartProducts.description,
+                        imageUrl: cartProducts.imageUrl,
+                        isHotAndNew: cartProducts.isHotAndNew,
+                        isTrending: cartProducts.isTrending,
+                        isSummerCollection: cartProducts.isSummerCollection,
+                        isNewArrival: cartProducts.isNewArrival,
+                        isHotSales: cartProducts.isHotSales,
+                        isPopularBrand: cartProducts.isPopularBrand,
+                        quantity:
+                            (int.parse(cartProducts.quantity) + 1).toString(),
+                        total: double.parse(cartProducts.price) *
+                            (int.parse(cartProducts.quantity) + 1)));
+              } else {
+                Get.snackbar("LIMIT REACHED", "MAXIMUM 10 QTY ALLOWED");
+              }
+            })
       ],
     );
   }
