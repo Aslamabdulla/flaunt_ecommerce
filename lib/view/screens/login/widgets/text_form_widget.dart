@@ -36,6 +36,9 @@ class TextFormWidget extends StatelessWidget {
                 fillColor: Colors.grey.withOpacity(.15),
                 hintText: hint,
                 hintStyle: TextStyle(fontSize: 12, height: 0)),
+            onChanged: (value) {
+              print(value);
+            },
           ),
           Padding(
             padding: const EdgeInsets.only(

@@ -1,3 +1,5 @@
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/payment_methods.dart';
 import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
@@ -26,8 +28,11 @@ class PaymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
-    Get.snackbar("SUCCESS", "YOUR ORDER ID IS PLACED SUCCESSFULLY ",
+    Get.snackbar("SUCCESS", "YOUR ORDER  IS PLACED SUCCESSFULLY ",
         colorText: kGreenAccent);
+
+    cartController.checkBool.value = false;
+    cartController.addOrdersToDb();
     Get.to(() => PaymentSuccessScreen());
   }
 

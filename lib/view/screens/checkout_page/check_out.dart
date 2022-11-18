@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,21 +56,21 @@ class CheckoutScreen extends StatelessWidget {
                 children: [
                   RowWidget(
                     text: "Delivery to",
-                    top: 20,
+                    top: 15,
                     left: 15,
                     fontSize: 15,
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
-                  kHeight15,
+                  kHeight10,
                   AddressTileWidget(),
                   RowWidget(
                     text: "Payment Methods",
-                    top: 15,
+                    top: 10,
                     left: 15,
                     fontSize: 16,
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
-                  kHeight10,
+                  kHeight5,
                   PaymentMethods(billablePrice: billableprice),
                   Column(
                     children: [
@@ -109,12 +110,16 @@ class CheckoutScreen extends StatelessWidget {
                           trailing: 0.toString(),
                           size1: 18,
                           size2: 18),
-                      kHeight30,
+                      kHeight10,
                       LoginButtonWidget(
                           name: "Pay",
                           height: height * .06,
                           width: width - 50,
-                          fnctn: () => Get.to(() => PaymentSuccessScreen()))
+                          fnctn: () => paymentController.dispatchPayment(
+                              cartController.totalPriceCart.value,
+                              "hello",
+                              "Paytm",
+                              "hello@gmail.com"))
                     ],
                   ),
                 ],

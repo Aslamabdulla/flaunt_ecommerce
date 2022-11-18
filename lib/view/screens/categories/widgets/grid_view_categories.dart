@@ -108,11 +108,11 @@ Widget image(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Levis Women Tshirt",
+                      title,
                       style: gridstyle,
                     ),
                     Text(
-                      "₹1850",
+                      "₹$price",
                       style: gridstyleSub,
                     ),
                     kHeight5

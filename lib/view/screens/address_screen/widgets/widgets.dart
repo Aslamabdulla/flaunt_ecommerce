@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 
-TextEditingController nameController = TextEditingController();
-TextEditingController phoneController = TextEditingController();
-TextEditingController addressController = TextEditingController();
-TextEditingController cityController = TextEditingController();
-TextEditingController stateController = TextEditingController();
-TextEditingController pinCodeController = TextEditingController();
-
-final List<TextEditingController> textFormController = [
-  nameController,
-  phoneController,
-  addressController,
-  cityController,
-  stateController,
-  pinCodeController,
-];
+// final List<TextEditingController> textFormController = [
+//   nameController,
+//   phoneController,
+//   addressController,
+//   cityController,
+//   stateController,
+//   pinCodeController,
+// ];
 
 final List<String> hintListAddress = [
   "Full Name",

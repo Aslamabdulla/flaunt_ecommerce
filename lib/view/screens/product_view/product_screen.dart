@@ -130,6 +130,7 @@ class ProductViewScreen extends StatelessWidget {
                             ElevatedButton.icon(
                                 style: buttonStyleCart(width * .8, 50, kBlack),
                                 onPressed: () async {
+                                  cartController.orderList.clear();
                                   Get.to(
                                       () => MyCartScreen(
                                           totalBill: cartController

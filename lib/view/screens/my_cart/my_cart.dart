@@ -115,6 +115,11 @@ class MyCartScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final cartProducts = ProductModel.fromJson(
                                     json: snapshot.data!.docs[index].data());
+                                if (cartController.checkBool.value) {
+                                  cartController.orderList.add(cartProducts);
+                                }
+
+                                print(cartController.orderList.value.length);
                                 // final String price = cartProducts.price;
                                 // final String quantity =
                                 //     cartProducts.quantity;

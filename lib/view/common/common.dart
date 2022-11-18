@@ -216,9 +216,7 @@ decorationCart(String imagesNoBg, int index) => BoxDecoration(
       color: colors[index],
     );
 
-final gridstyle = TextStyle(
-  fontSize: 16,
-);
+final gridstyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 final gridstyleSub = TextStyle(
   fontSize: 14,
 );

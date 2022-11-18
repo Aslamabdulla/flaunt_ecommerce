@@ -23,12 +23,15 @@ class CartController extends GetxController {
     super.onReady();
   }
 
+  var address = {}.obs;
+  RxBool checkBool = true.obs;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   RxDouble totalPriceCart = 0.0.obs;
   RxInt productCountCart = 1.obs;
   RxList cartItems = [].obs;
   RxDouble totalCartPrice = 0.0.obs;
   RxList<ProductModel> productList = RxList<ProductModel>([]);
+  RxList<ProductModel> orderList = RxList<ProductModel>([]);
   RxDouble itemPrice = 0.0.obs;
   RxDouble totalPrice = 0.0.obs;
   RxInt quantity = 0.obs;
@@ -45,6 +48,16 @@ class CartController extends GetxController {
     update();
   }
 
+  addOrdersToDb() async {
+    for (var element in orderList.value) {
+      await FirebaseDatabase.addOrder(element);
+    }
+    for (var element in orderList.value) {
+      await deleteItem(docId: element.productId);
+      orderList.remove(element);
+    }
+    checkBool.value = true;
+  }
   // totalPriceCartOnStart() async {
   //   var price = 0.0;
   //   var quantity = 0;

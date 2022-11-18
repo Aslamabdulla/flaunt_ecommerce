@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
 
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flutter/material.dart';
 
 class AddAddressButtonWidget extends StatelessWidget {
@@ -9,17 +9,15 @@ class AddAddressButtonWidget extends StatelessWidget {
     required this.name,
     required this.height,
     required this.width,
-    required this.fnctn,
   }) : super(key: key);
   final String name;
   final double height;
   final double width;
-  final Function() fnctn;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: fnctn,
+      onTap: () {},
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
