@@ -27,8 +27,12 @@ class PaymentMethods extends StatelessWidget {
         children: [
           GestureDetector(
               onTap: () {
-                paymentController.dispatchPayment(
-                    billablePrice, "hello", "Paytm", "hello@gmail.com");
+                if (cartController.address.value.isNotEmpty) {
+                  paymentController.dispatchPayment(
+                      billablePrice, "hello", "Paytm", "hello@gmail.com");
+                } else {
+                  Get.snackbar("Prompt", "PLEASE ADD ADDRESS");
+                }
               },
               child: PaymentWidget(
                 image: "assets/images/paymentButton/razorpay.png",
@@ -36,9 +40,13 @@ class PaymentMethods extends StatelessWidget {
           kWidth15,
           GestureDetector(
               onTap: () {
-                cartController.checkBool.value = false;
-                cartController.addOrdersToDb();
-                Get.to(() => PaymentSuccessScreen());
+                if (cartController.address.value.isNotEmpty) {
+                  cartController.checkBool.value = false;
+                  cartController.addOrdersToDb();
+                  Get.offAll(() => PaymentSuccessScreen());
+                } else {
+                  Get.snackbar("Prompt", "PLEASE ADD ADDRESS");
+                }
               },
               child:
                   PaymentWidget(image: "assets/images/paymentButton/cod.png"))

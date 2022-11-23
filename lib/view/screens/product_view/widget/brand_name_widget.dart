@@ -16,11 +16,11 @@ class BrandNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 0),
+      padding: const EdgeInsets.only(top: 0),
       child: Container(
         width: Get.width,
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(brandName.toUpperCase(),

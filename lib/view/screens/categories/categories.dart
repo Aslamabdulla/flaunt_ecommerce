@@ -81,7 +81,6 @@ class CategoriesScreen extends StatelessWidget {
                     } else if (snapshot.hasData) {
                       return CategoryListWidget(
                           snapshot: snapshot,
-                          subCategory: subCategory,
                           category: category,
                           offerTopTileBg: offerTopTileBg,
                           index: index);

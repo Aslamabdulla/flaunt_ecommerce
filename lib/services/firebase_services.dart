@@ -4,17 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/model/addres_model/address_model.dart';
-import 'package:flaunt_ecommenrce/model/product.dart';
+import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model.dart';
 import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final user = FirebaseAuth.instance.currentUser!;
+final userEmail = user.email;
 final CollectionReference _mainCollection = _firestore.collection("categories");
+final CollectionReference _homeCollection = _firestore.collection("sections");
 final CollectionReference _cartCollection = _firestore.collection("cart");
 final CollectionReference _adminOrderCollection =
     _firestore.collection("orders_admin");
@@ -48,19 +52,26 @@ class FirebaseDatabase {
         .snapshots();
   }
 
-  static Stream<DocumentSnapshot<Object?>> getItem(
-      String docId, String category, String subCategory) {
-    DocumentReference documentReference = _mainCollection
-        .doc(category)
-        .collection("subcategories")
-        .doc(subCategory)
-        .collection("products")
-        .doc(docId);
+  static Stream<DocumentSnapshot<Object?>> getItem(String docId,
+      String category, String subCategory, bool isMainCollection) {
+    DocumentReference documentReference = isMainCollection
+        ? _mainCollection
+            .doc(category)
+            .collection("subcategories")
+            .doc(subCategory)
+            .collection("products")
+            .doc(docId)
+        : _homeCollection
+            .doc(category)
+            .collection("subcategories")
+            .doc(subCategory)
+            .collection("products")
+            .doc(docId);
     return documentReference.snapshots();
   }
 
   static Future<void> addToCart(
-      ProductModel product, String userId, String id) async {
+      OrderModel product, String userId, String id) async {
     Map<String, dynamic> data = <String, dynamic>{
       "useId": userId,
       "time": DateTime.now()
@@ -69,18 +80,21 @@ class FirebaseDatabase {
     // Map<String,dynamic> data = <String,dynamic> {
     //   ""
     // };
+    // final temp = _homeCollection
+    //     .doc("mostpopular")
+    //     .collection("subcategories")
+    //     .doc("flaunt")
+    //     .collection("products")
+    //     .doc();
+    // temp.set(product.toJson());
     final cartPath = _cartCollection.doc(userId).collection("products").doc(id);
     cartPath.set(
-      product.toJson(),
+      product.toMap(),
     );
   }
 
-  // static Future<Map<String, dynamic>> createOrders() async {
-  //   Map<String, dynamic> orderData = <String, dynamic>{"orderId": "orderid"};
-  // }
-
-  static Future<Map<String, dynamic>> getCartItem(
-      String docId, String category, String subCategory, String id) async {
+  static Future<Map<String, dynamic>> getCartItem(String docId, String category,
+      String subCategory, String id, bool isMainCollection) async {
     Map<String, dynamic> userData = <String, dynamic>{
       "useId": user.email,
       "lastPurchase": DateTime.now(),
@@ -90,46 +104,99 @@ class FirebaseDatabase {
     await cartPath.set(userData);
     final cartData = cartPath.collection("products");
 
-    DocumentReference documentReference = _mainCollection
-        .doc(category)
-        .collection("subcategories")
-        .doc(subCategory)
-        .collection("products")
-        .doc(docId);
+    DocumentReference documentReference = isMainCollection
+        ? _mainCollection
+            .doc(category)
+            .collection("subcategories")
+            .doc(subCategory)
+            .collection("products")
+            .doc(docId)
+        : _homeCollection
+            .doc(category)
+            .collection("subcategories")
+            .doc(subCategory)
+            .collection("products")
+            .doc(docId);
+    if (isMainCollection) {
+      await documentReference.get().then(
+        (DocumentSnapshot doc) {
+          data = <String, dynamic>{};
+          data = doc.data() as Map<String, dynamic>;
+          final product = OrderModel(
+              orderId: "",
+              address: [],
+              productIndex: "0",
+              userEmail: userEmail!,
+              date: DateTime.now().toString(),
+              subCategory: subCategory,
+              productId: docId,
+              brand: data['brand'],
+              name: data['name'],
+              category: category,
+              colors: data["colors"],
+              description: data['description'],
+              imageUrl: data['imageUrl'],
+              isHotAndNew: data['isHotAndNew'],
+              isTrending: false,
+              isSummerCollection: false,
+              isNewArrival: false,
+              isHotSales: false,
+              isPopularBrand: false,
+              price: data['price'],
+              quantity: cartController.productCountCart.value.toString(),
+              total: double.parse(data['price']) *
+                  cartController.productCountCart.value);
+          cartController.productList.add(product);
+          log(product.toString());
+          print(cartController.productList.length);
+          addToCart(product, user.email!, id);
+          // cartData.add(
+          //   data,
+          // );
+        },
+        onError: (e) => print("Error getting document: $e"),
+      );
+    } else {
+      await documentReference.get().then(
+        (DocumentSnapshot doc) {
+          data = <String, dynamic>{};
+          data = doc.data() as Map<String, dynamic>;
+          final product = OrderModel(
+              orderId: "",
+              address: [],
+              date: DateTime.now().toString(),
+              userEmail: userEmail!,
+              productIndex: "0",
+              subCategory: subCategory,
+              productId: docId,
+              brand: data['brand'],
+              name: data['name'],
+              category: category,
+              colors: data["colors"],
+              description: data['description'],
+              imageUrl: data['imageUrl'],
+              isHotAndNew: false,
+              isTrending: false,
+              isSummerCollection: false,
+              isNewArrival: false,
+              isHotSales: false,
+              isPopularBrand: false,
+              price: data['price'],
+              quantity: cartController.productCountCart.value.toString(),
+              total: double.parse(data['price']) *
+                  cartController.productCountCart.value);
+          cartController.productList.add(product);
+          log(product.toString());
+          print(cartController.productList.length);
+          addToCart(product, user.email!, id);
+          // cartData.add(
+          //   data,
+          // );
+        },
+        onError: (e) => print("Error getting document: $e"),
+      );
+    }
 
-    await documentReference.get().then(
-      (DocumentSnapshot doc) {
-        data = <String, dynamic>{};
-        data = doc.data() as Map<String, dynamic>;
-        final product = ProductModel(
-            subCategory: subCategory,
-            productId: docId,
-            brand: data['brand'],
-            name: data['name'],
-            category: category,
-            colors: data["colors"],
-            description: data['description'],
-            imageUrl: data['imageUrl'],
-            isHotAndNew: data['isHotAndNew'],
-            isTrending: false,
-            isSummerCollection: false,
-            isNewArrival: false,
-            isHotSales: false,
-            isPopularBrand: false,
-            price: data['price'],
-            quantity: cartController.productCountCart.value.toString(),
-            total: double.parse(data['price']) *
-                cartController.productCountCart.value);
-        cartController.productList.add(product);
-        log(product.toString());
-        print(cartController.productList.length);
-        addToCart(product, user.email!, id);
-        // cartData.add(
-        //   data,
-        // );
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
     Get.snackbar("SUCCESS", "ITEM ADDED SUCCESSFULLY", colorText: kGreenAccent);
     cartController.productCountCart.value = 1;
     return data;
@@ -143,8 +210,16 @@ class FirebaseDatabase {
         .snapshots();
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readorders() {
+    return _firestore
+        .collection("users")
+        .doc(user.email)
+        .collection("order_history")
+        .snapshots();
+  }
+
   static Future<void> updateToCart({
-    required ProductModel productModel,
+    required OrderModel productModel,
   }) async {
     try {
       await _firestore
@@ -152,7 +227,7 @@ class FirebaseDatabase {
           .doc(user.email)
           .collection("products")
           .doc(productModel.productId)
-          .set(productModel.toJson());
+          .set(productModel.toMap());
     } on FirebaseAuthException catch (e) {
       Get.snackbar("ERROR", "ERROR OCCURED");
     }
@@ -172,7 +247,7 @@ class FirebaseDatabase {
     return _mainCollection;
   }
 
-  static Future getAddress(AddressModel address) async {
+  static Future getAddess(AddressModel address) async {
     final documentReference = _firestore
         .collection("users")
         .doc(user.email)
@@ -199,25 +274,7 @@ class FirebaseDatabase {
     return documentReference.snapshots();
   }
 
-  static Future paymentDone() async {
-    final paymentDonedata = _firestore
-        .collection("cart")
-        .doc(user.email)
-        .collection("products")
-        .snapshots();
-    paymentDonedata.map((event) => print(event));
-    // await paymentDonedata.then((value) {
-    //   value.docs.map((e) {
-    //     var product = ProductModel.fromJson(json: e.data());
-    //     addOrder(product);
-    //     print(product.toJson());
-    //   });
-    // }
-    // );
-    return paymentDonedata;
-  }
-
-  static Future<void> addOrder(ProductModel product) async {
+  static Future<void> addOrder(OrderModel product) async {
     Map<String, dynamic> data = <String, dynamic>{
       "useId": user.email,
       "time": DateTime.now()
@@ -226,13 +283,79 @@ class FirebaseDatabase {
     // Map<String,dynamic> data = <String,dynamic> {
     //   ""
     // };
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('MMddkkmm').format(now);
+    cartController.orderNumber.value = formattedDate;
+    print(formattedDate);
+    var tempAddress = [];
+    final address = cartController.address.value;
+    tempAddress = address.values.toList();
+    print(tempAddress);
     final cartPath = await _userOrderCollection
         .doc(user.email)
         .collection("order_history")
         .doc();
     cartPath.set(
-      product.toJson(),
+      OrderModel(
+              price: product.price,
+              orderId: "FLNT$formattedDate",
+              quantity: product.quantity,
+              address: tempAddress,
+              productId: product.productId,
+              brand: product.brand,
+              name: product.name,
+              category: product.category,
+              subCategory: product.subCategory,
+              colors: product.colors,
+              description: product.description,
+              imageUrl: product.imageUrl,
+              isHotAndNew: product.isHotAndNew,
+              isTrending: product.isTrending,
+              isSummerCollection: product.isSummerCollection,
+              isNewArrival: product.isNewArrival,
+              isHotSales: product.isHotSales,
+              isPopularBrand: product.isPopularBrand,
+              total: product.total,
+              date: product.date,
+              userEmail: userEmail!)
+          .toMap(),
     );
-    final adminOrder = await _adminOrderCollection.doc().set(product.toJson());
+    final adminOrder = await _adminOrderCollection.doc();
+    adminOrder.set(
+      OrderModel(
+              price: product.price,
+              orderId: "FLNT$formattedDate",
+              quantity: product.quantity,
+              address: tempAddress,
+              productId: product.productId,
+              brand: product.brand,
+              name: product.name,
+              category: product.category,
+              subCategory: product.subCategory,
+              colors: product.colors,
+              description: product.description,
+              imageUrl: product.imageUrl,
+              isHotAndNew: product.isHotAndNew,
+              isTrending: product.isTrending,
+              isSummerCollection: product.isSummerCollection,
+              isNewArrival: product.isNewArrival,
+              isHotSales: product.isHotSales,
+              isPopularBrand: product.isPopularBrand,
+              total: product.total,
+              date: product.date,
+              userEmail: userEmail!)
+          .toMap(),
+    );
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readHotsales(
+      String category) {
+    return _firestore
+        .collection("sections")
+        .doc(category)
+        .collection("subcategories")
+        .doc("flaunt")
+        .collection("products")
+        .snapshots();
   }
 }

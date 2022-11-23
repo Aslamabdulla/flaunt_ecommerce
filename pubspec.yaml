@@ -51,6 +51,7 @@ dependencies:
   get: ^4.6.5
   google_sign_in: ^5.4.2
   http: ^0.13.5
+  intl: ^0.17.0
   liquid_swipe: ^3.0.0
   logger: ^1.1.0
   pinput: ^2.2.16

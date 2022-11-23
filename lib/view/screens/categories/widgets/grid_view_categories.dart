@@ -12,11 +12,9 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart'
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_view.dart';
 
 class GridViewCategoryWidget extends StatelessWidget {
-  final List<String> imagesList;
   AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
   GridViewCategoryWidget({
     Key? key,
-    required this.imagesList,
     required this.snapshot,
   }) : super(key: key);
 
@@ -76,6 +74,7 @@ Widget image(
   return GestureDetector(
     onTap: (() {
       Get.to(() => ProductViewScreen(
+            isMainCollection: true,
             category: category,
             docId: id,
             itemIndex: index,
@@ -97,7 +96,6 @@ Widget image(
         children: [
           Container(
             padding: EdgeInsets.only(left: 15),
-            width: 200,
             height: 60,
             decoration: glassDecorationGrid,
             child: Row(
@@ -107,9 +105,13 @@ Widget image(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: gridstyle,
+                    Container(
+                      width: Get.width * .36,
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: gridstyle,
+                      ),
                     ),
                     Text(
                       "₹$price",

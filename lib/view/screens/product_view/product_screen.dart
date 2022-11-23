@@ -2,25 +2,26 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/my_cart.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/brand_name_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/carousel_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_color_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_description_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_image_widget.dart';
+import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
+import 'package:flaunt_ecommenrce/view/screens/my_cart/my_cart.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/brand_name_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/carousel_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/widget/cart_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/widget/leading_icon_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_color_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_description_widget.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/product_image_widget.dart';
 
 import 'widget/stack_decoration.dart';
 import 'widget/title_widget_product.dart';
@@ -31,6 +32,7 @@ class ProductViewScreen extends StatelessWidget {
   final int itemIndex;
   final String category;
   final String subCategory;
+  final bool isMainCollection;
 
   final String docId;
   const ProductViewScreen({
@@ -38,6 +40,7 @@ class ProductViewScreen extends StatelessWidget {
     required this.itemIndex,
     required this.category,
     required this.subCategory,
+    required this.isMainCollection,
     required this.docId,
   }) : super(key: key);
 
@@ -58,7 +61,8 @@ class ProductViewScreen extends StatelessWidget {
           elevation: 0,
         ),
         body: StreamBuilder<DocumentSnapshot<Object?>>(
-            stream: FirebaseDatabase.getItem(docId, category, subCategory),
+            stream: FirebaseDatabase.getItem(
+                docId, category, subCategory, isMainCollection),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
                 return const CupertinoActivityIndicator();
@@ -68,25 +72,30 @@ class ProductViewScreen extends StatelessWidget {
                 );
               } else {
                 var productInfo = snapshot.data!.data() as Map<String, dynamic>;
-                String id = snapshot.data!.id;
-                print(id);
-                String subCategory = productInfo['subCategory'];
-                String title = productInfo['name'];
-                String description = productInfo['description'];
-                String price = productInfo['price'];
-                String quantity = productInfo['quantity'];
-                String productId = productInfo['productId'];
-                final List imageUrl = productInfo['imageUrl'];
+                final product = Product.fromSnapshot(snapshot.data!);
+                final id = snapshot.data?.id ?? "";
 
-                List colors = productInfo['colors'];
-                String category = productInfo['category'];
-                String brandName = productInfo['brand'];
+                // String id = snapshot.data!.id;
+                // print(id);
+                // String subCategory = productInfo['subCategory'];
+                // String title = productInfo['name'];
+                // String description = productInfo['description'];
+                // String price = productInfo['price'];
+                // String quantity = productInfo['quantity'];
+                // String productId = productInfo['productId'];
+                // final List imageUrl = productInfo['imageUrl'];
+
+                // List colors = productInfo['colors'];
+                // String category = productInfo['category'];
+                // String brandName = productInfo['brand'];
 
                 return Stack(
                   alignment: AlignmentDirectional.bottomCenter,
                   children: [
                     CarouselWidget(
-                        height: height, width: width, imageUrl: imageUrl),
+                        height: height,
+                        width: width,
+                        imageUrl: product.imageUrl),
                     Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 15),
@@ -96,13 +105,15 @@ class ProductViewScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             BrandNameWidget(
-                              brandName: brandName,
+                              brandName: product.brand,
                               categoryName: category,
                             ),
                             TitleWidget(
-                                width: width, title: title, price: price),
+                                width: width,
+                                title: product.name,
+                                price: product.price),
                             DescriptionWidget(
-                                width: width, description: description),
+                                width: width, description: product.description),
                             kHeight5,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +123,7 @@ class ProductViewScreen extends StatelessWidget {
                                 QuantityWidget(
                                     width: width,
                                     height: height,
-                                    quantity: quantity),
+                                    quantity: product.quantity),
                               ],
                             ),
                             kHeight10,
@@ -120,11 +131,12 @@ class ProductViewScreen extends StatelessWidget {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 12),
                               child: CountAndCartWidget(
-                                  id: id,
+                                  isMainCollection: isMainCollection,
+                                  id: id!,
                                   category: category,
                                   subCategory: subCategory,
                                   docId: docId,
-                                  quantity: int.parse(quantity)),
+                                  quantity: int.parse(product.quantity)),
                             ),
                             kHeight15,
                             ElevatedButton.icon(

@@ -13,6 +13,7 @@ class CountAndCartWidget extends StatelessWidget {
   final String subCategory;
   final String docId;
   final String id;
+  final bool isMainCollection;
   const CountAndCartWidget({
     Key? key,
     required this.quantity,
@@ -20,6 +21,7 @@ class CountAndCartWidget extends StatelessWidget {
     required this.subCategory,
     required this.docId,
     required this.id,
+    required this.isMainCollection,
   }) : super(key: key);
 
   @override
@@ -34,7 +36,7 @@ class CountAndCartWidget extends StatelessWidget {
                 width * .5, 50, const Color.fromRGBO(43, 154, 184, 1)),
             onPressed: () async {
               await cartController.checkCartItem(
-                  docId, category, subCategory, id);
+                  docId, category, subCategory, id, isMainCollection);
             },
             icon: const Icon(Icons.add_shopping_cart_outlined),
             label: const Text("Add to Cart"))

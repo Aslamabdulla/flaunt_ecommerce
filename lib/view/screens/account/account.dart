@@ -1,19 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flaunt_ecommenrce/view/screens/account/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/view/screens/account/widgets/my_orders.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/account/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/contents.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/custom_paint.dart';
-import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/login_buttons.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/register_now.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/signup/signup.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -22,6 +28,10 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final user = FirebaseAuth.instance.currentUser;
+    final String username = user?.displayName ?? "USER";
+    final String email = user?.email ?? "EMAIL";
+    final String profileImage = user?.photoURL ?? "";
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
@@ -43,42 +53,65 @@ class AccountPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 kHeight20,
-                Container(
-                  padding: EdgeInsets.only(top: height * .12),
-                  child: PhysicalModel(
-                    elevation: 10,
-                    borderRadius: BorderRadius.circular(width / 4),
-                    color: Colors.transparent,
-                    child: CircleAvatar(
-                      radius: width / 4,
-                      backgroundImage:
-                          const AssetImage("assets/images/user.jpg"),
-                    ),
-                  ),
-                ),
+                ProfileImageCircleAvatar(
+                    height: height,
+                    width: width,
+                    user: user,
+                    profileImage: profileImage),
                 kHeight10,
                 Text(
-                  "STENY JOSEPH",
+                  username,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
-                kHeight10,
-                Container(
-                  width: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(.1),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: List.generate(
-                        tileName.length,
-                        (index) => AccountListTile(
-                          text: tileName[index],
-                          leading: iconsAccount[index],
-                          trailing: Icons.chevron_right,
-                        ),
-                      )),
+                Text(
+                  email,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
+                kHeight15,
+                Container(
+                    width: 300,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(.1),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AccountListTile(
+                            onTap: () => Get.to(() => MyOrdersScreen()),
+                            text: "My Orders",
+                            leading: Icons.local_mall,
+                            trailing: Icons.chevron_right,
+                          ),
+                          AccountListTile(
+                            onTap: () => Get.to(HomeScreen()),
+                            text: "Address book",
+                            leading: Icons.badge,
+                            trailing: Icons.chevron_right,
+                          ),
+                          AccountListTile(
+                            onTap: () => Get.to(HomeScreen()),
+                            text: "Giftcard & Vouchers",
+                            leading: Icons.redeem,
+                            trailing: Icons.chevron_right,
+                          ),
+                          AccountListTile(
+                            onTap: () => Get.to(HomeScreen()),
+                            text: "Help & Support",
+                            leading: Icons.help,
+                            trailing: Icons.chevron_right,
+                          ),
+                          AccountListTile(
+                            onTap: () {
+                              final googleSignin = GoogleSignIn();
+                              FirebaseAuth.instance.signOut();
+                              loginController.signout();
+                            },
+                            text: "Logout",
+                            leading: Icons.logout_outlined,
+                            trailing: Icons.chevron_right,
+                          ),
+                        ])),
               ],
             ),
           )
@@ -88,34 +121,72 @@ class AccountPage extends StatelessWidget {
   }
 }
 
+class ProfileImageCircleAvatar extends StatelessWidget {
+  const ProfileImageCircleAvatar({
+    Key? key,
+    required this.height,
+    required this.width,
+    required this.user,
+    required this.profileImage,
+  }) : super(key: key);
+
+  final double height;
+  final double width;
+  final User? user;
+  final String profileImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: height * .12),
+      child: PhysicalModel(
+        elevation: 10,
+        borderRadius: BorderRadius.circular(width / 4),
+        color: Colors.transparent,
+        child: CircleAvatar(
+          radius: width / 4,
+          backgroundImage: user?.photoURL == null
+              ? AssetImage("assets/images/user.jpg")
+              : NetworkImage(profileImage) as ImageProvider,
+        ),
+      ),
+    );
+  }
+}
+
 class AccountListTile extends StatelessWidget {
   final String text;
   final IconData leading;
   final IconData trailing;
+  final Function() onTap;
   const AccountListTile({
     Key? key,
     required this.text,
     required this.leading,
     required this.trailing,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      decoration:
-          BoxDecoration(color: kWhite, borderRadius: BorderRadius.circular(20)),
-      width: 250,
-      height: 45,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        kWidth10,
-        Icon(leading),
-        Spacer(),
-        Text(text),
-        Spacer(),
-        Icon(trailing),
-        kWidth10
-      ]),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
+        decoration: BoxDecoration(
+            color: kWhite, borderRadius: BorderRadius.circular(20)),
+        width: 250,
+        height: 45,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          kWidth10,
+          Icon(leading),
+          Spacer(),
+          Text(text),
+          Spacer(),
+          Icon(trailing),
+          kWidth10
+        ]),
+      ),
     );
   }
 }

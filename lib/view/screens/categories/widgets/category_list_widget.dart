@@ -12,14 +12,13 @@ class CategoryListWidget extends StatelessWidget {
   CategoryListWidget({
     Key? key,
     required this.category,
-    required this.subCategory,
     required this.offerTopTileBg,
     required this.index,
     required this.snapshot,
   }) : super(key: key);
 
   final String category;
-  final String subCategory;
+
   final List<String> offerTopTileBg;
   final int index;
   AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
@@ -43,7 +42,6 @@ class CategoryListWidget extends StatelessWidget {
         kHeight15,
         GridViewCategoryWidget(
           snapshot: snapshot,
-          imagesList: gridMenCategories,
         ),
         kHeight15,
       ],

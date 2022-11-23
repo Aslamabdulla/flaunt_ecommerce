@@ -138,18 +138,14 @@ List<String> textFlauntPay = [
 List<StepperData> stepperData = [
   StepperData(
     title: "Order Accepted",
-    subtitle: "9:12 AM, 25 oct 2022 ",
+    subtitle: " Your order was accepted successfully",
   ),
   StepperData(
     title: "Processing Order",
-    subtitle: "9:12 AM, 25 oct 2022 ",
+    subtitle: "Your order was Processing ",
   ),
   StepperData(
-    title: "Product picked & started journey",
-    subtitle: "",
-  ),
-  StepperData(
-    title: "Dispatch in local warehouse",
+    title: "Item -Shipped",
     subtitle: "",
   ),
   StepperData(

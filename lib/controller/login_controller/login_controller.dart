@@ -9,6 +9,12 @@ class LoginController extends GetxController {
   GoogleSignInAccount get user => _user!;
   String? profileImageurl = "";
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  final fireAuth = FirebaseAuth.instance;
+  Future signout() async {
+    await googleSignin.signOut();
+    update();
+  }
+
   Future googleLogin() async {
     CollectionReference _mainCollection = _fireStore.collection("users");
     final googleUser = await googleSignin.signIn();
@@ -18,11 +24,14 @@ class LoginController extends GetxController {
     _user = googleUser;
     profileImageurl = _user!.photoUrl;
     final googleAuth = await googleUser.authentication;
+
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-
+    if (fireAuth.currentUser == null) {
+      fireAuth.signInWithCredential(credential);
+    }
     await FirebaseAuth.instance.signInWithCredential(credential);
     DocumentReference documentReference = _mainCollection.doc(user.email);
     Map<String, dynamic> data = <String, dynamic>{

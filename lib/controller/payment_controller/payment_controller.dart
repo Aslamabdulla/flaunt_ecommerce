@@ -33,7 +33,7 @@ class PaymentController extends GetxController {
 
     cartController.checkBool.value = false;
     cartController.addOrdersToDb();
-    Get.to(() => PaymentSuccessScreen());
+    Get.offAll(() => PaymentSuccessScreen());
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

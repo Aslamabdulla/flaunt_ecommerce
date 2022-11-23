@@ -1,7 +1,10 @@
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/account/widgets/my_orders.dart';
 import 'package:flaunt_ecommenrce/view/screens/delivery_status/delivery_status.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,15 +36,32 @@ class PaymentSuccessScreen extends StatelessWidget {
             Text("PAYMENT SUCCESS"),
             kHeight15,
             Text("Payment Completed"),
-            Text("Your order number is #10821"),
-            kHeight20,
+            RichText(
+              text: TextSpan(
+                  text: 'Your Order Number Is ',
+                  style: TextStyle(
+                      color: kBlack, fontSize: 18, fontFamily: 'Oswald'),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'FLNT${cartController.orderNumber.value}',
+                      style: TextStyle(
+                          color: kBlack,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Oswald'),
+                    )
+                  ]),
+            ),
+            kHeight15,
             LoginButtonWidget(
-                name: "Order Delivery Status",
+                name: "MY ORDERS",
                 height: height * .06,
                 width: width,
-                fnctn: () => Get.to(DeliveryStatusScren())),
+                fnctn: () => Get.to(MyOrdersScreen())),
             kHeight15,
-            Text("Homepage")
+            GestureDetector(
+                onTap: () => Get.offAll(() => HomeNavigationPage()),
+                child: Text("Homepage"))
           ],
         ),
       ),

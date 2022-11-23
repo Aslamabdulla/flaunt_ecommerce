@@ -7,6 +7,7 @@ const kGreenAccent = Colors.greenAccent;
 const kGrey = Colors.grey;
 const kLightBlue = Color.fromRGBO(110, 219, 221, 1);
 const kDarkBlue = Color.fromRGBO(110, 219, 221, 1);
+const kDarkBlueColor = Colors.blueGrey;
 const kHeight5 = SizedBox(
   height: 5,
 );

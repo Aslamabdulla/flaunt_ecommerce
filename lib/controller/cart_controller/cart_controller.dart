@@ -3,13 +3,14 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/model/order_model.dart';
 import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flaunt_ecommenrce/model/product.dart';
+import 'package:flaunt_ecommenrce/model/cart_model.dart';
 
 class CartController extends GetxController {
   @override
@@ -23,6 +24,7 @@ class CartController extends GetxController {
     super.onReady();
   }
 
+  RxString orderNumber = "".obs;
   var address = {}.obs;
   RxBool checkBool = true.obs;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -30,8 +32,8 @@ class CartController extends GetxController {
   RxInt productCountCart = 1.obs;
   RxList cartItems = [].obs;
   RxDouble totalCartPrice = 0.0.obs;
-  RxList<ProductModel> productList = RxList<ProductModel>([]);
-  RxList<ProductModel> orderList = RxList<ProductModel>([]);
+  RxList<OrderModel> productList = RxList<OrderModel>([]);
+  RxList<OrderModel> orderList = RxList<OrderModel>([]);
   RxDouble itemPrice = 0.0.obs;
   RxDouble totalPrice = 0.0.obs;
   RxInt quantity = 0.obs;
@@ -39,6 +41,7 @@ class CartController extends GetxController {
   ValueNotifier<double> priceCartListenable = ValueNotifier(0);
   RxDouble cartSum = 0.0.obs;
   final user = FirebaseAuth.instance.currentUser!;
+  String addressUser = "";
   increaseQuantity(int quantity) {
     if (productCountCart.value < quantity) {
       productCountCart.value++;
@@ -49,14 +52,21 @@ class CartController extends GetxController {
   }
 
   addOrdersToDb() async {
-    for (var element in orderList.value) {
-      await FirebaseDatabase.addOrder(element);
+    if (address.isNotEmpty) {
+      for (var element in orderList.value) {
+        await FirebaseDatabase.addOrder(element);
+      }
+      orderList.value.forEach((element) {
+        deleteItem(docId: element.productId);
+      });
+      // for (var element in orderList) {
+      //   await deleteItem(docId: element.productId);
+      //   orderList.remove(element);
+      // }
+      checkBool.value = true;
+    } else {
+      Get.snackbar("ERROR", "Please Add Address");
     }
-    for (var element in orderList.value) {
-      await deleteItem(docId: element.productId);
-      orderList.remove(element);
-    }
-    checkBool.value = true;
   }
   // totalPriceCartOnStart() async {
   //   var price = 0.0;
@@ -116,15 +126,15 @@ class CartController extends GetxController {
     update();
   }
 
-  addtoCart(
-      String docId, String category, String subCategory, String id) async {
+  addtoCart(String docId, String category, String subCategory, String id,
+      bool isMainCollection) async {
     var quantity = 0;
     quantity = cartController.productCountCart.value;
     var price = 0.0;
 
     var total = 0.0;
-    final product =
-        FirebaseDatabase.getCartItem(docId, category, subCategory, id);
+    final product = FirebaseDatabase.getCartItem(
+        docId, category, subCategory, id, isMainCollection);
     var productInfo = await product.then((value) {
       price = double.parse(value['price']);
 
@@ -163,8 +173,8 @@ class CartController extends GetxController {
     update();
   }
 
-  checkCartItem(
-      String docId, String category, String subCategory, String id) async {
+  checkCartItem(String docId, String category, String subCategory, String id,
+      isMainCollection) async {
     await _firebaseFirestore
         .collection('cart')
         .doc(user.email)
@@ -174,7 +184,7 @@ class CartController extends GetxController {
         .then((onValue) async {
       onValue.exists
           ? Get.snackbar("PROMPT", "ITEM ALREADY IN CART")
-          : await addtoCart(docId, category, subCategory, id);
+          : await addtoCart(docId, category, subCategory, id, isMainCollection);
     });
 
     // void addProductTocart(Product product) {
@@ -190,14 +200,14 @@ class CartController extends GetxController {
   }
 
   Future<void> updateToCart(String docId, String category, String subCategory,
-      String id, ProductModel product) async {
+      String id, OrderModel product) async {
     try {
       await _firebaseFirestore
           .collection('orders')
           .doc(user.email)
           .collection("products")
           .doc(id)
-          .set(product.toJson());
+          .set(product.toMap());
     } catch (e) {}
   }
 

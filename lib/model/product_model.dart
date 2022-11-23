@@ -20,7 +20,7 @@ class Product extends Equatable {
   bool isSummerCollection;
   bool isNewArrival;
   bool isHotSales;
-  bool isPopularBrands;
+  bool isPopularBrand;
   String price;
   String quantity;
   Product({
@@ -36,7 +36,7 @@ class Product extends Equatable {
     required this.isSummerCollection,
     required this.isNewArrival,
     required this.isHotSales,
-    required this.isPopularBrands,
+    required this.isPopularBrand,
     required this.subCategory,
     this.price = "0",
     this.quantity = "0",
@@ -58,7 +58,7 @@ class Product extends Equatable {
       isSummerCollection,
       isNewArrival,
       isHotSales,
-      isPopularBrands,
+      isPopularBrand,
       price,
       quantity,
       subCategory,
@@ -96,7 +96,7 @@ class Product extends Equatable {
         isSummerCollection: isSummerCollection ?? this.isSummerCollection,
         isNewArrival: isNewArrival ?? this.isNewArrival,
         isHotSales: isHotSales ?? this.isHotSales,
-        isPopularBrands: isPopularBrands ?? this.isPopularBrands,
+        isPopularBrand: isPopularBrands ?? this.isPopularBrand,
         price: price ?? this.price,
         quantity: quantity ?? this.quantity);
   }
@@ -116,7 +116,7 @@ class Product extends Equatable {
       'isSummerCollection': isSummerCollection,
       'isNewArrival': isNewArrival,
       'isHotSales': isHotSales,
-      'isPopularBrand': isPopularBrands,
+      'isPopularBrand': isPopularBrand,
       'price': price,
       'quantity': quantity,
     };
@@ -132,18 +132,16 @@ class Product extends Equatable {
       colors: snap['colors'],
       description: snap['description'],
       imageUrl: snap['imageUrl'],
-      isHotAndNew: snap['isHotAndNew'],
-      isTrending: snap['isTrending'],
-      isSummerCollection: snap['isSummerCollection'],
-      isNewArrival: snap['isNewArrival'],
-      isHotSales: snap['isHotSales'],
-      isPopularBrands: snap['isPopularBrands'],
+      isHotAndNew: false,
+      isTrending: false,
+      isSummerCollection: false,
+      isNewArrival: false,
+      isHotSales: false,
+      isPopularBrand: false,
       price: snap['price'],
       quantity: snap['quantity'],
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   // factory Product.fromJson(String source) =>
   //     Product.fromSnapshot(json.decode(source));

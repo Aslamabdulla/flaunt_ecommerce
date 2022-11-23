@@ -1,5 +1,5 @@
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/product.dart';
+import 'package:flaunt_ecommenrce/model/cart_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/cupertino.dart';

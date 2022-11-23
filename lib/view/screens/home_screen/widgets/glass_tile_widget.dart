@@ -1,15 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 
 class GlassTileWidget extends StatelessWidget {
   final int index;
-  const GlassTileWidget({
+  Map<String, dynamic> products;
+  GlassTileWidget({
     Key? key,
     required this.index,
+    required this.products,
     required this.height,
     required this.width,
   }) : super(key: key);
@@ -19,6 +23,9 @@ class GlassTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productImage = products['imageUrl'];
+    var productName = products['name'];
+    var productPrice = products['price'];
     return Container(
       decoration: glassDecoration,
       child: BackdropFilter(
@@ -38,15 +45,16 @@ class GlassTileWidget extends StatelessWidget {
                   Icon(Icons.favorite_outline_outlined)
                 ],
               ),
-              Image.asset(
-                Accesoriesimages[index],
+              Image.network(
+                productImage[3],
                 height: height * .09,
                 width: width / 3,
               ),
               Column(
-                children: const [
-                  Text("Macbook Air M1"),
-                  Text("₹98500"),
+                children: [
+                  Text(productName, style: textStyleSize(15, FontWeight.bold)),
+                  Text("₹$productPrice",
+                      style: textStyleSize(18, FontWeight.bold)),
                 ],
               )
             ],

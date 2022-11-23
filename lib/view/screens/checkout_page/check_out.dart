@@ -115,11 +115,17 @@ class CheckoutScreen extends StatelessWidget {
                           name: "Pay",
                           height: height * .06,
                           width: width - 50,
-                          fnctn: () => paymentController.dispatchPayment(
-                              cartController.totalPriceCart.value,
-                              "hello",
-                              "Paytm",
-                              "hello@gmail.com"))
+                          fnctn: () {
+                            if (cartController.address.isNotEmpty) {
+                              return paymentController.dispatchPayment(
+                                  cartController.totalPriceCart.value,
+                                  "hello",
+                                  "Paytm",
+                                  "hello@gmail.com");
+                            } else {
+                              Get.snackbar("PROMPT", "PLEASE ADD ADDRESS");
+                            }
+                          })
                     ],
                   ),
                 ],

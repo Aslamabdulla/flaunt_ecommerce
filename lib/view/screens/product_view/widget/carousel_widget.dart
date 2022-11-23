@@ -33,7 +33,7 @@ class CarouselWidget extends StatelessWidget {
               index: index,
             );
           },
-          itemCount: 2,
+          itemCount: 3,
         ),
       ),
     );
