@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
 
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TextFormWidget extends StatelessWidget {
-  const TextFormWidget({
+  TextFormWidget({
     Key? key,
     required this.forgotBtn,
     required this.controller,
@@ -12,7 +13,7 @@ class TextFormWidget extends StatelessWidget {
     required this.prefixIcon,
   }) : super(key: key);
   final bool forgotBtn;
-  final TextEditingController controller;
+  RxString controller;
   final String hint;
   final IconData prefixIcon;
 
@@ -23,7 +24,7 @@ class TextFormWidget extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            controller: controller,
+            // controller: controller,
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(vertical: 5),
                 prefixIcon: Icon(
@@ -37,7 +38,9 @@ class TextFormWidget extends StatelessWidget {
                 hintText: hint,
                 hintStyle: TextStyle(fontSize: 12, height: 0)),
             onChanged: (value) {
-              print(value);
+              controller.value = value;
+              loginController.update();
+              print(controller);
             },
           ),
           Padding(

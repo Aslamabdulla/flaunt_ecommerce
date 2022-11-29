@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flaunt_ecommenrce/controller/login_controller/login_controller.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flaunt_ecommenrce/view/screens/signup/widgets/sign_up_methods.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +17,13 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:get/get.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
-
+  const SignUpPage({super.key, required this.loginCtrl});
+  final LoginController loginCtrl;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    final height = Get.height;
+    final width = Get.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -66,35 +67,35 @@ class SignUpPage extends StatelessWidget {
                   kHeight10,
                   TextFormWidget(
                       prefixIcon: Icons.account_circle_outlined,
-                      controller: emailController,
+                      controller: loginCtrl.userNameController,
                       forgotBtn: false,
                       hint: "Username"),
                   TextFormWidget(
                     prefixIcon: Icons.email_outlined,
                     hint: "Enter your email",
-                    controller: passwordController,
+                    controller: loginCtrl.signUpemailController,
                     forgotBtn: false,
                   ),
                   TextFormWidget(
                       prefixIcon: Icons.password_outlined,
-                      controller: emailController,
+                      controller: loginCtrl.passWordController,
                       forgotBtn: false,
                       hint: "Enter your password"),
                   TextFormWidget(
                       prefixIcon: Icons.password_outlined,
-                      controller: emailController,
+                      controller: loginCtrl.confirmPasswordController,
                       forgotBtn: false,
                       hint: "Confirm your password"),
                   TextFormWidget(
                       prefixIcon: Icons.man_outlined,
-                      controller: emailController,
+                      controller: loginCtrl.genderController,
                       forgotBtn: false,
                       hint: "Enter your gender"),
                   LoginButtonWidget(
                       height: height * .05,
                       width: width / 3,
                       name: "Sign up",
-                      fnctn: () => Get.offAll(() => HomeNavigationPage())),
+                      fnctn: () => loginCtrl.signUp()),
                   kHeight10,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

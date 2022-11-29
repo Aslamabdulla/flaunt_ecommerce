@@ -81,9 +81,13 @@ class CartListTileWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      cartProducts.category,
-                      style: textStyleSize(16, FontWeight.w500),
+                    SizedBox(
+                      width: width / 4.1,
+                      child: Text(
+                        cartProducts.category.toUpperCase(),
+                        overflow: TextOverflow.ellipsis,
+                        style: textStyleSize(16, FontWeight.w500),
+                      ),
                     ),
                     kWidth20,
                     Row(
@@ -132,7 +136,8 @@ class CartListTileWidget extends StatelessWidget {
                                         element.productId ==
                                         cartProducts.productId);
                                 print(cartController.orderList.length);
-                                Get.back();
+                                // Get.back();
+                                Get.close(1);
                               },
                               title: "CONFIRM",
                               content: Container(

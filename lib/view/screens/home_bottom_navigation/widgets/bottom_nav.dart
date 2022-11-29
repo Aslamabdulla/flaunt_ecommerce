@@ -1,8 +1,11 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flaunt_ecommenrce/controller/bottom_controller/bottom_controller.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
+import 'package:flaunt_ecommenrce/view/screens/my_cart/my_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
   const BottomNavigationBarWidget({
@@ -23,7 +26,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
               color: kBlack,
             ),
             color: Color.fromRGBO(79, 165, 185, 1)),
-        sheetChild: const LoginPage(),
+        sheetChild: MyCartScreen(totalBill: 150),
         bottomBarTheme: const BottomBarTheme(
             decoration: BoxDecoration(color: Colors.white),
             itemIconColor: Colors.grey,

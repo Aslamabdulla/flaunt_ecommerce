@@ -1,3 +1,4 @@
+import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_boarding_second.dart';
@@ -50,9 +51,12 @@ class OnboardingFinalScreen extends StatelessWidget {
                         radius: 30,
                         child: Center(
                           child: IconButton(
-                            onPressed: () => Get.offAll(() => const LoginPage(),
-                                transition: Transition.rightToLeft,
-                                duration: const Duration(milliseconds: 400)),
+                            onPressed: () {
+                              SharedPref.setLogin(false);
+                              Get.offAll(() => const LoginPage(),
+                                  transition: Transition.rightToLeft,
+                                  duration: const Duration(milliseconds: 400));
+                            },
                             icon: const Icon(
                               Icons.chevron_right,
                               color: kBlack,

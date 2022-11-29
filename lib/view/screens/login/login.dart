@@ -15,21 +15,18 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            );
-          }
-          if (snapshot.data == null) {
-            return Scaffold(
-              body: SingleChildScrollView(
+
+    return Scaffold(
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return Center(
+            //     child: CupertinoActivityIndicator(),
+            //   );
+            // }
+            if (snapshot.data == null) {
+              return SingleChildScrollView(
                 child: Stack(
                   children: [
                     ClipPath(
@@ -40,26 +37,18 @@ class LoginPage extends StatelessWidget {
                         decoration: customClipperBackground,
                       ),
                     ),
-                    ColumnWidget(
-                        height: height,
-                        width: width,
-                        emailController: emailController,
-                        passwordController: passwordController)
+                    ColumnWidget(height: height, width: width)
                   ],
                 ),
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return const Scaffold(
-              body: Center(
+              );
+            } else if (snapshot.hasError) {
+              return Center(
                 child: Text("Error Occured"),
-              ),
-            );
-          } else if (snapshot.data!.emailVerified) {
-            return const HomeNavigationPage();
-          } else {
-            return Scaffold(
-              body: SingleChildScrollView(
+              );
+            } else if (snapshot.data != null) {
+              return const HomeNavigationPage();
+            } else {
+              return SingleChildScrollView(
                 child: Stack(
                   children: [
                     ClipPath(
@@ -70,16 +59,12 @@ class LoginPage extends StatelessWidget {
                         decoration: customClipperBackground,
                       ),
                     ),
-                    ColumnWidget(
-                        height: height,
-                        width: width,
-                        emailController: emailController,
-                        passwordController: passwordController)
+                    ColumnWidget(height: height, width: width)
                   ],
                 ),
-              ),
-            );
-          }
-        });
+              );
+            }
+          }),
+    );
   }
 }

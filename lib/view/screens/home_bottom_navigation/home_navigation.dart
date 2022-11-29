@@ -27,6 +27,11 @@ class HomeNavigationPage extends StatelessWidget {
         autoRemove: false,
         builder: (BottomController bottomController) {
           return Scaffold(
+            drawer: Drawer(
+              elevation: 1,
+              backgroundColor: Colors.white,
+              child: Column(),
+            ),
             resizeToAvoidBottomInset: false,
             bottomNavigationBar:
                 BottomNavigationBarWidget(bottomController: bottomController),

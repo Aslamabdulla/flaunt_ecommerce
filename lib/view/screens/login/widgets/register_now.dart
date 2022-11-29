@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flaunt_ecommenrce/controller/login_controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,7 @@ class SignUpWidget extends StatelessWidget {
   final String text1;
   final String text2;
   final Function() fnctn;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

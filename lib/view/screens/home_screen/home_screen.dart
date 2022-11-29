@@ -19,10 +19,6 @@ class HomeScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: Drawer(
-        elevation: 1,
-        backgroundColor: Colors.white,
-      ),
       resizeToAvoidBottomInset: false,
       extendBody: true,
       extendBodyBehindAppBar: true,

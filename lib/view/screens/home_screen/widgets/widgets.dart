@@ -1,5 +1,7 @@
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/sample.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/recommended_for_you.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/trending_clothes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
@@ -75,7 +77,7 @@ List<Widget> widgets = [
   kHeight10,
   const RecentlyViewedWidget(),
   kHeight10,
-  const TopCategories(),
+  // const TopCategories(),
   const OfferTile(image: "assets/images/offer.png"),
   const RowWidget(
       text: "Trending Clothes",
@@ -84,7 +86,7 @@ List<Widget> widgets = [
       fontSize: 18,
       mainAxis: MainAxisAlignment.spaceBetween),
   kHeight10,
-  const RecentlyViewedWidget(),
+  const TrendingClothes(),
   const RowWidget(
       text: "Summer Collection",
       top: 10,
@@ -100,7 +102,7 @@ List<Widget> widgets = [
       fontSize: 18,
       mainAxis: MainAxisAlignment.spaceBetween),
   kHeight10,
-  const HotSalesTiles(),
+  const RecommendedForYou(),
   kHeight10,
   const OfferTile(image: "assets/images/offer2.png"),
   const RowWidget(

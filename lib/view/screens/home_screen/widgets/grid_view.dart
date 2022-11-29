@@ -1,4 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -22,40 +27,61 @@ class GridViewWidget extends StatelessWidget {
     return Container(
         height: imagesList.length >= 6 ? height : height + 300,
         margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: GridView.custom(
-          physics: const NeverScrollableScrollPhysics(),
-          primary: false,
-          gridDelegate: SliverWovenGridDelegate.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 0,
-            crossAxisSpacing: 5,
-            pattern: [
-              const WovenGridTile(1),
-              const WovenGridTile(
-                5 / 7,
-                crossAxisRatio: 1,
-                alignment: AlignmentDirectional.centerEnd,
-              ),
-            ],
-          ),
-          childrenDelegate: SliverChildBuilderDelegate(
-            addSemanticIndexes: false,
-            childCount: imagesList.length,
-            (context, index) => image(index, imagesList),
-          ),
-        ));
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: FirebaseDatabase.readHotsales("summercollection"),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text("ERROR WHILE FETCHING DATA");
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return CupertinoActivityIndicator();
+              } else if (snapshot.data == null) {
+                return Text("NO DATA");
+              } else {
+                return GridView.custom(
+                  physics: const NeverScrollableScrollPhysics(),
+                  primary: false,
+                  gridDelegate: SliverWovenGridDelegate.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 5,
+                    pattern: [
+                      const WovenGridTile(1),
+                      const WovenGridTile(
+                        5 / 7,
+                        crossAxisRatio: 1,
+                        alignment: AlignmentDirectional.centerEnd,
+                      ),
+                    ],
+                  ),
+                  childrenDelegate: SliverChildBuilderDelegate(
+                      addSemanticIndexes: false,
+                      childCount: imagesList.length, (context, index) {
+                    var summerCollectionProducts = CartModel.fromJson(
+                        json: snapshot.data!.docs[index].data());
+                    String id = snapshot.data!.docs[index].id;
+                    return image(index, summerCollectionProducts, id);
+                  }),
+                );
+              }
+            }));
   }
 }
 
-Widget image(int index, List<String> imagesList) => GestureDetector(
+Widget image(int index, CartModel productList, String id) => GestureDetector(
       onTap: (() {
-        Get.to(() => ProduductView());
+        Get.to(() => ProductViewScreen(
+              itemIndex: index,
+              docId: id,
+              category: "summercollection",
+              isMainCollection: false,
+              subCategory: "flaunt",
+            ));
       }),
       child: Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(imagesList[index]), fit: BoxFit.cover),
+              image: NetworkImage(productList.imageUrl[0]), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -74,11 +100,11 @@ Widget image(int index, List<String> imagesList) => GestureDetector(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Levis Women Tshirt",
+                        productList.name,
                         style: gridstyle,
                       ),
                       Text(
-                        "₹1850",
+                        "₹${productList.price}",
                         style: gridstyleSub,
                       ),
                       kHeight5

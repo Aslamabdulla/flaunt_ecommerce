@@ -80,13 +80,13 @@ class FirebaseDatabase {
     // Map<String,dynamic> data = <String,dynamic> {
     //   ""
     // };
-    // final temp = _homeCollection
-    //     .doc("mostpopular")
+    // final temp = _mainCollection
+    //     .doc("Women")
     //     .collection("subcategories")
-    //     .doc("flaunt")
+    //     .doc("Western Wear")
     //     .collection("products")
     //     .doc();
-    // temp.set(product.toJson());
+    // temp.set(product.toMap());
     final cartPath = _cartCollection.doc(userId).collection("products").doc(id);
     cartPath.set(
       product.toMap(),
@@ -291,10 +291,12 @@ class FirebaseDatabase {
     final address = cartController.address.value;
     tempAddress = address.values.toList();
     print(tempAddress);
+    // final uuid = DateTime.now();
+    // String formattedId = DateFormat().format(now);
     final cartPath = await _userOrderCollection
         .doc(user.email)
         .collection("order_history")
-        .doc();
+        .doc("${product.productId}$formattedDate");
     cartPath.set(
       OrderModel(
               price: product.price,
@@ -320,7 +322,8 @@ class FirebaseDatabase {
               userEmail: userEmail!)
           .toMap(),
     );
-    final adminOrder = await _adminOrderCollection.doc();
+    final adminOrder =
+        await _adminOrderCollection.doc("${product.productId}$formattedDate");
     adminOrder.set(
       OrderModel(
               price: product.price,

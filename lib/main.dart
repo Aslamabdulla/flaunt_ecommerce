@@ -1,13 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_board_first.dart';
 import 'package:flaunt_ecommenrce/view/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
+  await SharedPref.init();
   runApp(const MyApp());
 }
 
@@ -33,6 +35,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const SplashScreen());
+        home: SplashScreen());
   }
 }

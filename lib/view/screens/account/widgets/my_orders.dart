@@ -105,7 +105,7 @@ class MyOrdersScreen extends StatelessWidget {
                       return Column(
                         children: [
                           RowWidget(
-                            text: "MY CART",
+                            text: "MY ORDERS",
                             top: 15,
                             left: 15,
                             fontSize: 18,

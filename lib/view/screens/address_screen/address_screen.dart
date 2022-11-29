@@ -3,6 +3,7 @@ import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/add_address_button.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/address_screen/widgets/address_text.dart';
 import 'package:flaunt_ecommenrce/view/screens/address_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
@@ -63,7 +64,7 @@ class AddressScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                               6,
-                              (index) => TextFormWidget(
+                              (index) => TextAddressFormWidget(
                                   forgotBtn: false,
                                   controller: textFormController[index].value,
                                   hint: hintListAddress[index],

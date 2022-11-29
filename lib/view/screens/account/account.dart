@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/account/widgets/my_orders.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
+import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -106,6 +107,7 @@ class AccountPage extends StatelessWidget {
                               final googleSignin = GoogleSignIn();
                               FirebaseAuth.instance.signOut();
                               loginController.signout();
+                              Get.offAll(() => LoginPage());
                             },
                             text: "Logout",
                             leading: Icons.logout_outlined,

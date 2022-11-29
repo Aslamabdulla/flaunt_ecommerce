@@ -46,6 +46,7 @@ dependencies:
   flutter_animated_icons: ^1.0.1
   flutter_carousel_slider: ^1.0.9
   flutter_credit_card: ^3.0.4
+  flutter_launcher_icons: ^0.11.0
   flutter_staggered_grid_view: ^0.6.2
   font_awesome_flutter: ^10.2.1
   get: ^4.6.5
@@ -56,6 +57,7 @@ dependencies:
   logger: ^1.1.0
   pinput: ^2.2.16
   razorpay_flutter: ^1.3.4
+  shared_preferences: ^2.0.15
   uuid: ^3.0.7
 
 dev_dependencies:
@@ -79,7 +81,6 @@ flutter:
     - assets/images/products/accessories/
     - assets/images/products/shoes/
     - assets/images/products/circle/
-    - assets/images/products/homeGrid/
     - assets/images/products/categories/withoutbg/women/
     - assets/images/products/categories/withoutbg/men/
     - assets/images/paymentButton/

@@ -1,16 +1,21 @@
+import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
+import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_board_first.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
+  SplashScreen({super.key});
+  bool? firstTime = true;
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      firstTime = SharedPref.getLogin();
       splashTimer();
     });
+
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
@@ -30,6 +35,9 @@ class SplashScreen extends StatelessWidget {
   splashTimer() async {
     await Future.delayed(
       const Duration(seconds: 4),
-    ).then((value) => Get.to(() => const OnboardFirst()));
+    ).then((value) => Get.offAll(() {
+          firstTime = SharedPref.getLogin();
+          return firstTime == null ? const OnboardFirst() : LoginPage();
+        }));
   }
 }
