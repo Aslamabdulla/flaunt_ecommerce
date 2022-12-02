@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CurrentColorAndSizeWidget extends StatelessWidget {
   const CurrentColorAndSizeWidget({
@@ -20,8 +21,8 @@ class CurrentColorAndSizeWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: Color.fromRGBO(43, 154, 184, 1))),
-                height: 35,
-                width: 60,
+                height: 35.h,
+                width: 60.w,
                 child: Center(
                   child: Text("Large"),
                 ),

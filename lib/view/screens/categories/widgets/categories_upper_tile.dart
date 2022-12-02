@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
-import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/categories/widgets/head_offer_tile.dart';
-import 'package:flaunt_ecommenrce/view/screens/categories/widgets/widgets.dart';
 
 class CategoriesUpperTile extends StatelessWidget {
-  final List<String> offerTopTileBg;
+  final String category;
   const CategoriesUpperTile({
     Key? key,
-    required this.offerTopTileBg,
+    required this.category,
   }) : super(key: key);
 
   @override
@@ -20,14 +22,29 @@ class CategoriesUpperTile extends StatelessWidget {
     return Container(
       height: height / 3.2,
       width: width,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: imagesNoBackgroundWomen.length,
-          itemBuilder: (context, index) {
-            return HeadTileCategories(
-              offerTopTileBg: offerTopTileBg,
-              index: index,
-            );
+      child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: FirebaseDatabase.readHotsales(category.toUpperCase()),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              {
+                return Text("Error Occured");
+              }
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return CupertinoActivityIndicator();
+            } else if (snapshot.data == null) {
+              return Text("Empty data");
+            } else {
+              return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    return HeadTileCategories(
+                      snapshot: snapshot,
+                      category: category,
+                      index: index,
+                    );
+                  });
+            }
           }),
     );
   }

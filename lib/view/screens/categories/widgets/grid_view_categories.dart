@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/product_view/product_view.dart';
+
 
 class GridViewCategoryWidget extends StatelessWidget {
   AsyncSnapshot<QuerySnapshot<Object?>> snapshot;
@@ -120,7 +120,7 @@ Widget image(
                     kHeight5
                   ],
                 ),
-                Icon(Icons.favorite_outline_outlined)
+                // Icon(Icons.favorite_outline_outlined)
               ],
             ),
           ),

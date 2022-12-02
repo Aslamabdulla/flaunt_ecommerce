@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BrandNameWidget extends StatelessWidget {
@@ -24,14 +25,13 @@ class BrandNameWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(brandName.toUpperCase(),
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
             RichText(
                 text: TextSpan(
                     text: 'CATEGORY : ',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'Oswald'),
                     children: [
                   TextSpan(

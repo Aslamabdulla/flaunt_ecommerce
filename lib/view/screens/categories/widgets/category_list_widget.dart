@@ -31,7 +31,7 @@ class CategoryListWidget extends StatelessWidget {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         kHeight15,
-        CategoriesUpperTile(offerTopTileBg: imagesNoBackgroundMen),
+        CategoriesUpperTile(category: category),
         RowWidget(
           text: "FOR $category".toUpperCase(),
           top: 10,

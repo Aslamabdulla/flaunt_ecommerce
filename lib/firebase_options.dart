@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBZjXcF1rFhlOnucqEJW1CX24ovyIxl0jI',
-    appId: '1:565612190758:android:8b0ea2b5416be16cba1ae7',
+    appId: '1:565612190758:android:1ebaaa5349dc6824ba1ae7',
     messagingSenderId: '565612190758',
     projectId: 'flaunt-e9ed3',
     storageBucket: 'flaunt-e9ed3.appspot.com',
@@ -67,10 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '565612190758',
     projectId: 'flaunt-e9ed3',
     storageBucket: 'flaunt-e9ed3.appspot.com',
-    androidClientId:
-        '565612190758-cd95dd21ameqhiddlgctg67l68dvg8ed.apps.googleusercontent.com',
-    iosClientId:
-        '565612190758-r2j6qimooslmuvuvpokt2944t1rmj941.apps.googleusercontent.com',
+    androidClientId: '565612190758-c6omeftm5hcugb1p6l3li3tq3bbjelj4.apps.googleusercontent.com',
+    iosClientId: '565612190758-r2j6qimooslmuvuvpokt2944t1rmj941.apps.googleusercontent.com',
     iosBundleId: 'com.example.flauntEcommenrce',
   );
 
@@ -80,10 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '565612190758',
     projectId: 'flaunt-e9ed3',
     storageBucket: 'flaunt-e9ed3.appspot.com',
-    androidClientId:
-        '565612190758-cd95dd21ameqhiddlgctg67l68dvg8ed.apps.googleusercontent.com',
-    iosClientId:
-        '565612190758-r2j6qimooslmuvuvpokt2944t1rmj941.apps.googleusercontent.com',
+    androidClientId: '565612190758-c6omeftm5hcugb1p6l3li3tq3bbjelj4.apps.googleusercontent.com',
+    iosClientId: '565612190758-r2j6qimooslmuvuvpokt2944t1rmj941.apps.googleusercontent.com',
     iosBundleId: 'com.example.flauntEcommenrce',
   );
 }

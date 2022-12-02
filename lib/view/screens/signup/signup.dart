@@ -2,8 +2,10 @@
 import 'package:flaunt_ecommenrce/controller/login_controller/login_controller.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
+import 'package:flaunt_ecommenrce/view/screens/login/widgets/otp.dart';
 import 'package:flaunt_ecommenrce/view/screens/signup/widgets/sign_up_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
@@ -66,33 +68,38 @@ class SignUpPage extends StatelessWidget {
                   ),
                   kHeight10,
                   TextFormWidget(
+                      isObscure: false,
                       prefixIcon: Icons.account_circle_outlined,
                       controller: loginCtrl.userNameController,
                       forgotBtn: false,
                       hint: "Username"),
                   TextFormWidget(
+                    isObscure: false,
                     prefixIcon: Icons.email_outlined,
                     hint: "Enter your email",
                     controller: loginCtrl.signUpemailController,
                     forgotBtn: false,
                   ),
                   TextFormWidget(
+                      isObscure: true,
                       prefixIcon: Icons.password_outlined,
                       controller: loginCtrl.passWordController,
                       forgotBtn: false,
                       hint: "Enter your password"),
                   TextFormWidget(
+                      isObscure: true,
                       prefixIcon: Icons.password_outlined,
                       controller: loginCtrl.confirmPasswordController,
                       forgotBtn: false,
                       hint: "Confirm your password"),
                   TextFormWidget(
+                      isObscure: false,
                       prefixIcon: Icons.man_outlined,
                       controller: loginCtrl.genderController,
                       forgotBtn: false,
                       hint: "Enter your gender"),
                   LoginButtonWidget(
-                      height: height * .05,
+                      height: 45.h,
                       width: width / 3,
                       name: "Sign up",
                       fnctn: () => loginCtrl.signUp()),
@@ -101,12 +108,14 @@ class SignUpPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SignUpMethodWidget(
+                          fnctn: () {},
                           height: height,
                           width: width,
                           icon: FontAwesomeIcons.facebook,
                           color: Colors.blueAccent),
                       kWidth20,
                       SignUpMethodWidget(
+                        fnctn: () => loginCtrl.googleLogin(),
                         height: height,
                         width: width,
                         icon: FontAwesomeIcons.google,
@@ -114,6 +123,11 @@ class SignUpPage extends StatelessWidget {
                       ),
                       kWidth20,
                       SignUpMethodWidget(
+                          fnctn: () {
+                            Get.to(() => FilledRoundedPinPut(),
+                                transition: Transition.rightToLeft,
+                                duration: Duration(milliseconds: 400));
+                          },
                           color: Colors.black,
                           height: height,
                           width: width,

@@ -16,7 +16,7 @@ import 'package:uuid/uuid.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final user = FirebaseAuth.instance.currentUser!;
-final userEmail = user.email;
+final userEmail = user.email ?? user.uid;
 final CollectionReference _mainCollection = _firestore.collection("categories");
 final CollectionReference _homeCollection = _firestore.collection("sections");
 final CollectionReference _cartCollection = _firestore.collection("cart");
@@ -73,8 +73,8 @@ class FirebaseDatabase {
   static Future<void> addToCart(
       OrderModel product, String userId, String id) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "useId": userId,
-      "time": DateTime.now()
+      "useId": userEmail,
+      "time": DateTime.now(),
     };
     Map<String, dynamic> itemData = {};
     // Map<String,dynamic> data = <String,dynamic> {
@@ -87,20 +87,22 @@ class FirebaseDatabase {
     //     .collection("products")
     //     .doc();
     // temp.set(product.toMap());
-    final cartPath = _cartCollection.doc(userId).collection("products").doc(id);
-    cartPath.set(
-      product.toMap(),
-    );
+    final cartPath = _cartCollection.doc(userEmail);
+    cartPath.set(data);
+
+    cartPath.collection("products").doc(id).set(
+          product.toMap(),
+        );
   }
 
   static Future<Map<String, dynamic>> getCartItem(String docId, String category,
       String subCategory, String id, bool isMainCollection) async {
     Map<String, dynamic> userData = <String, dynamic>{
-      "useId": user.email,
+      "useId": user.email ?? user.uid,
       "lastPurchase": DateTime.now(),
       "total": "total",
     };
-    final cartPath = _userOrderCollection.doc(user.email);
+    final cartPath = _userOrderCollection.doc(userEmail);
     await cartPath.set(userData);
     final cartData = cartPath.collection("products");
 
@@ -126,7 +128,7 @@ class FirebaseDatabase {
               orderId: "",
               address: [],
               productIndex: "0",
-              userEmail: userEmail!,
+              userEmail: userEmail,
               date: DateTime.now().toString(),
               subCategory: subCategory,
               productId: docId,
@@ -149,7 +151,7 @@ class FirebaseDatabase {
           cartController.productList.add(product);
           log(product.toString());
           print(cartController.productList.length);
-          addToCart(product, user.email!, id);
+          addToCart(product, user.email ?? user.uid, id);
           // cartData.add(
           //   data,
           // );
@@ -165,7 +167,7 @@ class FirebaseDatabase {
               orderId: "",
               address: [],
               date: DateTime.now().toString(),
-              userEmail: userEmail!,
+              userEmail: userEmail,
               productIndex: "0",
               subCategory: subCategory,
               productId: docId,
@@ -188,7 +190,7 @@ class FirebaseDatabase {
           cartController.productList.add(product);
           log(product.toString());
           print(cartController.productList.length);
-          addToCart(product, user.email!, id);
+          addToCart(product, userEmail, id);
           // cartData.add(
           //   data,
           // );
@@ -205,7 +207,7 @@ class FirebaseDatabase {
   static Stream<QuerySnapshot<Map<String, dynamic>>> readCart() {
     return _firestore
         .collection("cart")
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("products")
         .snapshots();
   }
@@ -213,7 +215,7 @@ class FirebaseDatabase {
   static Stream<QuerySnapshot<Map<String, dynamic>>> readorders() {
     return _firestore
         .collection("users")
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("order_history")
         .snapshots();
   }
@@ -239,7 +241,7 @@ class FirebaseDatabase {
     // };
     final _mainCollection = await _firestore
         .collection('users')
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("address")
         .doc("details")
         .set(address.toMap());
@@ -250,7 +252,7 @@ class FirebaseDatabase {
   static Future getAddess(AddressModel address) async {
     final documentReference = _firestore
         .collection("users")
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("address")
         .doc("details")
         .get();
@@ -264,7 +266,7 @@ class FirebaseDatabase {
   static Stream<DocumentSnapshot<Object?>> addressGet() {
     final documentReference = _firestore
         .collection("users")
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("address")
         .doc("details");
     // await documentReference.then((DocumentSnapshot doc) {
@@ -276,7 +278,7 @@ class FirebaseDatabase {
 
   static Future<void> addOrder(OrderModel product) async {
     Map<String, dynamic> data = <String, dynamic>{
-      "useId": user.email,
+      "useId": user.email ?? user.uid,
       "time": DateTime.now()
     };
     Map<String, dynamic> itemData = {};
@@ -294,7 +296,7 @@ class FirebaseDatabase {
     // final uuid = DateTime.now();
     // String formattedId = DateFormat().format(now);
     final cartPath = await _userOrderCollection
-        .doc(user.email)
+        .doc(user.email ?? user.uid)
         .collection("order_history")
         .doc("${product.productId}$formattedDate");
     cartPath.set(
@@ -319,7 +321,7 @@ class FirebaseDatabase {
               isPopularBrand: product.isPopularBrand,
               total: product.total,
               date: product.date,
-              userEmail: userEmail!)
+              userEmail: userEmail)
           .toMap(),
     );
     final adminOrder =
@@ -346,7 +348,7 @@ class FirebaseDatabase {
               isPopularBrand: product.isPopularBrand,
               total: product.total,
               date: product.date,
-              userEmail: userEmail!)
+              userEmail: userEmail)
           .toMap(),
     );
   }

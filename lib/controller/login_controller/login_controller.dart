@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
+import 'package:flaunt_ecommenrce/services/database_services.dart';
+import 'package:flaunt_ecommenrce/view/common/snack_bar_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,6 +17,10 @@ class LoginController extends GetxController {
   RxString userNameController = "".obs;
   RxString confirmPasswordController = "".obs;
   RxString genderController = "".obs;
+  RxString phoneNumber = "".obs;
+  RxString otpNumber = "".obs;
+  RxString verificationNumId = "".obs;
+
   bool firstTime = true;
   final googleSignin = GoogleSignIn();
   GoogleSignInAccount? _user;
@@ -79,15 +86,22 @@ class LoginController extends GetxController {
     update();
   }
 
-  Future firebaseOtp(int phoneNumber) async {
+  Future firebaseOtp(String phoneNumber) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: phoneNumber.toString(),
-      verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int? resendToken) {},
+      phoneNumber: phoneNumber.toString().trim(),
+      verificationCompleted: (PhoneAuthCredential credential) async {},
+      verificationFailed: (FirebaseAuthException e) {
+        Get.snackbar("error", e.toString());
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        snackBarShowSuccess("PROMPT", "OTP SENT SUCCESSFULLY");
+        verificationNumId.value = verificationId;
+      },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
+
   // @override
   // void dispose() {
   //   controller.dispose();
@@ -96,29 +110,36 @@ class LoginController extends GetxController {
   // }
 
   Future signIn() async {
-    print(emailController);
-    print(loginPasswodController);
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.value.trim(),
         password: loginPasswodController.value.trim(),
       );
-      Get.snackbar("Success", "Verified Succesfully");
+      snackBarShowSuccess("Success", "Login Successfull");
     } on FirebaseAuthException catch (e) {
       print(e);
-      Get.snackbar("Error", "Error on Verifiying");
+      snackBarShowError("Error", "Error On Verifying");
     }
   }
 
   Future signUp() async {
-    print(signUpemailController + "hello");
     CollectionReference _mainCollection = _fireStore.collection("users");
-    if (passWordController == confirmPasswordController) {
+    if (passWordController != confirmPasswordController) {
+      snackBarShowError("Error", "Password Not Matching");
+    } else if (passWordController.value.length < 6) {
+      snackBarShowError("Error", "Password must have 6 letters");
+    } else if (signUpemailController.value.isEmpty) {
+      snackBarShowError("Error", "Email is empty");
+    } else if (userNameController.value.isEmpty) {
+      snackBarShowError("Error", "Username is empty");
+    } else if (genderController.value.isEmpty) {
+      snackBarShowError("Error", "Gender is empty");
+    } else {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: signUpemailController.trim(),
             password: passWordController.trim());
-
+        FirebaseAuth.instance.signOut();
         DocumentReference documentReference =
             _mainCollection.doc(signUpemailController.value);
         Map<String, dynamic> data = <String, dynamic>{
@@ -126,6 +147,7 @@ class LoginController extends GetxController {
           "username": userNameController.value,
           "email": signUpemailController.value,
           "id": signUpemailController.value,
+          "gender": genderController.value,
           "role": "user"
         };
         documentReference.set(data);
@@ -133,15 +155,14 @@ class LoginController extends GetxController {
             .collection("account")
             .doc(userNameController.value);
         await subDocumentreference.set(data).whenComplete(() {
-          Get.snackbar("Success", "Registered Successfully");
+          snackBarShowSuccess("Success", "Registered Successfully");
 
           return print("Note item inserted into database");
         }).catchError((e) => print(e));
       } on FirebaseAuthException catch (e) {
-        Get.snackbar("Error", "Please Verify Details", colorText: kRedAccent);
+        // Get.snackbar("Error", "Please Verify Details", colorText: kRedAccent);
+        snackBarShowError("Error", e.toString());
       }
-    } else {
-      Get.snackbar("ERROR", "Password Not Matching");
     }
   }
 }

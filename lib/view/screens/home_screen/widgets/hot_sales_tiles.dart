@@ -8,6 +8,7 @@ import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart'
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HotSalesTiles extends StatelessWidget {
@@ -28,8 +29,8 @@ class HotSalesTiles extends StatelessWidget {
             return Text("No Item");
           } else {
             return Container(
-              margin: const EdgeInsets.only(left: 10),
-              height: height * .22,
+              margin: const EdgeInsets.only(left: 10).r,
+              height: 170.h,
               child: ListView.separated(
                   physics: BouncingScrollPhysics(),
                   separatorBuilder: (context, index) => const SizedBox(

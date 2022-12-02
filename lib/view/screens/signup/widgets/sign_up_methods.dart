@@ -8,12 +8,14 @@ class SignUpMethodWidget extends StatelessWidget {
     required this.width,
     required this.icon,
     required this.color,
+    required this.fnctn,
   }) : super(key: key);
 
   final double height;
   final double width;
   final IconData icon;
   final Color color;
+  final Function() fnctn;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class SignUpMethodWidget extends StatelessWidget {
       child: Center(
         child: IconButton(
           icon: FaIcon(icon),
-          onPressed: () {},
+          onPressed: fnctn,
           color: color,
         ),
       ),

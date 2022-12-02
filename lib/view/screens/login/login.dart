@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget {
               return Center(
                 child: Text("Error Occured"),
               );
-            } else if (snapshot.data != null) {
+            } else if (snapshot.data != null || snapshot.data!.uid != null) {
               return const HomeNavigationPage();
             } else {
               return SingleChildScrollView(

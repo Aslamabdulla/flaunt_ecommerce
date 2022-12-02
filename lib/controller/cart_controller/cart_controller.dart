@@ -177,7 +177,7 @@ class CartController extends GetxController {
       isMainCollection) async {
     await _firebaseFirestore
         .collection('cart')
-        .doc(user.email)
+        .doc(userEmail)
         .collection("products")
         .doc(docId)
         .get()

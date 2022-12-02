@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BackButtonAppbar extends StatelessWidget {
   const BackButtonAppbar({
@@ -10,9 +11,9 @@ class BackButtonAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(right: 10),
-        height: 45,
-        width: 45,
+        margin: EdgeInsets.only(right: 10).w,
+        height: 45.h,
+        width: 45.h,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: LinearGradient(colors: [

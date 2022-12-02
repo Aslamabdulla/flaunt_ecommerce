@@ -7,15 +7,11 @@ import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/screens/account/widgets/order_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/delivery_status/delivery_status.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flaunt_ecommenrce/controller/cart_controller/cart_controller.dart';
-import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
-import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
@@ -119,12 +115,6 @@ class MyOrdersScreen extends StatelessWidget {
                                 final cartProducts = OrderModel.fromMap(
                                     snapshot.data!.docs[index].data());
                                 final id = snapshot.data!.docs[index].id;
-                                // cartController.orderList.value.where((orders) {
-                                //   return orders.productId ==
-                                //       cartProducts.productId;
-                                // }).isEmpty
-                                //     ? cartController.orderList.add(cartProducts)
-                                //     : null;
 
                                 return GestureDetector(
                                   onTap: () => Get.to(() => DeliveryStatusScren(

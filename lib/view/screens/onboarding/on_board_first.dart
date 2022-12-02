@@ -15,9 +15,7 @@ class OnboardFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final height = size.height;
-    final width = size.width;
+    LiquidController liquidController = LiquidController();
     final pages = [
       const FirstPage(),
       const SecondPage(),
@@ -28,6 +26,7 @@ class OnboardFirst extends StatelessWidget {
 
     return Scaffold(
         body: LiquidSwipe(
+      liquidController: liquidController,
       enableSideReveal: true,
       slideIconWidget: Icon(Icons.arrow_back_ios_new),
       positionSlideIcon: .8,

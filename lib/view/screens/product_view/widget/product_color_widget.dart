@@ -1,6 +1,7 @@
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ColorWidget extends StatelessWidget {
   const ColorWidget({
@@ -15,10 +16,10 @@ class ColorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 80,
+            width: 80.w,
             decoration: BoxDecoration(
                 border: Border.all(width: .5),
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(20).w),
             child: const Center(
               child: Text(
                 "COLORS",

@@ -64,13 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  cart_stepper:
-    dependency: "direct main"
-    description:
-      name: cart_stepper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.2"
   characters:
     dependency: transitive
     description:
@@ -155,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  elegant_notification:
+    dependency: "direct main"
+    description:
+      name: elegant_notification
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.4"
   equatable:
     dependency: "direct main"
     description:
@@ -300,6 +300,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.6.0"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -429,13 +436,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-  logger:
-    dependency: "direct main"
-    description:
-      name: logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   lottie:
     dependency: transitive
     description:

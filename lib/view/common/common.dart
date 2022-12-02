@@ -1,6 +1,7 @@
 import 'package:another_stepper/dto/stepper_data.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 List<String> imageTopCategories = [
   "assets/images/products/shoes/dress1.png",
@@ -193,8 +194,7 @@ final decorationCartTile =
 decorationCategories(String imagesNoBg, int index) => BoxDecoration(
       image: DecorationImage(
         alignment: Alignment.bottomLeft,
-        scale: .6,
-        image: AssetImage(
+        image: NetworkImage(
           imagesNoBg,
         ),
       ),
@@ -212,9 +212,9 @@ decorationCart(String imagesNoBg, int index) => BoxDecoration(
       color: colors[index],
     );
 
-final gridstyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+final gridstyle = TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600);
 final gridstyleSub = TextStyle(
-  fontSize: 14,
+  fontSize: 14.sp,
 );
 
 ///////////Color//////////
@@ -248,7 +248,7 @@ buttonStyleCart(double width, double height, Color color) => ButtonStyle(
     backgroundColor: MaterialStateProperty.all(color));
 
 textStyleSize(double size, FontWeight fontWeight) =>
-    TextStyle(fontSize: size, fontWeight: fontWeight, color: kBlack);
+    TextStyle(fontSize: size.sp, fontWeight: fontWeight, color: kBlack);
 
 final boxGradientDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(10),

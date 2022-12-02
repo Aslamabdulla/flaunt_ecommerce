@@ -6,6 +6,7 @@ import 'package:flaunt_ecommenrce/view/screens/categories/sub_categories.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CircleCategories extends StatelessWidget {
@@ -22,21 +23,21 @@ class CircleCategories extends StatelessWidget {
             return const Center(
               child: Text("Error Occured"),
             );
-          } else if (snapshot.data == null) {
-            return const Center(
-              child: Text("NO data there"),
-            );
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CupertinoActivityIndicator(),
             );
+          } else if (snapshot.data == null) {
+            return const Center(
+              child: Text("No Data Found"),
+            );
           } else {
             final categoryItemsList =
                 snapshot.data!.docs.map((e) => e.id).toList();
-
+            print(height * .14);
             return Container(
-              margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              height: height * .14,
+              margin: const EdgeInsets.only(top: 10, left: 10, right: 10).r,
+              height: 105.h,
               child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   separatorBuilder: (context, index) => const SizedBox(
@@ -53,11 +54,13 @@ class CircleCategories extends StatelessWidget {
                       onTap: () => Get.to(() => SubCategoriesScreen(
                           category: categoryItemsList[index])),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            height: 80,
-                            width: 80,
+                            margin: const EdgeInsets.only(left: 10).r,
+                            height: 80.h,
+                            width: 80.w,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: NetworkImage(categoryImage),
@@ -67,7 +70,8 @@ class CircleCategories extends StatelessWidget {
                           ),
                           Text(
                             categoryItemsList[index],
-                            style: const TextStyle(fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14.sp),
                           )
                         ],
                       ),

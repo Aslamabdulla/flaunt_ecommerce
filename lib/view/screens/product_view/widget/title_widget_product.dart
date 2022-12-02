@@ -1,5 +1,6 @@
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
@@ -19,20 +20,20 @@ class TitleWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: width / 1.6,
+          width: 257.w,
           child: Text(
             title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
           ),
         ),
         SizedBox(
-          width: width * .25,
+          width: 102.w,
           child: Text(
             "₹${price.toString()}",
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.end,
-            style: const TextStyle(
-              fontSize: 18,
+            style: TextStyle(
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

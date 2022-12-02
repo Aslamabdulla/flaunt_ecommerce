@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
@@ -16,6 +17,7 @@ class DescriptionWidget extends StatelessWidget {
       width: width,
       child: Text(
         description,
+        style: TextStyle(fontSize: 14.sp),
         maxLines: 5,
       ),
     );

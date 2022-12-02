@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 
@@ -22,7 +22,7 @@ class CounterCartWidget extends StatelessWidget {
         kWidth5,
         Obx(() => Text(
               cartController.productCountCart.value.toString(),
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18.sp),
             )),
         kWidth5,
         CartCountButtonWidget(

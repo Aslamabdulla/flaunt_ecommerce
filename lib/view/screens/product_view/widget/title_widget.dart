@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
@@ -15,13 +16,13 @@ class TitleWidget extends StatelessWidget {
           Text(
             "Mens Denim Jeans",
             style: TextStyle(
-              fontSize: 25,
+              fontSize: 25.sp,
               color: Color.fromRGBO(76, 163, 184, 1),
             ),
           ),
           Text(
             "₹950",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20.sp),
           )
         ],
       ),

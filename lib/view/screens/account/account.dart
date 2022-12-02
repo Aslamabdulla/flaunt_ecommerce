@@ -1,25 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/account/widgets/my_orders.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 
-import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
-import 'package:flaunt_ecommenrce/view/screens/account/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
-import 'package:flaunt_ecommenrce/view/screens/login/widgets/contents.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/custom_paint.dart';
-import 'package:flaunt_ecommenrce/view/screens/login/widgets/login_buttons.dart';
-import 'package:flaunt_ecommenrce/view/screens/login/widgets/register_now.dart';
-import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/signup/signup.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AccountPage extends StatelessWidget {
@@ -31,10 +27,9 @@ class AccountPage extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final user = FirebaseAuth.instance.currentUser;
     final String username = user?.displayName ?? "USER";
-    final String email = user?.email ?? "EMAIL";
+    final String email = user?.email ?? user?.phoneNumber ?? "EMAIL";
     final String profileImage = user?.photoURL ?? "";
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
@@ -70,50 +65,54 @@ class AccountPage extends StatelessWidget {
                 ),
                 kHeight15,
                 Container(
-                    width: 300,
+                    width: 300.w,
+                    height: 280.h,
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AccountListTile(
-                            onTap: () => Get.to(() => MyOrdersScreen()),
-                            text: "My Orders",
-                            leading: Icons.local_mall,
-                            trailing: Icons.chevron_right,
-                          ),
-                          AccountListTile(
-                            onTap: () => Get.to(HomeScreen()),
-                            text: "Address book",
-                            leading: Icons.badge,
-                            trailing: Icons.chevron_right,
-                          ),
-                          AccountListTile(
-                            onTap: () => Get.to(HomeScreen()),
-                            text: "Giftcard & Vouchers",
-                            leading: Icons.redeem,
-                            trailing: Icons.chevron_right,
-                          ),
-                          AccountListTile(
-                            onTap: () => Get.to(HomeScreen()),
-                            text: "Help & Support",
-                            leading: Icons.help,
-                            trailing: Icons.chevron_right,
-                          ),
-                          AccountListTile(
-                            onTap: () {
-                              final googleSignin = GoogleSignIn();
-                              FirebaseAuth.instance.signOut();
-                              loginController.signout();
-                              Get.offAll(() => LoginPage());
-                            },
-                            text: "Logout",
-                            leading: Icons.logout_outlined,
-                            trailing: Icons.chevron_right,
-                          ),
-                        ])),
+                        borderRadius: BorderRadius.circular(20).w),
+                    child: SingleChildScrollView(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AccountListTile(
+                              onTap: () => Get.to(() => MyOrdersScreen()),
+                              text: "My Orders",
+                              leading: Icons.local_mall,
+                              trailing: Icons.chevron_right,
+                            ),
+                            AccountListTile(
+                              onTap: () {},
+                              text: "Address book",
+                              leading: Icons.badge,
+                              trailing: Icons.chevron_right,
+                            ),
+                            AccountListTile(
+                              onTap: () {},
+                              text: "Giftcard & Vouchers",
+                              leading: Icons.redeem,
+                              trailing: Icons.chevron_right,
+                            ),
+                            AccountListTile(
+                              onTap: () {},
+                              text: "Help & Support",
+                              leading: Icons.help,
+                              trailing: Icons.chevron_right,
+                            ),
+                            AccountListTile(
+                              onTap: () {
+                                final googleSignin = GoogleSignIn();
+                                FirebaseAuth.instance.signOut();
+                                loginController.signout();
+                                Get.offAll(() => const LoginPage(),
+                                    transition: Transition.leftToRight);
+                              },
+                              text: "Logout",
+                              leading: Icons.logout_outlined,
+                              trailing: Icons.chevron_right,
+                            ),
+                          ]),
+                    )),
               ],
             ),
           )

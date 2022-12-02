@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/model/cart_model.dart';
@@ -15,11 +16,9 @@ class GridMostpopular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = Get.height;
-
     return Container(
-      margin: EdgeInsets.only(left: 10),
-      height: height * .4,
+      margin: EdgeInsets.only(left: 10).r,
+      height: 330.h,
       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseDatabase.readHotsales("mostpopular"),
           builder: (context, snapshot) {
@@ -31,7 +30,7 @@ class GridMostpopular extends StatelessWidget {
               return Text("NO DATA");
             } else {
               return GridView.count(
-                childAspectRatio: .6,
+                childAspectRatio: .5,
                 physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 crossAxisCount: 2,
@@ -78,15 +77,15 @@ class MostPopularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 200.h,
       width: width,
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(15).w,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
               blurRadius: 10, color: Colors.grey.shade400, spreadRadius: -5)
         ],
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20).w,
         color: Colors.white,
       ),
       child: Row(
@@ -104,10 +103,11 @@ class MostPopularWidget extends StatelessWidget {
           ),
           kWidth10,
           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                  width: width / 3.5,
+                  width: 140.w,
                   child: Text(
                     product.name,
                     style: textStyleSize(15, FontWeight.bold),

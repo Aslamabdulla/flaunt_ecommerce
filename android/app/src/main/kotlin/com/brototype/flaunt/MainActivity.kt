@@ -1,4 +1,4 @@
-package com.example.flaunt_ecommenrce
+package com.brototype.flaunt
 
 import io.flutter.embedding.android.FlutterActivity
 

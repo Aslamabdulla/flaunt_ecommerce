@@ -6,6 +6,7 @@ import 'package:flaunt_ecommenrce/model/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
@@ -46,9 +47,8 @@ class ProductViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-    final height = size.height;
+    final width = ScreenUtil().screenWidth;
+    final height = ScreenUtil().screenHeight;
     return Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -75,20 +75,6 @@ class ProductViewScreen extends StatelessWidget {
                 final product = Product.fromSnapshot(snapshot.data!);
                 final id = snapshot.data?.id ?? "";
 
-                // String id = snapshot.data!.id;
-                // print(id);
-                // String subCategory = productInfo['subCategory'];
-                // String title = productInfo['name'];
-                // String description = productInfo['description'];
-                // String price = productInfo['price'];
-                // String quantity = productInfo['quantity'];
-                // String productId = productInfo['productId'];
-                // final List imageUrl = productInfo['imageUrl'];
-
-                // List colors = productInfo['colors'];
-                // String category = productInfo['category'];
-                // String brandName = productInfo['brand'];
-
                 return Stack(
                   alignment: AlignmentDirectional.bottomCenter,
                   children: [
@@ -99,7 +85,7 @@ class ProductViewScreen extends StatelessWidget {
                     Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 15),
-                        height: height / 2,
+                        height: 422.h,
                         width: width,
                         decoration: stackDecoration,
                         child: Column(
@@ -129,10 +115,10 @@ class ProductViewScreen extends StatelessWidget {
                             kHeight10,
                             Container(
                               margin:
-                                  const EdgeInsets.symmetric(horizontal: 12),
+                                  const EdgeInsets.only(left: 12, right: 12).r,
                               child: CountAndCartWidget(
                                   isMainCollection: isMainCollection,
-                                  id: id!,
+                                  id: id,
                                   category: category,
                                   subCategory: subCategory,
                                   docId: docId,
@@ -140,7 +126,7 @@ class ProductViewScreen extends StatelessWidget {
                             ),
                             kHeight15,
                             ElevatedButton.icon(
-                                style: buttonStyleCart(width * .8, 50, kBlack),
+                                style: buttonStyleCart(300.w, 50.h, kBlack),
                                 onPressed: () async {
                                   cartController.orderList.clear();
                                   Get.to(
@@ -151,11 +137,11 @@ class ProductViewScreen extends StatelessWidget {
                                       duration: Duration(milliseconds: 500));
                                 },
                                 icon: const Icon(Icons.local_mall),
-                                label: const Text(
+                                label: Text(
                                   "CHECKOUT",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18.sp),
                                 ))
                           ],
                         ))

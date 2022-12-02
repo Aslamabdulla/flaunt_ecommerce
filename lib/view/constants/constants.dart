@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const kRedAccent = Colors.redAccent;
 const kWhite = Colors.white;
@@ -11,42 +12,42 @@ const kDarkBlueColor = Colors.blueGrey;
 const kHeight5 = SizedBox(
   height: 5,
 );
-const kHeight10 = SizedBox(
-  height: 10,
+final kHeight10 = SizedBox(
+  height: 10.h,
 );
-const kHeight15 = SizedBox(
-  height: 15,
+final kHeight15 = SizedBox(
+  height: 15.h,
 );
-const kHeight20 = SizedBox(
-  height: 20,
+final kHeight20 = SizedBox(
+  height: 20.h,
 );
-const kHeight25 = SizedBox(
-  height: 25,
+final kHeight25 = SizedBox(
+  height: 25.h,
 );
-const kHeight30 = SizedBox(
-  height: 30,
+final kHeight30 = SizedBox(
+  height: 30.h,
 );
-const kHeight35 = SizedBox(
-  height: 35,
+final kHeight35 = SizedBox(
+  height: 35.h,
 );
-const kHeight40 = SizedBox(
-  height: 40,
+final kHeight40 = SizedBox(
+  height: 40.h,
 );
-const kHeight45 = SizedBox(
-  height: 45,
+final kHeight45 = SizedBox(
+  height: 45.h,
 );
-const kHeight50 = SizedBox(
-  height: 50,
+final kHeight50 = SizedBox(
+  height: 50.h,
 );
-const kWidth10 = SizedBox(
-  width: 10,
+final kWidth10 = SizedBox(
+  width: 10.w,
 );
-const kWidth5 = SizedBox(
-  width: 5,
+final kWidth5 = SizedBox(
+  width: 5.w,
 );
-const kWidth15 = SizedBox(
-  width: 15,
+final kWidth15 = SizedBox(
+  width: 15.w,
 );
-const kWidth20 = SizedBox(
-  width: 20,
+final kWidth20 = SizedBox(
+  width: 20.w,
 );

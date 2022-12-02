@@ -50,14 +50,14 @@ class RecentlyViewedWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Spacer(),
-                        Icon(Icons.favorite_outline_outlined)
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   mainAxisSize: MainAxisSize.min,
+                    //   children: const [
+                    //     Spacer(),
+                    //     Icon(Icons.favorite_outline_outlined)
+                    //   ],
+                    // ),
                     Image.asset(
                       Accesoriesimages[index],
                       height: height * .1,

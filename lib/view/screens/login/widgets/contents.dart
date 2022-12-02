@@ -65,11 +65,13 @@ class ColumnWidget extends StatelessWidget {
                   ),
                   kHeight10,
                   TextFormWidget(
+                      isObscure: false,
                       prefixIcon: Icons.email_outlined,
                       controller: loginCtrl.emailController,
                       forgotBtn: false,
                       hint: "Enter your email"),
                   TextFormWidget(
+                    isObscure: true,
                     prefixIcon: Icons.password_outlined,
                     hint: "Enter your password",
                     controller: loginCtrl.loginPasswodController,
@@ -100,7 +102,9 @@ class ColumnWidget extends StatelessWidget {
                   kHeight10,
                   GestureDetector(
                     onTap: () {
-                      // Get.to(() => FilledRoundedPinPut());
+                      Get.to(() => FilledRoundedPinPut(),
+                          transition: Transition.rightToLeft,
+                          duration: Duration(milliseconds: 400));
                     },
                     child: const LoginMethodButtons(
                       text: "Continue with Mobile   ",
@@ -112,9 +116,12 @@ class ColumnWidget extends StatelessWidget {
                   SignUpWidget(
                       text1: "Don't have an account?",
                       text2: " Register Now",
-                      fnctn: () => Get.to(() => SignUpPage(
-                            loginCtrl: loginCtrl,
-                          ))),
+                      fnctn: () => Get.to(
+                          transition: Transition.rightToLeft,
+                          duration: const Duration(milliseconds: 400),
+                          () => SignUpPage(
+                                loginCtrl: loginCtrl,
+                              ))),
                 ],
               );
             }));

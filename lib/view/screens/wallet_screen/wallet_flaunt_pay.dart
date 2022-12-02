@@ -12,6 +12,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.da
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/wallet_screen/widgets/credit_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FlauntPayScreen extends StatelessWidget {
   const FlauntPayScreen({super.key});
@@ -20,6 +21,7 @@ class FlauntPayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -29,7 +31,7 @@ class FlauntPayScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "FLAUNT PAY",
-          style: textStyleSize(20, FontWeight.w600),
+          style: textStyleSize(20.sp, FontWeight.w600),
         ),
       ),
       body: Stack(
@@ -59,7 +61,7 @@ class FlauntPayScreen extends StatelessWidget {
                         fontSize: 18),
                     kHeight20,
                     Container(
-                        height: height * .32,
+                        height: 270.h,
                         width: width,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),

@@ -11,11 +11,13 @@ class TextFormWidget extends StatelessWidget {
     required this.controller,
     required this.hint,
     required this.prefixIcon,
+    required this.isObscure,
   }) : super(key: key);
   final bool forgotBtn;
   RxString controller;
   final String hint;
   final IconData prefixIcon;
+  final bool isObscure;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TextFormWidget extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            obscureText: isObscure,
             // controller: controller,
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(vertical: 5),

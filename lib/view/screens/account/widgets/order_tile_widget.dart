@@ -174,7 +174,7 @@ class CounterCartProducts extends StatelessWidget {
                     productModel: OrderModel(
                         orderId: "",
                         address: [],
-                        userEmail: userEmail!,
+                        userEmail: userEmail,
                         productIndex: "0",
                         date: DateTime.now().toString(),
                         productId: cartProducts.productId,
@@ -215,7 +215,7 @@ class CounterCartProducts extends StatelessWidget {
                         orderId: "",
                         address: [],
                         date: DateTime.now().toString(),
-                        userEmail: userEmail!,
+                        userEmail: userEmail,
                         productIndex: "0",
                         productId: cartProducts.productId,
                         brand: cartProducts.brand,
