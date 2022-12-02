@@ -92,10 +92,10 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
               height: 60,
               decoration: glassDecorationGrid,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -109,7 +109,25 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
                       kHeight5
                     ],
                   ),
-                  Icon(Icons.favorite_outline_outlined)
+                  // StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  //     stream: FirebaseDatabase.readFav(),
+                  //     builder: (context, snapshot) {
+                  //       if (snapshot.connectionState ==
+                  //           ConnectionState.waiting) {
+                  //         return SizedBox();
+                  //       } else if (snapshot.hasError) {
+                  //         return SizedBox();
+                  //       } else {
+                  //         var fav = snapshot.data!.docs.map((e) => e).toList();
+
+                  //         return fav.contains(productList.productId)
+                  //             ? Icon(Icons.favorite_outline_outlined)
+                  //             : Icon(
+                  //                 Icons.favorite,
+                  //                 color: kRedAccent,
+                  //               );
+                  //       }
+                  //     })
                 ],
               ),
             ),
