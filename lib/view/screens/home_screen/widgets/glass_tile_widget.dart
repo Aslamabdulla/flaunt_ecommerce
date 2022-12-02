@@ -19,12 +19,7 @@ class GlassTileWidget extends StatelessWidget {
     Key? key,
     required this.index,
     required this.products,
-    required this.height,
-    required this.width,
   }) : super(key: key);
-
-  final double height;
-  final double width;
 
   @override
   Widget build(BuildContext context) {

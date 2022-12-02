@@ -53,8 +53,6 @@ class HotSalesTiles extends StatelessWidget {
                             ));
                       },
                       child: GlassTileWidget(
-                        height: height,
-                        width: width,
                         index: index,
                         products: product,
                       ),

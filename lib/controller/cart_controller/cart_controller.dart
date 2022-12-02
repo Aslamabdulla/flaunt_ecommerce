@@ -186,17 +186,6 @@ class CartController extends GetxController {
           ? Get.snackbar("PROMPT", "ITEM ALREADY IN CART")
           : await addtoCart(docId, category, subCategory, id, isMainCollection);
     });
-
-    // void addProductTocart(Product product) {
-    //   try {
-    //     if (isItemAlredyAdded(product)) {
-    //       Get.snackbar("ERROR", "ITEM ALREADY IN CART");
-    //     } else {
-    //       String itemId = Uuid().toString();
-    //       FirebaseDatabase.addToCart(product, user.email!);
-    //     }
-    //   } catch (e) {}
-    // // }
   }
 
   Future<void> updateToCart(String docId, String category, String subCategory,

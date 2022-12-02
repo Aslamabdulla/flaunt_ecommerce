@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/model/product_model.dart';
+import 'package:flaunt_ecommenrce/view/screens/product_view/widget/quantity_text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -134,7 +135,8 @@ class ProductViewScreen extends StatelessWidget {
                                           totalBill: cartController
                                               .priceCartListenable.value),
                                       transition: Transition.rightToLeft,
-                                      duration: Duration(milliseconds: 500));
+                                      duration:
+                                          const Duration(milliseconds: 500));
                                 },
                                 icon: const Icon(Icons.local_mall),
                                 label: Text(
@@ -149,66 +151,5 @@ class ProductViewScreen extends StatelessWidget {
                 );
               }
             }));
-  }
-}
-
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-    required this.category,
-  }) : super(key: key);
-
-  final double width;
-  final double height;
-  final String category;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          "CATEGORY : ",
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-      ],
-    );
-  }
-}
-
-class QuantityWidget extends StatelessWidget {
-  const QuantityWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-    required this.quantity,
-  }) : super(key: key);
-
-  final double width;
-  final double height;
-  final String quantity;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width * .35,
-      height: height * .06,
-      decoration: BoxDecoration(
-          border: Border.all(width: .5),
-          borderRadius: BorderRadius.circular(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "QUANTITY : ",
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-          Text(quantity)
-        ],
-      ),
-    );
   }
 }

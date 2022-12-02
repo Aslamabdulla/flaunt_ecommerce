@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/glass_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecentlyViewedWidget extends StatelessWidget {
   const RecentlyViewedWidget({super.key});
@@ -19,24 +20,23 @@ class RecentlyViewedWidget extends StatelessWidget {
       Color.fromRGBO(187, 209, 230, .8),
       Color.fromRGBO(125, 220, 213, .8),
     ];
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+
     return Container(
-      margin: EdgeInsets.only(left: 10),
-      height: height * .25,
+      margin: const EdgeInsets.only(left: 10).r,
+      height: 190.h,
       child: ListView.separated(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         separatorBuilder: (context, index) => SizedBox(
-          height: 10,
-          width: 10,
+          height: 10.h,
+          width: 10.h,
         ),
         scrollDirection: Axis.horizontal,
         itemCount: 8,
         itemBuilder: (context, index) => Container(
-          height: height * .1,
-          width: width / 2.2,
+          height: 85.h,
+          width: 187.w,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20).w,
             color: colors[index],
           ),
           child: Container(
@@ -44,9 +44,9 @@ class RecentlyViewedWidget extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: -15, sigmaY: -15),
               child: Container(
-                padding: const EdgeInsets.all(15),
-                height: height * .1,
-                width: width / 3,
+                padding: const EdgeInsets.all(15).w,
+                height: 85.h,
+                width: 137.w,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -60,21 +60,21 @@ class RecentlyViewedWidget extends StatelessWidget {
                     // ),
                     Image.asset(
                       Accesoriesimages[index],
-                      height: height * .1,
-                      width: width / 2,
+                      height: 85.h,
+                      width: 206.w,
                       fit: BoxFit.contain,
                     ),
                     Column(
-                      children: const [
+                      children: [
                         Text(
                           "Macbook Air M1",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                              fontSize: 18.sp, fontWeight: FontWeight.w500),
                         ),
                         Text(
                           "₹98500",
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                              fontSize: 15.sp, fontWeight: FontWeight.w500),
                         ),
                       ],
                     )

@@ -45,36 +45,14 @@ class FilledRoundedPinPut extends StatelessWidget {
     return Scaffold(
       backgroundColor: kWhite,
       body: SafeArea(
-        child: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error Occured"),
-                );
-              } else if (snapshot.data == null || snapshot.data!.uid == null) {
-                return OtpScreenWidget(
-                    length: length,
-                    otpController: otpController,
-                    focusNode: focusNode,
-                    defaultPinTheme: defaultPinTheme,
-                    borderColor: borderColor,
-                    errorColor: errorColor,
-                    auth: auth);
-              } else if (snapshot.data != null || snapshot.data!.uid != null) {
-                return HomeNavigationPage();
-              } else {
-                return OtpScreenWidget(
-                    length: length,
-                    otpController: otpController,
-                    focusNode: focusNode,
-                    defaultPinTheme: defaultPinTheme,
-                    borderColor: borderColor,
-                    errorColor: errorColor,
-                    auth: auth);
-              }
-            }),
-      ),
+          child: OtpScreenWidget(
+              length: length,
+              otpController: otpController,
+              focusNode: focusNode,
+              defaultPinTheme: defaultPinTheme,
+              borderColor: borderColor,
+              errorColor: errorColor,
+              auth: auth)),
     );
   }
 }

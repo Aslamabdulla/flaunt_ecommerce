@@ -17,6 +17,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/offer_tile.da
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/recently_viewed.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/top_categories.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ClipperPath extends CustomClipper<Path> {
   @override
@@ -79,11 +80,11 @@ List<Widget> widgets = [
   kHeight10,
   // const TopCategories(),
   const OfferTile(image: "assets/images/offer.png"),
-  const RowWidget(
+  RowWidget(
       text: "Trending Clothes",
       top: 0,
       left: 10,
-      fontSize: 18,
+      fontSize: 18.sp,
       mainAxis: MainAxisAlignment.spaceBetween),
   kHeight10,
   const TrendingClothes(),

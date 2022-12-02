@@ -5,6 +5,7 @@ import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,7 @@ class GridViewWidget extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
-        height: imagesList.length >= 6 ? height : height + 300,
+        height: imagesList.length >= 6 ? height.h : height + 300,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: FirebaseDatabase.readHotsales("summercollection"),
@@ -81,15 +82,15 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
         decoration: BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(productList.imageUrl[0]), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20).w,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
               padding: EdgeInsets.only(left: 15),
-              width: 200,
-              height: 60,
+              width: 200.w,
+              height: 60.h,
               decoration: glassDecorationGrid,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,

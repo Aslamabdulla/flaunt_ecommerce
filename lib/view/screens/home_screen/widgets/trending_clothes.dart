@@ -9,6 +9,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart'
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class TrendingClothes extends StatelessWidget {
@@ -29,24 +30,25 @@ class TrendingClothes extends StatelessWidget {
     ];
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return Container(
-      margin: EdgeInsets.only(left: 10),
-      height: height * .3,
+      margin: const EdgeInsets.only(left: 10),
+      height: 253.h,
       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseDatabase.readHotsales("trendingclothes"),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text("ERROR WHILE FETCHING DATA");
+              return const Text("ERROR WHILE FETCHING DATA");
             } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return CupertinoActivityIndicator();
+              return const CupertinoActivityIndicator();
             } else if (snapshot.data == null) {
-              return Text("NO DATA");
+              return const Text("NO DATA");
             } else {
               return ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   separatorBuilder: (context, index) => SizedBox(
-                        height: 10,
-                        width: 10,
+                        height: 10.h,
+                        width: 10.w,
                       ),
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.docs.length,

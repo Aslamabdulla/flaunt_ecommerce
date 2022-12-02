@@ -6,6 +6,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart'
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class NewWallWidget extends StatelessWidget {
@@ -15,9 +16,10 @@ class NewWallWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    // print(width * .3);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      height: 150,
+      height: 150.h,
       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseDatabase.readHotsales("newarrivals"),
           builder: (context, snapshot) {
@@ -32,9 +34,9 @@ class NewWallWidget extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.docs.length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                        width: 10,
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 10.h,
+                        width: 10.w,
                       ),
                   itemBuilder: (context, index) {
                     var newProducts = CartModel.fromJson(
@@ -42,13 +44,13 @@ class NewWallWidget extends StatelessWidget {
                     String id = snapshot.data!.docs[index].id;
                     return Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(25).w,
                           image: const DecorationImage(
                               image: AssetImage(
                                   "assets/images/backgroundnewarrival.png"),
                               fit: BoxFit.cover)),
-                      height: height / 4,
-                      width: width / 1.4,
+                      height: 210.h,
+                      width: 293.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -57,13 +59,15 @@ class NewWallWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               kHeight5,
-                              const Text(
+                              Text(
                                 "NEW\nARRIVALS",
-                                style: TextStyle(fontSize: 20, color: kWhite),
+                                style:
+                                    TextStyle(fontSize: 20.sp, color: kWhite),
                               ),
-                              const Text(
+                              Text(
                                 "Fashion Nova",
-                                style: TextStyle(fontSize: 10, color: kWhite),
+                                style:
+                                    TextStyle(fontSize: 10.sp, color: kWhite),
                               ),
                               ElevatedButton(
                                 onPressed: () {
@@ -80,7 +84,7 @@ class NewWallWidget extends StatelessWidget {
                                           RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(20))),
+                                              BorderRadius.circular(20).w)),
                                   backgroundColor:
                                       MaterialStateProperty.all(Colors.purple),
                                 ),
@@ -88,9 +92,9 @@ class NewWallWidget extends StatelessWidget {
                             ],
                           ),
                           Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            height: height * .17,
-                            width: width * .3,
+                            margin: const EdgeInsets.only(left: 10).r,
+                            height: 143.5.h,
+                            width: 123.5.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
                               image: DecorationImage(

@@ -1,6 +1,7 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedSearchWidget extends StatelessWidget {
   const AnimatedSearchWidget({
@@ -24,7 +25,7 @@ class AnimatedSearchWidget extends StatelessWidget {
           Icons.search,
           color: kBlack,
         ),
-        width: width - width / 3,
+        width: 274.w,
         textController: textEditingController,
         onSuffixTap: () {});
   }

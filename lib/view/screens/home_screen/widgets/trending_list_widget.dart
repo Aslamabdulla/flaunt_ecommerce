@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flaunt_ecommenrce/model/cart_model.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class TrendingListItemWidget extends StatelessWidget {
@@ -23,9 +24,10 @@ class TrendingListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = Get.height;
     var width = Get.width;
+    print(width * .5);
     return Container(
-      height: height * .2,
-      width: width / 2.2,
+      height: 160.h,
+      width: 180.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: colors[index],
@@ -35,9 +37,9 @@ class TrendingListItemWidget extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: -15, sigmaY: -15),
           child: Container(
-            padding: const EdgeInsets.all(15),
-            height: height * .2,
-            width: width / 3,
+            padding: const EdgeInsets.all(15).w,
+            height: 168.h,
+            width: 137.w,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               // mainAxisSize: MainAxisSize.min,
@@ -52,8 +54,8 @@ class TrendingListItemWidget extends StatelessWidget {
                 // ),
                 Image.network(
                   trndingClothes.imageUrl[3],
-                  height: height * .18,
-                  width: width / 2,
+                  height: 151.h,
+                  width: 205.w,
                   fit: BoxFit.fitHeight,
                 ),
                 Column(
@@ -61,18 +63,18 @@ class TrendingListItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: width * .5,
+                      width: 205.w,
                       child: Text(
                         trndingClothes.name,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                            fontSize: 18.sp, fontWeight: FontWeight.w500),
                       ),
                     ),
                     Text(
                       "₹${trndingClothes.price}",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
                   ],
                 )

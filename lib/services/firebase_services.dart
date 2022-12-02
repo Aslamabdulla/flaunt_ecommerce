@@ -70,6 +70,28 @@ class FirebaseDatabase {
     return documentReference.snapshots();
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readFav() {
+    return _firestore
+        .collection("users")
+        .doc(userEmail)
+        .collection("favourites")
+        .snapshots();
+  }
+
+  static Future<void> addFav(CartModel product) async {
+    // Map<String,dynamic> data = <String,dynamic> {
+    //   ""
+    // };
+    final _mainCollection = await _firestore
+        .collection('users')
+        .doc(userEmail)
+        .collection("favourites")
+        .doc(product.productId)
+        .set(product.toJson());
+
+    return _mainCollection;
+  }
+
   static Future<void> addToCart(
       OrderModel product, String userId, String id) async {
     Map<String, dynamic> data = <String, dynamic>{

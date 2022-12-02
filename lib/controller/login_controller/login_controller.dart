@@ -87,19 +87,41 @@ class LoginController extends GetxController {
   }
 
   Future firebaseOtp(String phoneNumber) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: phoneNumber.toString().trim(),
-      verificationCompleted: (PhoneAuthCredential credential) async {},
-      verificationFailed: (FirebaseAuthException e) {
-        Get.snackbar("error", e.toString());
-      },
-      codeSent: (String verificationId, int? resendToken) async {
-        snackBarShowSuccess("PROMPT", "OTP SENT SUCCESSFULLY");
-        verificationNumId.value = verificationId;
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phoneNumber.toString().trim(),
+        verificationCompleted: (PhoneAuthCredential credential) async {},
+        verificationFailed: (FirebaseAuthException e) {
+          Get.snackbar("error", e.toString());
+        },
+        codeSent: (String verificationId, int? resendToken) async {
+          snackBarShowSuccess("PROMPT", "OTP SENT SUCCESSFULLY");
+          verificationNumId.value = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      snackBarShowError("Error", e.toString());
+    }
+  }
+
+  Future saveUserOtp() async {
+    Get.offAll(() => const HomeNavigationPage(),
+        transition: Transition.rightToLeft,
+        duration: const Duration(microseconds: 400));
+    CollectionReference _mainCollection =
+        FirebaseFirestore.instance.collection("users");
+    DocumentReference documentReference =
+        _mainCollection.doc(FirebaseAuth.instance.currentUser!.uid);
+    Map<String, dynamic> data = <String, dynamic>{
+      "loggedin": DateTime.now(),
+      "username": fireAuth.currentUser!.tenantId,
+      "email": fireAuth.currentUser!.phoneNumber,
+      "id": documentReference.id,
+      "role": "user"
+    };
+    await documentReference.set(data, SetOptions(merge: true));
   }
 
   // @override

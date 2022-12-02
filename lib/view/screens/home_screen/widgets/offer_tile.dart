@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OfferTile extends StatelessWidget {
   final String image;
@@ -10,12 +11,10 @@ class OfferTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
-      width: width,
-      height: height * .24,
+      width: 412.w,
+      height: 202.h,
       child: Image.asset(
         image,
         fit: BoxFit.contain,

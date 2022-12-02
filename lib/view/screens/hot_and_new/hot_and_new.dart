@@ -9,6 +9,7 @@ import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/controller/hot_and_new_controller/hot_and_view_controller.dart';
@@ -51,8 +52,8 @@ class HotAndNewScreen extends StatelessWidget {
                                 json: snapshot.data!.docs[index].data());
                             String id = snapshot.data!.docs[index].id;
                             return Container(
-                              height: height,
-                              width: width,
+                              height: ScreenUtil().screenHeight,
+                              width: ScreenUtil().scaleWidth,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image:
@@ -76,7 +77,7 @@ class HotAndNewScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           TextWidgetWithSize(
-                                            text: textPageview[index],
+                                            text: hotAndNew.name,
                                             size: width * .10,
                                             family: 'Oswald',
                                             weight: FontWeight.bold,

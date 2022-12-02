@@ -8,6 +8,7 @@ import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart'
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RecommendedForYou extends StatelessWidget {
@@ -20,6 +21,7 @@ class RecommendedForYou extends StatelessWidget {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseDatabase.readHotsales("recommendedforyou"),
         builder: (context, snapshot) {
+          print(height * .22);
           if (snapshot.hasError) {
             return Text("ERROR OCCURED");
           } else if (snapshot.connectionState == ConnectionState.waiting) {
@@ -28,13 +30,13 @@ class RecommendedForYou extends StatelessWidget {
             return Text("No Item");
           } else {
             return Container(
-              margin: const EdgeInsets.only(left: 10),
-              height: height * .22,
+              margin: const EdgeInsets.only(left: 10).r,
+              height: 170.h,
               child: ListView.separated(
                   physics: BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                        width: 10,
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 10.h,
+                        width: 10.w,
                       ),
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.docs.length,
@@ -52,8 +54,6 @@ class RecommendedForYou extends StatelessWidget {
                             ));
                       },
                       child: GlassTileWidget(
-                        height: height,
-                        width: width,
                         index: index,
                         products: product,
                       ),

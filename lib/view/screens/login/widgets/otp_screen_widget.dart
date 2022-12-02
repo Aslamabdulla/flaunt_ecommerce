@@ -4,6 +4,7 @@ import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/common/snack_bar_widget.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/register_now.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/signup/signup.dart';
@@ -45,7 +46,7 @@ class OtpScreenWidget extends StatelessWidget {
           Text("PLEASE VERIFY YOUR PHONE NUMBER"),
           kHeight10,
           Padding(
-            padding: const EdgeInsets.only(left: 50, right: 50),
+            padding: const EdgeInsets.only(left: 50, right: 50).r,
             child: TextFormField(
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
@@ -57,7 +58,7 @@ class OtpScreenWidget extends StatelessWidget {
                   filled: true,
                   fillColor: Colors.grey.withOpacity(.15),
                   hintText: "Phone Number",
-                  hintStyle: TextStyle(fontSize: 12, height: 0)),
+                  hintStyle: TextStyle(fontSize: 12.sp, height: 0)),
               onChanged: (value) {
                 loginController.phoneNumber.value = value;
                 loginController.update();
@@ -120,25 +121,21 @@ class OtpScreenWidget extends StatelessWidget {
             height: 45.h,
             width: 150.w,
             fnctn: () async {
-              PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                  verificationId: loginController.verificationNumId.value,
-                  smsCode: loginController.otpNumber.value);
-              await auth
-                  .signInWithCredential(credential)
-                  .whenComplete(() async {
-                CollectionReference _mainCollection =
-                    FirebaseFirestore.instance.collection("users");
-                DocumentReference documentReference =
-                    _mainCollection.doc(FirebaseAuth.instance.currentUser!.uid);
-                Map<String, dynamic> data = <String, dynamic>{
-                  "loggedin": DateTime.now(),
-                  "username": auth.currentUser!.tenantId,
-                  "email": auth.currentUser!.phoneNumber,
-                  "id": documentReference.id,
-                  "role": "user"
-                };
-                await documentReference.set(data, SetOptions(merge: true));
-              });
+              if (loginController.otpNumber.value.isNotEmpty) {
+                PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                    verificationId: loginController.verificationNumId.value,
+                    smsCode: loginController.otpNumber.value);
+                await auth.signInWithCredential(credential).then((value) {
+                  if (value.user == null) {
+                    snackBarShowError('Error', "Error occured");
+                    return;
+                  } else if (value.user!.uid != null) {
+                    snackBarShowSuccess("Success", "Verified Successfully");
+                    Get.offAll(() => HomeNavigationPage());
+                    loginController.saveUserOtp();
+                  }
+                });
+              }
             },
           ),
           kHeight20,

@@ -35,7 +35,9 @@ class SplashScreen extends StatelessWidget {
   splashTimer() async {
     await Future.delayed(
       const Duration(seconds: 4),
-    ).then((value) => Get.offAll(() {
+    ).then((value) => Get.offAll(
+            transition: Transition.rightToLeft,
+            duration: const Duration(milliseconds: 500), () {
           firstTime = SharedPref.getLogin();
           return firstTime == null ? const OnboardFirst() : const LoginPage();
         }));
