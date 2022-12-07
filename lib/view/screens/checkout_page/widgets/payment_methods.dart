@@ -34,7 +34,7 @@ class PaymentMethods extends StatelessWidget {
                   Get.snackbar("Prompt", "PLEASE ADD ADDRESS");
                 }
               },
-              child: PaymentWidget(
+              child: const PaymentWidget(
                 image: "assets/images/paymentButton/razorpay.png",
               )),
           kWidth15,
@@ -43,13 +43,13 @@ class PaymentMethods extends StatelessWidget {
                 if (cartController.address.value.isNotEmpty) {
                   cartController.checkBool.value = false;
                   cartController.addOrdersToDb();
-                  Get.offAll(() => PaymentSuccessScreen());
+                  Get.offAll(() => const PaymentSuccessScreen());
                 } else {
                   Get.snackbar("Prompt", "PLEASE ADD ADDRESS");
                 }
               },
-              child:
-                  PaymentWidget(image: "assets/images/paymentButton/cod.png"))
+              child: const PaymentWidget(
+                  image: "assets/images/paymentButton/cod.png"))
         ],
       ),
     );

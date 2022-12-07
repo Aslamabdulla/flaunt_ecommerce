@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
 import 'package:flaunt_ecommenrce/services/database_services.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/snack_bar_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
@@ -64,14 +65,6 @@ class LoginController extends GetxController {
 
       DocumentReference subDocumentreference =
           documentReference.collection("account").doc(user.displayName);
-      // CollectionReference notesItemCollection =
-      //     _mainCollection.doc(user.email).collection('account');
-      // if (notesItemCollection.doc(user.displayName).toString() ==
-      //     user.displayName.toString()) {
-      //   return;
-      // } else {
-
-      // }
 
       await subDocumentreference
           .set(data)
@@ -116,12 +109,14 @@ class LoginController extends GetxController {
         _mainCollection.doc(FirebaseAuth.instance.currentUser!.uid);
     Map<String, dynamic> data = <String, dynamic>{
       "loggedin": DateTime.now(),
-      "username": fireAuth.currentUser!.tenantId,
+      "username": fireAuth.currentUser!.phoneNumber,
       "email": fireAuth.currentUser!.phoneNumber,
       "id": documentReference.id,
       "role": "user"
     };
     await documentReference.set(data, SetOptions(merge: true));
+    DocumentReference subDocumentreference =
+        documentReference.collection("account").doc(userEmail);
   }
 
   // @override

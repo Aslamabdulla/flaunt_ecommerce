@@ -164,7 +164,7 @@ class CartController extends GetxController {
         _firebaseFirestore.collection('cart');
 
     DocumentReference documentReference =
-        mainCollection.doc(user.email).collection("products").doc(docId);
+        mainCollection.doc(userEmail).collection("products").doc(docId);
     await documentReference
         .delete()
         .whenComplete(() => Get.snackbar("Success", "Deleted Successfully",

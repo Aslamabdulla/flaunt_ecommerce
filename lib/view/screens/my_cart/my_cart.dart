@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/model/order_model.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
@@ -9,10 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flaunt_ecommenrce/controller/cart_controller/cart_controller.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
-import 'package:flaunt_ecommenrce/model/product_model.dart';
+
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
@@ -66,20 +63,21 @@ class MyCartScreen extends StatelessWidget {
                   stream: FirebaseDatabase.readCart(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
+                      return const Center(
                         child: Text("ITEM ALREADY IN CART"),
                       );
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CupertinoActivityIndicator(),
                       );
                     } else if (snapshot.data == null) {
                       return Center(
                         child: TextButton.icon(
                             onPressed: () {},
-                            icon: Icon(Icons.remove_shopping_cart_outlined),
-                            label: Text("EMPTY CART")),
+                            icon:
+                                const Icon(Icons.remove_shopping_cart_outlined),
+                            label: const Text("EMPTY CART")),
                       );
                     } else if (snapshot.data!.docs.isEmpty) {
                       return Column(
@@ -89,7 +87,7 @@ class MyCartScreen extends StatelessWidget {
                           Center(
                             child: TextButton.icon(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove_shopping_cart_outlined,
                                   color: kRedAccent,
                                 ),
@@ -103,7 +101,7 @@ class MyCartScreen extends StatelessWidget {
                     } else {
                       return Column(
                         children: [
-                          RowWidget(
+                          const RowWidget(
                             text: "MY CART",
                             top: 15,
                             left: 15,
@@ -130,7 +128,8 @@ class MyCartScreen extends StatelessWidget {
                                   index: index,
                                 );
                               },
-                              separatorBuilder: (context, index) => SizedBox(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
                                     height: 10,
                                   ),
                               itemCount: snapshot.data!.docs.length),

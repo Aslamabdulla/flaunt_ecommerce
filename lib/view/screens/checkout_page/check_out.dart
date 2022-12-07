@@ -54,7 +54,7 @@ class CheckoutScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  RowWidget(
+                  const RowWidget(
                     text: "Delivery to",
                     top: 15,
                     left: 15,
@@ -62,8 +62,8 @@ class CheckoutScreen extends StatelessWidget {
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
                   kHeight10,
-                  AddressTileWidget(),
-                  RowWidget(
+                  const AddressTileWidget(),
+                  const RowWidget(
                     text: "Payment Methods",
                     top: 10,
                     left: 15,
@@ -74,7 +74,7 @@ class CheckoutScreen extends StatelessWidget {
                   PaymentMethods(billablePrice: billableprice),
                   Column(
                     children: [
-                      RowWidget(
+                      const RowWidget(
                         text: "Fees Breakup",
                         top: 10,
                         left: 30,
@@ -100,7 +100,7 @@ class CheckoutScreen extends StatelessWidget {
                           left: 30),
                       SizedBox(
                         width: width - 30,
-                        child: Divider(
+                        child: const Divider(
                           height: 30,
                         ),
                       ),

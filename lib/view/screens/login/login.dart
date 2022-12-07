@@ -7,14 +7,15 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/custom_paint.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     return Scaffold(
       body: StreamBuilder<User?>(
