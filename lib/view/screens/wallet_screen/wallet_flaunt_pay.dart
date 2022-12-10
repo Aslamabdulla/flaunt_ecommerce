@@ -19,7 +19,7 @@ class FlauntPayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- final height = ScreenUtil().screenHeight;
+    final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
 
     return Scaffold(
@@ -39,15 +39,15 @@ class FlauntPayScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 2.5,
+              height: height / 2.5.h,
               decoration: customClipperBackground,
             ),
           ),
           SafeArea(
             child: SingleChildScrollView(
               child: Container(
-                height: height,
-                width: width,
+                height: height.h,
+                width: width.w,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,11 +58,11 @@ class FlauntPayScreen extends StatelessWidget {
                         text: "Saved Cards",
                         top: 20,
                         left: 20,
-                        fontSize: 18),
+                        fontSize: 18.sp),
                     kHeight20,
                     Container(
                         height: 270.h,
-                        width: width,
+                        width: width.w,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -79,8 +79,8 @@ class FlauntPayScreen extends StatelessWidget {
                     kHeight20,
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 15),
-                      height: height * .2,
-                      width: width,
+                      height: height * .2.h,
+                      width: width.w,
                       child: ListView.separated(
                           shrinkWrap: true,
                           physics: BouncingScrollPhysics(),

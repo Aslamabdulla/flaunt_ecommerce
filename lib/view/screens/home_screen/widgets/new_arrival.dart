@@ -14,8 +14,6 @@ class NewWallWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
-    final width = ScreenUtil().screenWidth;
     // print(width * .3);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10).w,

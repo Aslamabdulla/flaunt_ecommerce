@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
+import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_boarding_last.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/on_boarding_second.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/first_page.dart';
@@ -8,6 +9,7 @@ import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/second_page.da
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/third_page.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 class OnboardFirst extends StatelessWidget {
@@ -15,6 +17,7 @@ class OnboardFirst extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int index = 0;
     LiquidController liquidController = LiquidController();
     final pages = [
       const FirstPage(),
@@ -32,6 +35,14 @@ class OnboardFirst extends StatelessWidget {
       positionSlideIcon: .8,
       enableLoop: false,
       pages: pages,
+      slidePercentCallback: (slidePercentHorizontal, slidePercentVertical) {
+        if (index == 4) {
+          Get.offAll(() => const LoginPage());
+        }
+      },
+      onPageChangeCallback: (activePageIndex) {
+        index = activePageIndex;
+      },
     ));
   }
 }

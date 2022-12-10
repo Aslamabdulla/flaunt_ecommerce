@@ -2,6 +2,7 @@
 
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class TextFormWidget extends StatelessWidget {
@@ -22,7 +23,7 @@ class TextFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 50, right: 50, bottom: 10),
+      padding: const EdgeInsets.only(left: 50, right: 50, bottom: 10).r,
       child: Column(
         children: [
           TextFormField(
@@ -35,11 +36,11 @@ class TextFormWidget extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(30)),
+                    borderRadius: BorderRadius.circular(30).r),
                 filled: true,
                 fillColor: Colors.grey.withOpacity(.15),
                 hintText: hint,
-                hintStyle: TextStyle(fontSize: 12, height: 0)),
+                hintStyle: TextStyle(fontSize: 12.sp, height: 0)),
             onChanged: (value) {
               controller.value = value;
               loginController.update();
@@ -49,14 +50,14 @@ class TextFormWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               right: 15,
-            ),
+            ).r,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 forgotBtn
-                    ? const Text(
+                    ? Text(
                         "Forgot password",
-                        style: TextStyle(color: Colors.blue, fontSize: 10),
+                        style: TextStyle(color: Colors.blue, fontSize: 10.sp),
                       )
                     : const SizedBox(),
               ],

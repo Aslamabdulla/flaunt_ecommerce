@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpMethodWidget extends StatelessWidget {
@@ -23,8 +24,8 @@ class SignUpMethodWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color.fromRGBO(241, 246, 251, 1),
           borderRadius: BorderRadius.circular(10)),
-      height: height * .05,
-      width: width * .1,
+      height: height * .05.h,
+      width: width * .1.w,
       child: Center(
         child: IconButton(
           icon: FaIcon(icon),

@@ -188,7 +188,10 @@ class LoginController extends GetxController {
 
   @override
   void dispose() {
-    loginController.dispose(); // TODO: implement dispose
+    loginController.dispose();
+    cartController.dispose();
+
+    // TODO: implement dispose
     super.dispose();
   }
 }

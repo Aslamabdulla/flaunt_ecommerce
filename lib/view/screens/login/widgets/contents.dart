@@ -12,6 +12,7 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/register_now.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/signup/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -39,29 +40,29 @@ class ColumnWidget extends StatelessWidget {
                 children: [
                   kHeight35,
                   Container(
-                    padding: EdgeInsets.only(top: height / 8),
+                    padding: EdgeInsets.only(top: height / 8).r,
                     child: PhysicalModel(
                       elevation: 10,
-                      borderRadius: BorderRadius.circular(width / 4),
+                      borderRadius: BorderRadius.circular(width / 4).w,
                       color: Colors.transparent,
                       child: CircleAvatar(
-                        radius: width / 4,
+                        radius: width / 4.w,
                         backgroundImage:
                             const AssetImage("assets/images/user.jpg"),
                       ),
                     ),
                   ),
                   kHeight10,
-                  const Text(
+                  Text(
                     "Welcome Back Yo!",
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Text(
+                  Text(
                     "Let's login to get started...",
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                   ),
                   kHeight10,
                   TextFormWidget(
@@ -78,8 +79,8 @@ class ColumnWidget extends StatelessWidget {
                     forgotBtn: true,
                   ),
                   LoginButtonWidget(
-                      height: height * .05,
-                      width: width / 3,
+                      height: height * .05.h,
+                      width: width / 3.w,
                       name: "LOGIN",
                       fnctn: () => loginCtrl.signIn()),
                   kHeight10,

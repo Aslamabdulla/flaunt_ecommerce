@@ -11,12 +11,12 @@ class SecondPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-      height: height,
-      width: width,
+      height: height.h,
+      width: width.h,
       decoration: onBoardSecondImage,
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20).r,
+          padding: const EdgeInsets.all(20).w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

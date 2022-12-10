@@ -13,12 +13,12 @@ class ThirdPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-        height: height,
-        width: width,
+        height: height.h,
+        width: width.w,
         decoration: onBoardThirdImage,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30).w,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,36 +29,20 @@ class ThirdPage extends StatelessWidget {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           "IT'S A NEW ERA\nIN FASHION",
                           style: TextStyle(
-                              fontSize: 25,
+                              fontSize: 25.sp,
                               color: kBlack,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
                           "A Premium Online Store For Men & Women\nFind Their Stylish Choice",
-                          style: TextStyle(fontSize: 12, color: kBlack),
+                          style: TextStyle(fontSize: 12.sp, color: kBlack),
                         )
                       ],
                     ),
-                    // CircleAvatar(
-                    //   backgroundColor: kWhite,
-                    //   radius: 30,
-                    //   child: Center(
-                    //     child: IconButton(
-                    //       onPressed: () => Get.offAll(
-                    //           () => const OnBoardingSecondScreen(),
-                    //           transition: Transition.rightToLeft,
-                    //           duration: Duration(milliseconds: 400)),
-                    //       icon: const Icon(
-                    //         Icons.chevron_right,
-                    //         color: kBlack,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // )
                   ],
                 ),
               ],

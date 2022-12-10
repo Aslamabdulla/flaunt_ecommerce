@@ -11,29 +11,29 @@ class FirstPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-        height: height,
-        width: width,
+        height: height.h,
+        width: width.w,
         decoration: onBoardFirstImage,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30).w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "THE LATEST CLOTHES\nOF THE DAY",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 25.sp,
                           color: kWhite,
                           fontWeight: FontWeight.w600),
                     ),
                     Text(
                       "A Premium Online Store For Men & Women\nFind Their Stylish Choice",
-                      style: TextStyle(fontSize: 12, color: kWhite),
+                      style: TextStyle(fontSize: 12.sp, color: kWhite),
                     )
                   ],
                 ),

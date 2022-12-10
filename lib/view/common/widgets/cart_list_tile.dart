@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/widget/counter_cart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CartListTileWidget extends StatelessWidget {
@@ -32,23 +33,23 @@ class CartListTileWidget extends StatelessWidget {
     var id = snapshot.data!.docs[index].id;
     print(id);
 
-    final height = Get.height;
-    final width = Get.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     // cartController.priceCartListenable.value =
     //     cartProducts.total! + cartController.priceCartListenable.value;
     // print(cartController.priceCartListenable.value);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: glassDecorationCustom(Colors.white54, Colors.white30),
       child: Row(
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
             decoration: decoration,
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            height: height / 5,
-            width: width / 3,
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            height: height / 5.h,
+            width: width / 3.w,
             child: Image.network(
               cartProducts.imageUrl[0],
               fit: BoxFit.cover,
@@ -65,7 +66,7 @@ class CartListTileWidget extends StatelessWidget {
                 ],
               ),
               Container(
-                width: width / 2,
+                width: width / 2.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -77,12 +78,12 @@ class CartListTileWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                width: width / 2.2,
+                width: width / 2.2.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: width / 4.1,
+                      width: width / 4.1.w,
                       child: Text(
                         cartProducts.category.toUpperCase(),
                         overflow: TextOverflow.ellipsis,
@@ -96,7 +97,7 @@ class CartListTileWidget extends StatelessWidget {
                           "Color : ",
                           style: textStyleSize(16, FontWeight.w500),
                         ),
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 10,
                         ),
                       ],
@@ -116,7 +117,7 @@ class CartListTileWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: width / 2,
+                width: width / 2.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -135,16 +136,16 @@ class CartListTileWidget extends StatelessWidget {
                                     (element) =>
                                         element.productId ==
                                         cartProducts.productId);
-                                print(cartController.orderList.length);
+
                                 // Get.back();
                                 Get.close(1);
                               },
                               title: "CONFIRM",
                               content: Container(
-                                child: Text("DO YOU WANT TO REMOVE"),
+                                child: const Text("DO YOU WANT TO REMOVE"),
                               ));
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete_outline_outlined,
                           color: Colors.red,
                         ))
@@ -208,7 +209,7 @@ class CounterCartProducts extends StatelessWidget {
         kWidth5,
         Text(
           cartProducts.quantity,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
         kWidth5,
         CartCountButtonWidget(

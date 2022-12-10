@@ -1,5 +1,5 @@
 import 'package:flaunt_ecommenrce/view/common/common.dart';
-import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/sample.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/recommended_for_you.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/trending_clothes.dart';
 import 'package:flutter/material.dart';

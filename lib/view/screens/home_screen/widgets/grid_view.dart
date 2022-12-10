@@ -22,8 +22,8 @@ class GridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Container(
         height: imagesList.length >= 6 ? height.h : height + 300,
         margin: const EdgeInsets.symmetric(horizontal: 10),

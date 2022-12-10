@@ -1,5 +1,6 @@
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const onBoardDecoration = BoxDecoration(
     image: DecorationImage(
@@ -8,8 +9,8 @@ const onBoardDecoration = BoxDecoration(
         ),
         fit: BoxFit.cover));
 
-const textStyleItaliana =
-    TextStyle(fontFamily: 'Italiana', color: kWhite, fontSize: 50);
+final textStyleItaliana =
+    TextStyle(fontFamily: 'Italiana', color: kWhite, fontSize: 50.sp);
 
 const onBoardFirstImage = BoxDecoration(
     image: DecorationImage(
@@ -29,24 +30,27 @@ const onBoardThirdImage = BoxDecoration(
           "assets/images/onboarding6.png",
         ),
         fit: BoxFit.cover));
-const onBoardFourthImage = BoxDecoration(
+final onBoardFourthImage = BoxDecoration(
     borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50), topRight: Radius.circular(50)),
-    image: DecorationImage(
+        topLeft: const Radius.circular(50).w,
+        topRight: const Radius.circular(50).w),
+    image: const DecorationImage(
         image: AssetImage(
           "assets/images/onboarding9.png",
         ),
         fit: BoxFit.cover));
 
-const stackDecoration = BoxDecoration(
+final stackDecoration = BoxDecoration(
   color: kWhite,
   borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+      topLeft: const Radius.circular(50).w,
+      topRight: const Radius.circular(50).w),
 );
-const onBoardFinalImage = BoxDecoration(
+final onBoardFinalImage = BoxDecoration(
     borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50), topRight: Radius.circular(50)),
-    image: DecorationImage(
+        topLeft: const Radius.circular(50).w,
+        topRight: const Radius.circular(50).w),
+    image: const DecorationImage(
         image: AssetImage(
           "assets/images/onboarding10.png",
         ),

@@ -1,6 +1,7 @@
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 snackBarShowSuccess(String title, String message) {
@@ -11,9 +12,9 @@ snackBarShowSuccess(String title, String message) {
 
 snackBarShowError(String title, String message) {
   var context = Get.context;
+
+  final width = ScreenUtil().screenWidth;
   ElegantNotification.error(
-          width: Get.width - 100,
-          title: Text(title),
-          description: Text(message))
+          width: width - 100.w, title: Text(title), description: Text(message))
       .show(context!);
 }

@@ -33,8 +33,8 @@ class LoginPage extends StatelessWidget {
                     ClipPath(
                       clipper: BackgroundClipper(),
                       child: Container(
-                        height: height,
-                        width: width,
+                        height: height.h,
+                        width: width.w,
                         decoration: customClipperBackground,
                       ),
                     ),
@@ -55,8 +55,8 @@ class LoginPage extends StatelessWidget {
                     ClipPath(
                       clipper: BackgroundClipper(),
                       child: Container(
-                        height: height,
-                        width: width,
+                        height: height.h,
+                        width: width.w,
                         decoration: customClipperBackground,
                       ),
                     ),

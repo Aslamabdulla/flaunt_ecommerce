@@ -16,8 +16,6 @@ class HotSalesTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseDatabase.readHotsales("hotsales"),
         builder: (context, snapshot) {
@@ -33,9 +31,9 @@ class HotSalesTiles extends StatelessWidget {
               height: 170.h,
               child: ListView.separated(
                   physics: BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                        width: 10,
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 10.h,
+                        width: 10.w,
                       ),
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.docs.length,

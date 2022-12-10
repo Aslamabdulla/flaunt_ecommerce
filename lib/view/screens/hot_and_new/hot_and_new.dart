@@ -22,8 +22,8 @@ class HotAndNewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return GetBuilder<HotAndNewController>(
         init: HotAndNewController(),
         builder: (controller) {
@@ -32,20 +32,20 @@ class HotAndNewScreen extends StatelessWidget {
                   stream: FirebaseDatabase.readHotsales("hotandnew"),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CupertinoActivityIndicator(),
                       );
                     } else if (snapshot.hasError) {
-                      return Center(
+                      return const Center(
                         child: Text("Error Occured"),
                       );
                     } else if (snapshot.data == null) {
-                      return Center(
+                      return const Center(
                         child: Text("No data"),
                       );
                     } else {
                       return PageView.builder(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemCount: snapshot.data!.docs.length,
                           controller: controller.pageviewController,
@@ -54,8 +54,8 @@ class HotAndNewScreen extends StatelessWidget {
                                 json: snapshot.data!.docs[index].data());
                             String id = snapshot.data!.docs[index].id;
                             return Container(
-                              height: ScreenUtil().screenHeight,
-                              width: ScreenUtil().scaleWidth,
+                              height: ScreenUtil().screenHeight.h,
+                              width: ScreenUtil().scaleWidth.w,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image:
@@ -67,11 +67,13 @@ class HotAndNewScreen extends StatelessWidget {
                                     alignment: Alignment.bottomLeft,
                                     child: Container(
                                       decoration: glassDecoration,
-                                      padding: EdgeInsets.only(left: 10),
-                                      margin:
-                                          EdgeInsets.only(bottom: 40, left: 10),
-                                      height: height * .20,
-                                      width: width / 1.3,
+                                      padding:
+                                          const EdgeInsets.only(left: 10).r,
+                                      margin: const EdgeInsets.only(
+                                              bottom: 40, left: 10)
+                                          .r,
+                                      height: height * .20.h,
+                                      width: width / 1.3.w,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -80,13 +82,13 @@ class HotAndNewScreen extends StatelessWidget {
                                         children: [
                                           TextWidgetWithSize(
                                             text: hotAndNew.name,
-                                            size: width * .10,
+                                            size: width * .10.w,
                                             family: 'Oswald',
                                             weight: FontWeight.bold,
                                           ),
                                           TextWidgetWithSize(
                                               text: "NEW ARRIVAL",
-                                              size: width * .06,
+                                              size: width * .06.w,
                                               family: 'Italiana',
                                               weight: FontWeight.bold)
                                         ],
@@ -97,10 +99,10 @@ class HotAndNewScreen extends StatelessWidget {
                                     alignment: Alignment.bottomRight,
                                     child: Container(
                                       decoration: glassDecoration,
-                                      margin: EdgeInsets.only(
+                                      margin: const EdgeInsets.only(
                                           bottom: 40, right: 10),
-                                      height: height * .2,
-                                      width: width * .15,
+                                      height: height * .2.h,
+                                      width: width * .15.w,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
@@ -114,10 +116,12 @@ class HotAndNewScreen extends StatelessWidget {
                                                   isMainCollection: false,
                                                   docId: id));
                                             },
-                                            icon: Icon(Icons.shopping_cart),
+                                            icon:
+                                                const Icon(Icons.shopping_cart),
                                           ),
-                                          Icon(Icons.favorite_outline_outlined),
-                                          Icon(Icons.add)
+                                          const Icon(
+                                              Icons.favorite_outline_outlined),
+                                          const Icon(Icons.add)
                                         ],
                                       ),
                                     ),

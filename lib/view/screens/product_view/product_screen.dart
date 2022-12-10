@@ -80,14 +80,15 @@ class ProductViewScreen extends StatelessWidget {
                   alignment: AlignmentDirectional.bottomCenter,
                   children: [
                     CarouselWidget(
-                        height: height,
-                        width: width,
+                        height: height.h,
+                        width: width.w,
                         imageUrl: product.imageUrl),
                     Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 15),
+                                vertical: 20, horizontal: 15)
+                            .w,
                         height: 422.h,
-                        width: width,
+                        width: width.w,
                         decoration: stackDecoration,
                         child: Column(
                           children: [
@@ -100,16 +101,17 @@ class ProductViewScreen extends StatelessWidget {
                                 title: product.name,
                                 price: product.price),
                             DescriptionWidget(
-                                width: width, description: product.description),
+                                width: width.w,
+                                description: product.description),
                             kHeight5,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                ColorWidget(),
+                                const ColorWidget(),
                                 QuantityWidget(
-                                    width: width,
-                                    height: height,
+                                    width: width.w,
+                                    height: height.h,
                                     quantity: product.quantity),
                               ],
                             ),

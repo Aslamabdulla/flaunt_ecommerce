@@ -2,6 +2,7 @@ import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class AnimatedSearchWidget extends StatelessWidget {
   const AnimatedSearchWidget({
@@ -27,6 +28,8 @@ class AnimatedSearchWidget extends StatelessWidget {
         ),
         width: 274.w,
         textController: textEditingController,
-        onSuffixTap: () {});
+        onSuffixTap: () {
+          print("tapped");
+        });
   }
 }

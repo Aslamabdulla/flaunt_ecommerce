@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
         height: height,
         width: width,
         decoration: onBoardDecoration,
-        child: const Center(
+        child: Center(
           child: Text("FLAUNT", style: textStyleItaliana),
         ),
       ),

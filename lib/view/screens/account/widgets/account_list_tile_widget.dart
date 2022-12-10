@@ -1,5 +1,6 @@
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AccountListTile extends StatelessWidget {
   final String text;
@@ -19,9 +20,9 @@ class AccountListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
+        margin: EdgeInsets.symmetric(vertical: 5).w,
         decoration: BoxDecoration(
-            color: kWhite, borderRadius: BorderRadius.circular(20)),
+            color: kWhite, borderRadius: BorderRadius.circular(20).r),
         width: 250,
         height: 45,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [

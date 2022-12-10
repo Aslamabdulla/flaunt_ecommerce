@@ -33,8 +33,8 @@ class SignUpPage extends StatelessWidget {
             ClipPath(
               clipper: BackgroundClipper(),
               child: Container(
-                height: height,
-                width: width,
+                height: height.h,
+                width: width.w,
                 decoration: customClipperBackground,
               ),
             ),
@@ -46,23 +46,23 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   kHeight20,
                   Container(
-                    padding: EdgeInsets.only(top: height * .12),
+                    padding: EdgeInsets.only(top: height * .12).r,
                     child: PhysicalModel(
                       elevation: 10,
                       borderRadius: BorderRadius.circular(width / 4),
                       color: Colors.transparent,
                       child: CircleAvatar(
-                        radius: width / 4,
+                        radius: width / 4.w,
                         backgroundImage:
                             const AssetImage("assets/images/user.jpg"),
                       ),
                     ),
                   ),
                   kHeight10,
-                  const Text(
-                    "Sign up",
+                  Text(
+                    "Sign Up",
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
@@ -100,7 +100,7 @@ class SignUpPage extends StatelessWidget {
                       hint: "Enter your gender"),
                   LoginButtonWidget(
                       height: 45.h,
-                      width: width / 3,
+                      width: width / 3.w,
                       name: "Sign up",
                       fnctn: () => loginCtrl.signUp()),
                   kHeight10,
@@ -109,15 +109,15 @@ class SignUpPage extends StatelessWidget {
                     children: [
                       SignUpMethodWidget(
                           fnctn: () {},
-                          height: height,
-                          width: width,
+                          height: height.h,
+                          width: width.w,
                           icon: FontAwesomeIcons.facebook,
                           color: Colors.blueAccent),
                       kWidth20,
                       SignUpMethodWidget(
                         fnctn: () => loginCtrl.googleLogin(),
-                        height: height,
-                        width: width,
+                        height: height.h,
+                        width: width.w,
                         icon: FontAwesomeIcons.google,
                         color: Colors.red,
                       ),
@@ -129,8 +129,8 @@ class SignUpPage extends StatelessWidget {
                                 duration: Duration(milliseconds: 400));
                           },
                           color: Colors.black,
-                          height: height,
-                          width: width,
+                          height: height.h,
+                          width: width.w,
                           icon: FontAwesomeIcons.phone),
                       kWidth20,
                     ],

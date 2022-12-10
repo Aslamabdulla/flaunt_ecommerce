@@ -9,6 +9,7 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 CreditCardController creditCardController = Get.put(CreditCardController());
@@ -23,8 +24,8 @@ class CreditCardScreen extends StatefulWidget {
 class CreditCardScreenState extends State<CreditCardScreen> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -43,7 +44,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.9,
+              height: height / 1.9.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -77,8 +78,8 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                               cardType: CardType.mastercard,
                               cardImage: Image.asset(
                                 'assets/images/mastercard.png',
-                                height: 48,
-                                width: 48,
+                                height: 48.h,
+                                width: 48.w,
                               ),
                             ),
                           ],
@@ -88,7 +89,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                             text: "Credit Card Details",
                             top: 20,
                             left: 15,
-                            fontSize: 18),
+                            fontSize: 18.sp),
                         Expanded(
                           child: SingleChildScrollView(
                             child: Column(
@@ -144,11 +145,11 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    const Text(
+                                    Text(
                                       'Glass Effect',
                                       style: TextStyle(
                                         color: kBlack,
-                                        fontSize: 18,
+                                        fontSize: 18.sp,
                                       ),
                                     ),
                                     Switch(
@@ -167,8 +168,8 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                 kHeight10,
                                 LoginButtonWidget(
                                     name: "Add Card",
-                                    height: 40,
-                                    width: 150,
+                                    height: 40.h,
+                                    width: 150.w,
                                     fnctn: () =>
                                         creditController.validateCard()),
                               ],

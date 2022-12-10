@@ -16,7 +16,7 @@ class AddressTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
+    final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
       clipBehavior: Clip.hardEdge,
@@ -61,7 +61,7 @@ class AddressTileWidget extends StatelessWidget {
               final addressMAp = snapshot.data!.data() as Map<String, dynamic>;
               cartController.address.value = addressMAp;
               return Container(
-                margin: const EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20).r,
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,11 +101,11 @@ class AddressTileWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: () => Get.to(() => const AddressScreen()),
                         child: Container(
-                          width: width * .25,
-                          height: height * .05,
+                          width: width * .25.w,
+                          height: height * .05.h,
                           decoration: BoxDecoration(
                               border: Border.all(),
-                              borderRadius: BorderRadius.circular(15)),
+                              borderRadius: BorderRadius.circular(15).w),
                           child: const Center(
                             child: Text(
                               "Change Address",

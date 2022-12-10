@@ -10,11 +10,4 @@ class BottomController extends GetxController {
     newIndex.value = index;
     update();
   }
-
-  @override
-  void dispose() {
-    loginController.onClose();
-
-    super.dispose();
-  }
 }

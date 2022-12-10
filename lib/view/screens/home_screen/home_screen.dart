@@ -18,8 +18,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -32,8 +32,7 @@ class HomeScreen extends StatelessWidget {
                     totalBill: cartController.priceCartListenable.value,
                   )),
               icon: Icons.shopping_basket),
-          IconButtonWidget(
-              fnctn: () => Get.to(() => CreditCardScreen()), icon: Icons.mic),
+          IconButtonWidget(fnctn: () {}, icon: Icons.mic),
         ],
         title: AnimatedSearchWidget(
             width: width.w, textEditingController: textEditingController),

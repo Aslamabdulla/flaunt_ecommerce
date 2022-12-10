@@ -16,12 +16,9 @@ class RecommendedForYou extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseDatabase.readHotsales("recommendedforyou"),
         builder: (context, snapshot) {
-          print(height * .22);
           if (snapshot.hasError) {
             return Text("ERROR OCCURED");
           } else if (snapshot.connectionState == ConnectionState.waiting) {

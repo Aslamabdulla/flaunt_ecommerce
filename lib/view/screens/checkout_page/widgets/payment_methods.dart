@@ -20,7 +20,7 @@ class PaymentMethods extends StatelessWidget {
   final PaymentController paymentController = Get.put(PaymentController());
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
+    final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
       margin: EdgeInsets.fromLTRB(15, 0, 10, height * .08).r,

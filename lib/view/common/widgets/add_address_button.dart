@@ -2,6 +2,7 @@
 
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddAddressButtonWidget extends StatelessWidget {
   const AddAddressButtonWidget({
@@ -26,8 +27,8 @@ class AddAddressButtonWidget extends StatelessWidget {
             Color.fromRGBO(60, 174, 200, .5)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
-        height: height,
-        width: width,
+        height: height.h,
+        width: width.w,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -6,6 +6,7 @@ import 'package:flaunt_ecommenrce/view/screens/delivery_status/delivery_status.d
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
@@ -13,8 +14,8 @@ class PaymentSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       appBar: AppBar(
         foregroundColor: kBlack,
@@ -22,31 +23,31 @@ class PaymentSuccessScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.task_alt,
               color: Colors.green,
               size: 50,
             ),
             kHeight15,
-            Text("PAYMENT SUCCESS"),
+            const Text("PAYMENT SUCCESS"),
             kHeight15,
-            Text("Payment Completed"),
+            const Text("Payment Completed"),
             RichText(
               text: TextSpan(
                   text: 'Your Order Number Is ',
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: kBlack, fontSize: 18, fontFamily: 'Oswald'),
                   children: <TextSpan>[
                     TextSpan(
                       text: 'FLNT${cartController.orderNumber.value}',
                       style: TextStyle(
                           color: kBlack,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Oswald'),
                     )
@@ -55,13 +56,13 @@ class PaymentSuccessScreen extends StatelessWidget {
             kHeight15,
             LoginButtonWidget(
                 name: "MY ORDERS",
-                height: height * .06,
+                height: height * .06.sp,
                 width: width,
-                fnctn: () => Get.to(MyOrdersScreen())),
+                fnctn: () => Get.to(const MyOrdersScreen())),
             kHeight15,
             GestureDetector(
-                onTap: () => Get.offAll(() => HomeNavigationPage()),
-                child: Text("Homepage"))
+                onTap: () => Get.offAll(() => const HomeNavigationPage()),
+                child: const Text("Homepage"))
           ],
         ),
       ),

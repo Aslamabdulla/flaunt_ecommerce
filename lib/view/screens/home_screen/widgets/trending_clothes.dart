@@ -28,8 +28,8 @@ class TrendingClothes extends StatelessWidget {
       Color.fromRGBO(187, 209, 230, .8),
       Color.fromRGBO(125, 220, 213, .8),
     ];
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     return Container(
       margin: const EdgeInsets.only(left: 10),

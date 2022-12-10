@@ -50,7 +50,7 @@ class OtpScreenWidget extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5).w,
                   prefixIcon: const Icon(Icons.phone),
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,

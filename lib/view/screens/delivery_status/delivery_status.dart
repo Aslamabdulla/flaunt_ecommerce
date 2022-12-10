@@ -29,7 +29,7 @@ class DeliveryStatusScren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
+    final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     final date = DateTime.parse(orderModel.date);
     final formattedDate = DateFormat('EEE,M/d/y/hh:mm a').format(date);

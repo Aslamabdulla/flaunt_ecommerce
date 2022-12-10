@@ -22,8 +22,8 @@ class TrendingListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = Get.height;
-    var width = Get.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     print(width * .5);
     return Container(
       height: 160.h,

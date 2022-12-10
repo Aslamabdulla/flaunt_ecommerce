@@ -19,7 +19,7 @@ class AddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
+    final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Scaffold(
       extendBodyBehindAppBar: true,
