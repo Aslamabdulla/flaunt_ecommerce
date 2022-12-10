@@ -43,6 +43,11 @@ class FilledRoundedPinPut extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("MOBILE VERIFICATION"),
+        backgroundColor: const Color.fromRGBO(43, 154, 184, 1),
+      ),
       backgroundColor: kWhite,
       body: SafeArea(
           child: OtpScreenWidget(

@@ -2,6 +2,7 @@
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';
@@ -26,8 +27,8 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
-    final width = Get.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -46,7 +47,7 @@ class CheckoutScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.7,
+              height: height / 1.7.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -54,31 +55,31 @@ class CheckoutScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const RowWidget(
+                  RowWidget(
                     text: "Delivery to",
                     top: 15,
                     left: 15,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
                   kHeight10,
                   const AddressTileWidget(),
-                  const RowWidget(
+                  RowWidget(
                     text: "Payment Methods",
                     top: 10,
                     left: 15,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     mainAxis: MainAxisAlignment.spaceBetween,
                   ),
                   kHeight5,
                   PaymentMethods(billablePrice: billableprice),
                   Column(
                     children: [
-                      const RowWidget(
+                      RowWidget(
                         text: "Fees Breakup",
                         top: 10,
                         left: 30,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         mainAxis: MainAxisAlignment.spaceBetween,
                       ),
                       kHeight10,
@@ -99,9 +100,9 @@ class CheckoutScreen extends StatelessWidget {
                           size2: 16,
                           left: 30),
                       SizedBox(
-                        width: width - 30,
-                        child: const Divider(
-                          height: 30,
+                        width: width - 30.w,
+                        child: Divider(
+                          height: 30.h,
                         ),
                       ),
                       TotalPriceRowWidget(
@@ -113,8 +114,8 @@ class CheckoutScreen extends StatelessWidget {
                       kHeight10,
                       LoginButtonWidget(
                           name: "Pay",
-                          height: height * .06,
-                          width: width - 50,
+                          height: height * .06.h,
+                          width: width - 50.h,
                           fnctn: () {
                             if (cartController.address.isNotEmpty) {
                               return paymentController.dispatchPayment(

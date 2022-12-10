@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/view/screens/credit_card/credit_card.dart';
+import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
@@ -34,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               fnctn: () => Get.to(() => CreditCardScreen()), icon: Icons.mic),
         ],
         title: AnimatedSearchWidget(
-            width: width, textEditingController: textEditingController),
+            width: width.w, textEditingController: textEditingController),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -43,7 +45,7 @@ class HomeScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.7,
+              height: height / 1.7.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -58,24 +60,6 @@ class HomeScreen extends StatelessWidget {
           ))
         ],
       ),
-    );
-  }
-}
-
-class IconButtonWidget extends StatelessWidget {
-  final Function() fnctn;
-  final IconData icon;
-  const IconButtonWidget({
-    Key? key,
-    required this.fnctn,
-    required this.icon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: fnctn,
-      icon: Icon(icon),
     );
   }
 }

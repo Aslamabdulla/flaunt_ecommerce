@@ -4,15 +4,11 @@ import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flaunt_ecommenrce/view/common/common.dart';
-import 'package:flaunt_ecommenrce/view/constants/constants.dart';
-import 'package:flaunt_ecommenrce/view/screens/categories/widgets/categories_upper_tile.dart';
-import 'package:flaunt_ecommenrce/view/screens/categories/widgets/grid_view_categories.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/animated_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/grid_view.dart';
-import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgets/category_list_widget.dart';
 
@@ -32,8 +28,8 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
@@ -56,7 +52,7 @@ class CategoriesScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.7,
+              height: height / 1.7.h,
               decoration: customClipperBackground,
             ),
           ),

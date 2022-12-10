@@ -8,6 +8,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart'
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -20,12 +21,13 @@ class SubCategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = Get.height;
+    final height = ScreenUtil().screenHeight;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "SUB CATEGORIES",
           style: TextStyle(color: kBlack, fontWeight: FontWeight.bold),
         ),
@@ -37,28 +39,30 @@ class SubCategoriesScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 5,
+              height: height / 5.h,
               decoration: customClipperBackground,
             ),
           ),
           SafeArea(
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(
-                    height: 40,
+                    height: 40.h,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 15, right: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 15),
                     child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseDatabase.readSubCategories(category),
                         builder: (context, snapshot) {
                           if (snapshot.data == null) {
-                            return Center(child: CupertinoActivityIndicator());
+                            return const Center(
+                                child: CupertinoActivityIndicator());
                           } else if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(child: CupertinoActivityIndicator());
+                            return const Center(
+                                child: CupertinoActivityIndicator());
                           } else {
                             final subCategoryData =
                                 snapshot.data!.docs.map((e) => e.id).toList();

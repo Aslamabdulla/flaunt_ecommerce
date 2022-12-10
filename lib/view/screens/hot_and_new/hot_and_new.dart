@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/controller/hot_and_new_controller/hot_and_view_controller.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
+
+import 'widgets/text_widget_with_size.dart';
 
 class HotAndNewScreen extends StatelessWidget {
   const HotAndNewScreen({super.key});
@@ -127,31 +129,5 @@ class HotAndNewScreen extends StatelessWidget {
                     }
                   }));
         });
-  }
-}
-
-class TextWidgetWithSize extends StatelessWidget {
-  final String text;
-  final double size;
-  final String family;
-  final FontWeight weight;
-  const TextWidgetWithSize({
-    Key? key,
-    required this.text,
-    required this.size,
-    required this.family,
-    required this.weight,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-          fontFamily: family,
-          fontSize: size,
-          fontWeight: weight,
-          color: kBlack),
-    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/screens/payment_success/payment_success.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -19,9 +20,10 @@ class PaymentMethods extends StatelessWidget {
   final PaymentController paymentController = Get.put(PaymentController());
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Container(
-      margin: EdgeInsets.fromLTRB(15, 0, 10, height * .08),
+      margin: EdgeInsets.fromLTRB(15, 0, 10, height * .08).r,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

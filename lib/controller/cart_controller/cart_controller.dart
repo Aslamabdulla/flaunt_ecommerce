@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/order_model.dart';
-import 'package:flaunt_ecommenrce/model/product_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/product_model/product_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
 
 class CartController extends GetxController {
   @override

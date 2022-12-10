@@ -18,13 +18,16 @@ import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'widgets/account_list_tile_widget.dart';
+import 'widgets/profile_image_circle.dart';
+
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     final user = FirebaseAuth.instance.currentUser;
     final String username = user?.displayName ?? "USER";
     final String email = user?.email ?? user?.phoneNumber ?? "EMAIL";
@@ -37,8 +40,8 @@ class AccountPage extends StatelessWidget {
           ClipPath(
             clipper: BackgroundClipper(),
             child: Container(
-              height: height,
-              width: width,
+              height: height.h,
+              width: width.w,
               decoration: customClipperBackground,
             ),
           ),
@@ -50,18 +53,20 @@ class AccountPage extends StatelessWidget {
               children: [
                 kHeight20,
                 ProfileImageCircleAvatar(
-                    height: height,
-                    width: width,
+                    height: height.h,
+                    width: width.w,
                     user: user,
                     profileImage: profileImage),
                 kHeight10,
                 Text(
                   username,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   email,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                 ),
                 kHeight15,
                 Container(
@@ -76,7 +81,7 @@ class AccountPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             AccountListTile(
-                              onTap: () => Get.to(() => MyOrdersScreen()),
+                              onTap: () => Get.to(() => const MyOrdersScreen()),
                               text: "My Orders",
                               leading: Icons.local_mall,
                               trailing: Icons.chevron_right,
@@ -117,76 +122,6 @@ class AccountPage extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class ProfileImageCircleAvatar extends StatelessWidget {
-  const ProfileImageCircleAvatar({
-    Key? key,
-    required this.height,
-    required this.width,
-    required this.user,
-    required this.profileImage,
-  }) : super(key: key);
-
-  final double height;
-  final double width;
-  final User? user;
-  final String profileImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: height * .12),
-      child: PhysicalModel(
-        elevation: 10,
-        borderRadius: BorderRadius.circular(width / 4),
-        color: Colors.transparent,
-        child: CircleAvatar(
-          radius: width / 4,
-          backgroundImage: user?.photoURL == null
-              ? AssetImage("assets/images/user.jpg")
-              : NetworkImage(profileImage) as ImageProvider,
-        ),
-      ),
-    );
-  }
-}
-
-class AccountListTile extends StatelessWidget {
-  final String text;
-  final IconData leading;
-  final IconData trailing;
-  final Function() onTap;
-  const AccountListTile({
-    Key? key,
-    required this.text,
-    required this.leading,
-    required this.trailing,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
-        decoration: BoxDecoration(
-            color: kWhite, borderRadius: BorderRadius.circular(20)),
-        width: 250,
-        height: 45,
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          kWidth10,
-          Icon(leading),
-          Spacer(),
-          Text(text),
-          Spacer(),
-          Icon(trailing),
-          kWidth10
-        ]),
       ),
     );
   }

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
-import 'package:flaunt_ecommenrce/model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/delivery_status/delivery_status.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/widget/counter_cart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class OrderTileWidget extends StatelessWidget {
@@ -28,20 +29,13 @@ class OrderTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProducts = OrderModel.fromMap(snapshot.data!.docs[index].data());
-    // var cartProducts =
-    //     snapshot.data!.docs[index].data() as Map<String, dynamic>;
     var id = snapshot.data!.docs[index].id;
-    print(id);
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
-    final height = Get.height;
-    final width = Get.width;
-
-    // cartController.priceCartListenable.value =
-    //     cartProducts.total! + cartController.priceCartListenable.value;
-    // print(cartController.priceCartListenable.value);
     return Container(
       height: height * .3,
-      margin: EdgeInsets.symmetric(horizontal: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: glassDecorationCustom(Colors.white54, Colors.white30),
       child: Column(
         children: [
@@ -49,9 +43,9 @@ class OrderTileWidget extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: height / 5,
-                width: width / 3,
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                height: height / 5.h,
+                width: width / 3.w,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -72,34 +66,34 @@ class OrderTileWidget extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    width: width / 2,
+                    width: width / 2.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           cartProducts.name,
-                          style: textStyleSize(18, FontWeight.w600),
+                          style: textStyleSize(18.sp, FontWeight.w600),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    width: width / 2.2,
+                    width: width / 2.2.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "${cartProducts.quantity} Qty",
-                          style: textStyleSize(16, FontWeight.w500),
+                          style: textStyleSize(16.sp, FontWeight.w500),
                         ),
                         kWidth20,
                         Row(
                           children: [
                             Text(
                               "Color : ",
-                              style: textStyleSize(16, FontWeight.w500),
+                              style: textStyleSize(16.sp, FontWeight.w500),
                             ),
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 10,
                             ),
                           ],
@@ -112,26 +106,26 @@ class OrderTileWidget extends StatelessWidget {
                     children: [
                       Text(
                         "₹${cartProducts.price}",
-                        style: textStyleSize(14, FontWeight.w400),
+                        style: textStyleSize(14.sp, FontWeight.w400),
                       ),
                       kWidth20,
                     ],
                   ),
                   SizedBox(
-                    width: width / 2,
+                    width: width / 2.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "TOTAL : ₹${cartProducts.total.toString()}",
-                          style: textStyleSize(18, FontWeight.w600),
+                          style: textStyleSize(18.sp, FontWeight.w600),
                         ),
                       ],
                     ),
                   ),
                   Text(
                     "ORDER ID : ${cartProducts.orderId}",
-                    style: textStyleSize(16, FontWeight.w500),
+                    style: textStyleSize(16.sp, FontWeight.w500),
                   ),
                 ],
               )
@@ -139,108 +133,17 @@ class OrderTileWidget extends StatelessWidget {
           ),
           kHeight15,
           ElevatedButton.icon(
-              style: buttonStyleCart(width * .5, 50, kBlack),
+              style: buttonStyleCart(width * .5.w, 50.h, kBlack),
               onPressed: () {
                 Get.to(() => DeliveryStatusScren(
                       id: id,
                       orderModel: cartProducts,
                     ));
               },
-              icon: Icon(Icons.flight_land_outlined),
-              label: Text("Track Order")),
+              icon: const Icon(Icons.flight_land_outlined),
+              label: const Text("Track Order")),
         ],
       ),
-    );
-  }
-}
-
-class CounterCartProducts extends StatelessWidget {
-  const CounterCartProducts({
-    Key? key,
-    required this.cartProducts,
-  }) : super(key: key);
-
-  final CartModel cartProducts;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CartCountButtonWidget(
-            icon: Icons.remove,
-            fnctn: () async {
-              if (int.parse(cartProducts.quantity) > 1) {
-                await FirebaseDatabase.updateToCart(
-                    productModel: OrderModel(
-                        orderId: "",
-                        address: [],
-                        userEmail: userEmail,
-                        productIndex: "0",
-                        date: DateTime.now().toString(),
-                        productId: cartProducts.productId,
-                        brand: cartProducts.brand,
-                        name: cartProducts.name,
-                        price: cartProducts.price,
-                        category: cartProducts.category,
-                        subCategory: cartProducts.subCategory,
-                        colors: cartProducts.colors,
-                        description: cartProducts.description,
-                        imageUrl: cartProducts.imageUrl,
-                        isHotAndNew: cartProducts.isHotAndNew,
-                        isTrending: cartProducts.isTrending,
-                        isSummerCollection: cartProducts.isSummerCollection,
-                        isNewArrival: cartProducts.isNewArrival,
-                        isHotSales: cartProducts.isHotSales,
-                        isPopularBrand: cartProducts.isPopularBrand,
-                        quantity:
-                            (int.parse(cartProducts.quantity) - 1).toString(),
-                        total: double.parse(cartProducts.price) *
-                            (int.parse(cartProducts.quantity) - 1)));
-              } else {
-                Get.snackbar("PROMPT", "Minimum Limit Reached");
-              }
-            }),
-        kWidth5,
-        Text(
-          cartProducts.quantity,
-          style: TextStyle(fontSize: 18),
-        ),
-        kWidth5,
-        CartCountButtonWidget(
-            icon: Icons.add,
-            fnctn: () async {
-              if (int.parse(cartProducts.quantity) < 10) {
-                await FirebaseDatabase.updateToCart(
-                    productModel: OrderModel(
-                        orderId: "",
-                        address: [],
-                        date: DateTime.now().toString(),
-                        userEmail: userEmail,
-                        productIndex: "0",
-                        productId: cartProducts.productId,
-                        brand: cartProducts.brand,
-                        name: cartProducts.name,
-                        price: cartProducts.price,
-                        category: cartProducts.category,
-                        subCategory: cartProducts.subCategory,
-                        colors: cartProducts.colors,
-                        description: cartProducts.description,
-                        imageUrl: cartProducts.imageUrl,
-                        isHotAndNew: cartProducts.isHotAndNew,
-                        isTrending: cartProducts.isTrending,
-                        isSummerCollection: cartProducts.isSummerCollection,
-                        isNewArrival: cartProducts.isNewArrival,
-                        isHotSales: cartProducts.isHotSales,
-                        isPopularBrand: cartProducts.isPopularBrand,
-                        quantity:
-                            (int.parse(cartProducts.quantity) + 1).toString(),
-                        total: double.parse(cartProducts.price) *
-                            (int.parse(cartProducts.quantity) + 1)));
-              } else {
-                Get.snackbar("LIMIT REACHED", "MAXIMUM 10 QTY ALLOWED");
-              }
-            })
-      ],
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flaunt_ecommenrce/model/addres_model/address_model.dart';
+import 'package:flaunt_ecommenrce/model/adress_model/address_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

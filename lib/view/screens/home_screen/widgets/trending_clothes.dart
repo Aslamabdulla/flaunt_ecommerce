@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/glass_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/trending_list_widget.dart';

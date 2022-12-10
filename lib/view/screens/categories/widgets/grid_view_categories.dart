@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flaunt_ecommenrce/model/product_model.dart';
+import 'package:flaunt_ecommenrce/model/product_model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
-
 
 class GridViewCategoryWidget extends StatelessWidget {
   AsyncSnapshot<QuerySnapshot<Object?>> snapshot;

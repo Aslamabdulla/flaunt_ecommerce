@@ -19,8 +19,8 @@ class FlauntPayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+ final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     return Scaffold(
       extendBodyBehindAppBar: true,

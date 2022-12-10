@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/common/common.dart';

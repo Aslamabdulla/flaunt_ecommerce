@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
-import 'package:flaunt_ecommenrce/model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/material.dart';

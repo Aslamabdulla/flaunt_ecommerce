@@ -3,6 +3,7 @@ import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flaunt_ecommenrce/view/screens/checkout_page/widgets/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentButtonWidget extends StatelessWidget {
   final int index;
@@ -13,12 +14,12 @@ class PaymentButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Container(
       padding: EdgeInsets.all(8),
-      height: height * .07,
-      width: width * .3,
+      height: height * .07.h,
+      width: width * .3.w,
       decoration: boxDecorationPaymentBtn,
       child: Center(
           child: Image.asset(

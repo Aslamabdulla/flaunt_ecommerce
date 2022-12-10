@@ -1,9 +1,10 @@
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ShippingRowWidget extends StatelessWidget {
   final String leading;
@@ -22,9 +23,10 @@ class ShippingRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Container(
-      margin: EdgeInsets.only(left: left, right: 50, top: 10),
+      margin: EdgeInsets.only(left: left, right: 50, top: 10).r,
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,8 +36,8 @@ class ShippingRowWidget extends StatelessWidget {
             style: textStyleSize(size1, FontWeight.w500),
           ),
           SizedBox(
-            height: 25,
-            width: 100,
+            height: 25.h,
+            width: 100.w,
             child: Text(
               "Free",
               textAlign: TextAlign.center,

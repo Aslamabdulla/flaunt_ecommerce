@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
 import 'package:flaunt_ecommenrce/services/database_services.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
@@ -181,5 +182,13 @@ class LoginController extends GetxController {
         snackBarShowError("Error", e.toString());
       }
     }
+  }
+
+  otpSignIn() async {}
+
+  @override
+  void dispose() {
+    loginController.dispose(); // TODO: implement dispose
+    super.dispose();
   }
 }

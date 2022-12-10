@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import 'package:flaunt_ecommenrce/model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/shipping_fee.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
@@ -30,8 +31,8 @@ class MyCartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
-    final width = Get.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     TextEditingController offerController = TextEditingController();
     double total = 0;
@@ -42,7 +43,7 @@ class MyCartScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "MY CART",
-          style: textStyleSize(20, FontWeight.w600),
+          style: textStyleSize(20.sp, FontWeight.w600),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -159,7 +160,7 @@ class MyCartScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: LoginButtonWidget(
                               name: "Proceed To Checkout",
-                              height: height * .06,
+                              height: height * .06.h,
                               width: width,
                               fnctn: () => Get.to(() => CheckoutScreen(
                                     billableprice:

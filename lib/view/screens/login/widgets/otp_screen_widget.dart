@@ -43,15 +43,15 @@ class OtpScreenWidget extends StatelessWidget {
             "assets/images/phone.gif",
             height: 280.h,
           ),
-          Text("PLEASE VERIFY YOUR PHONE NUMBER"),
+          const Text("PLEASE VERIFY YOUR PHONE NUMBER"),
           kHeight10,
           Padding(
             padding: const EdgeInsets.only(left: 50, right: 50).r,
             child: TextFormField(
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: 5),
-                  prefixIcon: Icon(Icons.phone),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                  prefixIcon: const Icon(Icons.phone),
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(30)),
@@ -131,7 +131,7 @@ class OtpScreenWidget extends StatelessWidget {
                     return;
                   } else if (value.user!.uid != null) {
                     snackBarShowSuccess("Success", "Verified Successfully");
-                    Get.offAll(() => HomeNavigationPage());
+                    Get.offAll(() => const HomeNavigationPage());
                     loginController.saveUserOtp();
                   }
                 });

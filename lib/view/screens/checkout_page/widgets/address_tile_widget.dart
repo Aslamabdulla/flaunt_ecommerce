@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/addres_model/address_model.dart';
+import 'package:flaunt_ecommenrce/model/adress_model/address_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/address_screen/address_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AddressTileWidget extends StatelessWidget {
@@ -15,13 +16,13 @@ class AddressTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Container(
       clipBehavior: Clip.hardEdge,
-      margin: const EdgeInsets.symmetric(horizontal: 15),
-      width: width,
-      height: height * .2,
+      margin: const EdgeInsets.symmetric(horizontal: 15).w,
+      width: width.w,
+      height: height * .2.h,
       decoration: decorationCartTile,
       child: StreamBuilder<DocumentSnapshot<Object?>>(
           stream: FirebaseDatabase.addressGet(),
@@ -34,17 +35,17 @@ class AddressTileWidget extends StatelessWidget {
               return GestureDetector(
                 onTap: () => Get.to(() => const AddressScreen()),
                 child: Container(
-                  width: width * .25,
-                  height: height * .05,
+                  width: width * .25.w,
+                  height: height * .05.h,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   child: Center(
                     child: Container(
-                      width: width * .25,
-                      height: 50,
+                      width: width * .25.w,
+                      height: 50.h,
                       decoration: BoxDecoration(
                           border: Border.all(),
-                          borderRadius: BorderRadius.circular(15)),
+                          borderRadius: BorderRadius.circular(15).r),
                       child: const Center(
                         child: Text(
                           "Add Address",

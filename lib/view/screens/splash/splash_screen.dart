@@ -1,7 +1,7 @@
 import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
-import 'package:flaunt_ecommenrce/view/screens/onboarding/on_board_first.dart';
+import 'package:flaunt_ecommenrce/view/screens/onboarding/on_board_control_home.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

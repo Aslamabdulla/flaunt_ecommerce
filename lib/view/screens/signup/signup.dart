@@ -23,8 +23,8 @@ class SignUpPage extends StatelessWidget {
   final LoginController loginCtrl;
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
-    final width = Get.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
     return Scaffold(
       body: SingleChildScrollView(

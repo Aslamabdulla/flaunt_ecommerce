@@ -3,6 +3,7 @@ import 'package:flaunt_ecommenrce/view/screens/onboarding/on_boarding_last.dart'
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/rich_text.dart';
 import 'package:flaunt_ecommenrce/view/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class OnBoardingSecondScreen extends StatelessWidget {
@@ -10,9 +11,8 @@ class OnBoardingSecondScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-    final height = size.height;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       body: Container(
         height: height,
@@ -41,8 +41,8 @@ class OnBoardingSecondScreen extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(),
+                    children: const [
+                      SizedBox(),
                       // CircleAvatar(
                       //   backgroundColor: kBlack,
                       //   radius: 30,

@@ -2,26 +2,26 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flaunt_ecommenrce/model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
+import 'package:flaunt_ecommenrce/view/screens/account/widgets/order_screen_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/account/widgets/order_tile_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/delivery_status/delivery_status.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/cart_list_tile.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
-import 'package:flaunt_ecommenrce/view/screens/checkout_page/check_out.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/price_tile_widget.dart';
-import 'package:flaunt_ecommenrce/view/screens/my_cart/widget.dart/promo_tile_widget.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   const MyOrdersScreen({
@@ -30,11 +30,9 @@ class MyOrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = Get.height;
-    final width = Get.width;
+    final height = ScreenUtil().screenHeight;
+    final width = ScreenUtil().screenWidth;
 
-    TextEditingController offerController = TextEditingController();
-    double total = 0;
     // double sum = 0;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,7 +40,7 @@ class MyOrdersScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "MY ORDERS",
-          style: textStyleSize(20, FontWeight.w600),
+          style: textStyleSize(20.sp, FontWeight.w600),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -53,7 +51,7 @@ class MyOrdersScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.7,
+              height: height / 1.7.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -63,20 +61,21 @@ class MyOrdersScreen extends StatelessWidget {
                   stream: FirebaseDatabase.readorders(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
+                      return const Center(
                         child: Text("ITEM ALREADY IN CART"),
                       );
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CupertinoActivityIndicator(),
                       );
                     } else if (snapshot.data == null) {
                       return Center(
                         child: TextButton.icon(
                             onPressed: () {},
-                            icon: Icon(Icons.remove_shopping_cart_outlined),
-                            label: Text("NO ORDERS")),
+                            icon:
+                                const Icon(Icons.remove_shopping_cart_outlined),
+                            label: const Text("NO ORDERS")),
                       );
                     } else if (snapshot.data!.docs.isEmpty) {
                       return Column(
@@ -86,66 +85,20 @@ class MyOrdersScreen extends StatelessWidget {
                           Center(
                             child: TextButton.icon(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove_shopping_cart_outlined,
                                   color: kRedAccent,
                                 ),
                                 label: Text(
                                   "NO ORDERS",
-                                  style: textStyleSize(18, FontWeight.w600),
+                                  style: textStyleSize(18.sp, FontWeight.w600),
                                 )),
                           ),
                         ],
                       );
                     } else {
-                      return Column(
-                        children: [
-                          RowWidget(
-                            text: "MY ORDERS",
-                            top: 15,
-                            left: 15,
-                            fontSize: 18,
-                            mainAxis: MainAxisAlignment.spaceBetween,
-                          ),
-                          kHeight10,
-                          ListView.separated(
-                              shrinkWrap: true,
-                              primary: false,
-                              itemBuilder: (context, index) {
-                                final cartProducts = OrderModel.fromMap(
-                                    snapshot.data!.docs[index].data());
-                                final id = snapshot.data!.docs[index].id;
-
-                                return GestureDetector(
-                                  onTap: () => Get.to(() => DeliveryStatusScren(
-                                        orderModel: cartProducts,
-                                        id: id,
-                                      )),
-                                  child: OrderTileWidget(
-                                    snapshot: snapshot,
-                                    images: cartProducts.imageUrl,
-                                    index: index,
-                                  ),
-                                );
-                              },
-                              separatorBuilder: (context, index) => SizedBox(
-                                    height: 10,
-                                  ),
-                              itemCount: snapshot.data!.docs.length),
-                          kHeight45,
-                          kHeight45,
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: LoginButtonWidget(
-                              name: "HOMEPAGE",
-                              height: height * .06,
-                              width: width,
-                              fnctn: () =>
-                                  Get.offAll(() => HomeNavigationPage()),
-                            ),
-                          ),
-                          kHeight15,
-                        ],
+                      return OrderSceenWidget(
+                        snapshot: snapshot,
                       );
                     }
                   }),

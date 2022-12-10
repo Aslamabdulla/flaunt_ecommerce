@@ -10,6 +10,7 @@ import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart'
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/text_form_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -18,8 +19,8 @@ class AddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -32,7 +33,7 @@ class AddressScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 3,
+              height: height / 3.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -48,16 +49,16 @@ class AddressScreen extends StatelessWidget {
                   addressCtrl.pinCodeController,
                 ];
                 return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20).w,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         RowWidget(
                             mainAxis: MainAxisAlignment.center,
                             text: "Edit Your Delivery Address",
-                            top: height * .18,
+                            top: height * .18.h,
                             left: 0,
-                            fontSize: 22),
+                            fontSize: 22.sp),
                         kHeight50,
                         kHeight40,
                         Column(
@@ -79,8 +80,7 @@ class AddressScreen extends StatelessWidget {
                                     kLightBlue.withOpacity(.8)),
                                 onPressed: () async {
                                   await addressCtrl.addAddressToFirebase();
-                                  print(
-                                      addressCtrl.pinCodeController.value.text);
+
                                   bool validate = addressCtrl.validator();
                                   if (validate) {
                                     await addressCtrl.updateAddress();
@@ -89,7 +89,7 @@ class AddressScreen extends StatelessWidget {
                                 },
                                 icon: Icon(
                                   Icons.location_city,
-                                  size: 20,
+                                  size: 20.sp,
                                 ),
                                 label: Text(
                                   "ADD ADDRESS",
@@ -101,9 +101,9 @@ class AddressScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.check_box),
+                            const Icon(Icons.check_box),
                             kWidth5,
-                            Text("Save to default address"),
+                            const Text("Save to default address"),
                           ],
                         ),
                         kHeight15,

@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:another_stepper/widgets/another_stepper.dart';
+import 'package:flaunt_ecommenrce/view/screens/delivery_status/widgets/row_start_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flaunt_ecommenrce/model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
@@ -13,6 +15,8 @@ import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navig
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/widgets.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/widgets.dart';
+
+import 'widgets/estimated_delivery_widget.dart';
 
 class DeliveryStatusScren extends StatelessWidget {
   final String id;
@@ -25,8 +29,8 @@ class DeliveryStatusScren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = ScreenUtil().scaleHeight;
+    final width = ScreenUtil().screenWidth;
     final date = DateTime.parse(orderModel.date);
     final formattedDate = DateFormat('EEE,M/d/y/hh:mm a').format(date);
 
@@ -48,21 +52,21 @@ class DeliveryStatusScren extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 2.2,
+              height: height / 2.2.h,
               decoration: customClipperBackground,
             ),
           ),
           SafeArea(
             child: Container(
-              height: height,
-              width: width,
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: height.h,
+              width: width.w,
+              padding: const EdgeInsets.symmetric(horizontal: 20).w,
               child: StreamBuilder<Object>(
                   stream: FirebaseDatabase.readorders(),
                   builder: (context, snapshot) {
                     return Column(
                       children: [
-                        EstimatedDeliveryWidget(),
+                        const EstimatedDeliveryWidget(),
                         kHeight10,
                         Row(
                           children: [
@@ -77,7 +81,7 @@ class DeliveryStatusScren extends StatelessWidget {
                             orderModel: orderModel, text: "Track Order"),
                         kHeight10,
                         AnotherStepper(
-                          dotWidget: Icon(
+                          dotWidget: const Icon(
                             Icons.check_circle,
                             color: Colors.green,
                           ),
@@ -85,15 +89,16 @@ class DeliveryStatusScren extends StatelessWidget {
                           activeBarColor: Colors.green,
                           stepperList: stepperData,
                           stepperDirection: Axis.vertical,
-                          horizontalStepperHeight: 60,
+                          horizontalStepperHeight: 60.h,
                           inverted: false,
                           activeIndex: int.parse(orderModel.productIndex),
                         ),
                         LoginButtonWidget(
                             name: "Homepage",
-                            height: height * .06,
-                            width: width - 100,
-                            fnctn: () => Get.to(() => HomeNavigationPage()))
+                            height: height * .06.h,
+                            width: width - 100.w,
+                            fnctn: () =>
+                                Get.to(() => const HomeNavigationPage()))
                       ],
                     );
                   }),
@@ -101,57 +106,6 @@ class DeliveryStatusScren extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class RowStartTextWidget extends StatelessWidget {
-  final String text;
-  const RowStartTextWidget({
-    Key? key,
-    required this.text,
-    required this.orderModel,
-  }) : super(key: key);
-
-  final OrderModel orderModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          text,
-          style: textStyleSize(16, FontWeight.w600),
-        ),
-        Spacer(),
-        Text(orderModel.orderId)
-      ],
-    );
-  }
-}
-
-class EstimatedDeliveryWidget extends StatelessWidget {
-  const EstimatedDeliveryWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        RowWidget(
-            mainAxis: MainAxisAlignment.center,
-            text: "Estimated Delivery : ",
-            top: 20,
-            left: 0,
-            fontSize: 16),
-        RowWidget(
-            mainAxis: MainAxisAlignment.center,
-            text: "7-14 DAYS",
-            top: 20,
-            left: 0,
-            fontSize: 16),
-      ],
     );
   }
 }

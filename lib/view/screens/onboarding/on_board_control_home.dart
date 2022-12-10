@@ -20,15 +20,15 @@ class OnboardFirst extends StatelessWidget {
       const FirstPage(),
       const SecondPage(),
       const ThirdPage(),
-      OnBoardingSecondScreen(),
-      OnboardingFinalScreen(),
+      const OnBoardingSecondScreen(),
+      const OnboardingFinalScreen(),
     ];
 
     return Scaffold(
         body: LiquidSwipe(
       liquidController: liquidController,
       enableSideReveal: true,
-      slideIconWidget: Icon(Icons.arrow_back_ios_new),
+      slideIconWidget: const Icon(Icons.arrow_back_ios_new),
       positionSlideIcon: .8,
       enableLoop: false,
       pages: pages,

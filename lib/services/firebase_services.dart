@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
-import 'package:flaunt_ecommenrce/model/addres_model/address_model.dart';
-import 'package:flaunt_ecommenrce/model/cart_model.dart';
-import 'package:flaunt_ecommenrce/model/order_model.dart';
-import 'package:flaunt_ecommenrce/model/product_model.dart';
+import 'package:flaunt_ecommenrce/model/adress_model/address_model.dart';
+import 'package:flaunt_ecommenrce/model/cart_model/cart_model.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
+import 'package:flaunt_ecommenrce/model/product_model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
@@ -291,10 +291,7 @@ class FirebaseDatabase {
         .doc(user.email ?? user.uid)
         .collection("address")
         .doc("details");
-    // await documentReference.then((DocumentSnapshot doc) {
-    //   var data = {};
-    //   data = doc.data() as Map<String, dynamic>;
-    // });
+
     return documentReference.snapshots();
   }
 
