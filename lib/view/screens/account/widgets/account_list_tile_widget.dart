@@ -23,15 +23,21 @@ class AccountListTile extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 5).w,
         decoration: BoxDecoration(
             color: kWhite, borderRadius: BorderRadius.circular(20).r),
-        width: 250,
-        height: 45,
+        width: 260.h,
+        height: 46.w,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           kWidth10,
-          Icon(leading),
+          Icon(
+            leading,
+            size: 20.sp,
+          ),
           Spacer(),
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(fontSize: 14.sp),
+          ),
           Spacer(),
-          Icon(trailing),
+          Icon(trailing, size: 20.sp),
           kWidth10
         ]),
       ),

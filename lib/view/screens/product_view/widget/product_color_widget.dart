@@ -11,7 +11,6 @@ class ColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -20,10 +19,10 @@ class ColorWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(width: .5),
                 borderRadius: BorderRadius.circular(20).w),
-            child: const Center(
+            child: Center(
               child: Text(
                 "COLORS",
-                style: TextStyle(fontWeight: FontWeight.w600),
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp),
               ),
             ),
           ),
@@ -34,6 +33,7 @@ class ColorWidget extends StatelessWidget {
                 (index) => Padding(
                       padding: const EdgeInsets.only(right: 5),
                       child: CircleAvatar(
+                        radius: 15,
                         backgroundColor: colorsProduct[index],
                       ),
                     )),

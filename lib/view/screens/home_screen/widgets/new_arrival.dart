@@ -17,7 +17,7 @@ class NewWallWidget extends StatelessWidget {
     // print(width * .3);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10).w,
-      height: 150.h,
+      height: 160.h,
       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseDatabase.readHotsales("newarrivals"),
           builder: (context, snapshot) {

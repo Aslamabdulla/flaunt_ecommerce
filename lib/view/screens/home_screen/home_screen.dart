@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 1.7.h,
+              height: height / 1.7,
               decoration: customClipperBackground,
             ),
           ),

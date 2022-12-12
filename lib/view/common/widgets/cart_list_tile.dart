@@ -31,25 +31,22 @@ class CartListTileWidget extends StatelessWidget {
     // var cartProducts =
     //     snapshot.data!.docs[index].data() as Map<String, dynamic>;
     var id = snapshot.data!.docs[index].id;
-    print(id);
 
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
+    print("${width / 2} dxggd");
 
-    // cartController.priceCartListenable.value =
-    //     cartProducts.total! + cartController.priceCartListenable.value;
-    // print(cartController.priceCartListenable.value);
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12),
+      margin: EdgeInsets.symmetric(horizontal: 12.w),
       decoration: glassDecorationCustom(Colors.white54, Colors.white30),
       child: Row(
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
             decoration: decoration,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            height: height / 5.h,
-            width: width / 3.w,
+            margin: EdgeInsets.symmetric(horizontal: 10.w),
+            height: 161.h,
+            width: 128.w,
             child: Image.network(
               cartProducts.imageUrl[0],
               fit: BoxFit.cover,
@@ -66,7 +63,7 @@ class CartListTileWidget extends StatelessWidget {
                 ],
               ),
               Container(
-                width: width / 2.w,
+                width: 192.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -78,12 +75,12 @@ class CartListTileWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                width: width / 2.2.w,
+                width: 210.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: width / 4.1.w,
+                      width: 87.w,
                       child: Text(
                         cartProducts.category.toUpperCase(),
                         overflow: TextOverflow.ellipsis,
@@ -117,13 +114,13 @@ class CartListTileWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: width / 2.w,
+                width: 210.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "TOTAL : ₹${cartProducts.total.toString()}",
-                      style: textStyleSize(18, FontWeight.w600),
+                      style: textStyleSize(16, FontWeight.w600),
                     ),
                     IconButton(
                         onPressed: () {

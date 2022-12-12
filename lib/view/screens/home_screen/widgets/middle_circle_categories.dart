@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/screens/categories/categories.dart';
@@ -34,15 +35,16 @@ class CircleCategories extends StatelessWidget {
           } else {
             final categoryItemsList =
                 snapshot.data!.docs.map((e) => e.id).toList();
-            print(height * .14);
+            // dataController.category = categoryItemsList;
+
             return Container(
               margin: const EdgeInsets.only(top: 10, left: 10, right: 10).r,
-              height: 105.h,
+              height: 110.h,
               child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                        width: 10,
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 10.h,
+                        width: 10.w,
                       ),
                   scrollDirection: Axis.horizontal,
                   itemCount: categoryItemsList.length,
@@ -70,8 +72,7 @@ class CircleCategories extends StatelessWidget {
                           ),
                           Text(
                             categoryItemsList[index],
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 14.sp),
+                            style: TextStyle(fontSize: 14.sp),
                           )
                         ],
                       ),

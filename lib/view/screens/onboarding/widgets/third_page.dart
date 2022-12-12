@@ -13,8 +13,8 @@ class ThirdPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-        height: height.h,
-        width: width.w,
+        height: height,
+        width: width,
         decoration: onBoardThirdImage,
         child: SafeArea(
           child: Padding(

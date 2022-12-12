@@ -11,8 +11,8 @@ class FirstPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-        height: height.h,
-        width: width.w,
+        height: height,
+        width: width,
         decoration: onBoardFirstImage,
         child: SafeArea(
           child: Padding(

@@ -35,14 +35,6 @@ class CategoriesScreen extends StatelessWidget {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(Icons.mic),
-          )
-        ],
-        title: AnimatedSearchWidget(
-            width: width, textEditingController: textEditingController),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

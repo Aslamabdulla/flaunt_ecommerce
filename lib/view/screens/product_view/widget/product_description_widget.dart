@@ -18,7 +18,7 @@ class DescriptionWidget extends StatelessWidget {
       child: Text(
         description,
         style: TextStyle(fontSize: 14.sp),
-        maxLines: 5,
+        maxLines: 4,
       ),
     );
   }

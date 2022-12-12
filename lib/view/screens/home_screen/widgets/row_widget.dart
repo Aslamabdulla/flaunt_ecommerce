@@ -21,7 +21,7 @@ class RowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: top, left: left).r,
-      height: 30.sp,
+      height: 40.sp,
       child: Row(
         mainAxisAlignment: mainAxis,
         children: [

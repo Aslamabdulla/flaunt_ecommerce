@@ -50,6 +50,7 @@ class ProductViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = ScreenUtil().screenWidth;
     final height = ScreenUtil().screenHeight;
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -80,74 +81,85 @@ class ProductViewScreen extends StatelessWidget {
                   alignment: AlignmentDirectional.bottomCenter,
                   children: [
                     CarouselWidget(
-                        height: height.h,
-                        width: width.w,
+                        height: height,
+                        width: width,
                         imageUrl: product.imageUrl),
                     Container(
                         padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 15)
                             .w,
                         height: 422.h,
-                        width: width.w,
+                        width: width,
                         decoration: stackDecoration,
-                        child: Column(
-                          children: [
-                            BrandNameWidget(
-                              brandName: product.brand,
-                              categoryName: category,
-                            ),
-                            TitleWidget(
-                                width: width,
-                                title: product.name,
-                                price: product.price),
-                            DescriptionWidget(
-                                width: width.w,
-                                description: product.description),
-                            kHeight5,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                const ColorWidget(),
-                                QuantityWidget(
-                                    width: width.w,
-                                    height: height.h,
-                                    quantity: product.quantity),
-                              ],
-                            ),
-                            kHeight10,
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(left: 12, right: 12).r,
-                              child: CountAndCartWidget(
-                                  isMainCollection: isMainCollection,
-                                  id: id,
-                                  category: category,
-                                  subCategory: subCategory,
-                                  docId: docId,
-                                  quantity: int.parse(product.quantity)),
-                            ),
-                            kHeight15,
-                            ElevatedButton.icon(
-                                style: buttonStyleCart(300.w, 50.h, kBlack),
-                                onPressed: () async {
-                                  cartController.orderList.clear();
-                                  Get.to(
-                                      () => MyCartScreen(
-                                          totalBill: cartController
-                                              .priceCartListenable.value),
-                                      transition: Transition.rightToLeft,
-                                      duration:
-                                          const Duration(milliseconds: 500));
-                                },
-                                icon: const Icon(Icons.local_mall),
-                                label: Text(
-                                  "CHECKOUT",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.sp),
-                                ))
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              kHeight5,
+                              BrandNameWidget(
+                                brandName: product.brand,
+                                categoryName: category,
+                              ),
+                              kHeight5,
+                              TitleWidget(
+                                  width: width.w,
+                                  title: product.name,
+                                  price: product.price),
+                              kHeight5,
+                              DescriptionWidget(
+                                  width: width.w,
+                                  description: product.description),
+                              kHeight5,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  const ColorWidget(),
+                                  QuantityWidget(
+                                      width: width.w,
+                                      height: height.h,
+                                      quantity: product.quantity),
+                                ],
+                              ),
+                              kHeight10,
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(left: 12, right: 12)
+                                        .r,
+                                child: CountAndCartWidget(
+                                    isMainCollection: isMainCollection,
+                                    id: id,
+                                    category: category,
+                                    subCategory: subCategory,
+                                    docId: docId,
+                                    quantity: int.parse(product.quantity)),
+                              ),
+                              kHeight5,
+                              ElevatedButton.icon(
+                                  style: buttonStyleCart(300.w, 45.h, kBlack),
+                                  onPressed: () async {
+                                    cartController.orderList.clear();
+                                    Get.to(
+                                        () => MyCartScreen(
+                                            totalBill: cartController
+                                                .priceCartListenable.value),
+                                        transition: Transition.rightToLeft,
+                                        duration:
+                                            const Duration(milliseconds: 500));
+                                  },
+                                  icon: Icon(
+                                    Icons.local_mall,
+                                    size: 20.sp,
+                                  ),
+                                  label: Text(
+                                    "CHECKOUT",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15.sp),
+                                  ))
+                            ],
+                          ),
                         ))
                   ],
                 );

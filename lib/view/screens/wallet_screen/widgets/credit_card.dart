@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/credit_card/credit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 import 'package:flaunt_ecommenrce/view/common/widgets/wallet_credit_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CreditCard extends StatelessWidget {
@@ -23,8 +25,8 @@ class CreditCard extends StatelessWidget {
       child: Column(
         children: [
           CreditCardWidget(
-            height: height * .26,
-            width: width - 60,
+            height: 235.h,
+            width: 350.w,
             cardNumber: creditCardController.cardNumber.value,
             expiryDate: creditCardController.expiryDate.value,
             cardHolderName: creditCardController.cardHolderName.value,
@@ -36,14 +38,15 @@ class CreditCard extends StatelessWidget {
             isHolderNameVisible: true,
             cardBgColor: index == 0 ? Colors.red : Colors.deepPurpleAccent,
             isSwipeGestureEnabled: true,
+            textStyle: TextStyle(fontSize: 12.sp, color: kWhite),
             onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
             customCardTypeIcons: <CustomCardTypeIcon>[
               CustomCardTypeIcon(
                 cardType: index == 0 ? CardType.mastercard : CardType.visa,
                 cardImage: Image.asset(
                   'assets/images/mastercard.png',
-                  height: 48,
-                  width: 48,
+                  height: 50.h,
+                  width: 48.w,
                 ),
               ),
             ],

@@ -69,12 +69,12 @@ class RecentlyViewedWidget extends StatelessWidget {
                         Text(
                           "Macbook Air M1",
                           style: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.w500),
+                              fontSize: 18.sp, fontWeight: FontWeight.w400),
                         ),
                         Text(
                           "₹98500",
                           style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.w500),
+                              fontSize: 15.sp, fontWeight: FontWeight.w400),
                         ),
                       ],
                     )

@@ -24,6 +24,7 @@ class HotAndNewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
+    print(width * .15);
     return GetBuilder<HotAndNewController>(
         init: HotAndNewController(),
         builder: (controller) {
@@ -54,8 +55,8 @@ class HotAndNewScreen extends StatelessWidget {
                                 json: snapshot.data!.docs[index].data());
                             String id = snapshot.data!.docs[index].id;
                             return Container(
-                              height: ScreenUtil().screenHeight.h,
-                              width: ScreenUtil().scaleWidth.w,
+                              height: ScreenUtil().screenHeight,
+                              width: ScreenUtil().scaleWidth,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image:
@@ -72,8 +73,8 @@ class HotAndNewScreen extends StatelessWidget {
                                       margin: const EdgeInsets.only(
                                               bottom: 40, left: 10)
                                           .r,
-                                      height: height * .20.h,
-                                      width: width / 1.3.w,
+                                      height: 161.h,
+                                      width: 320.w,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -82,13 +83,13 @@ class HotAndNewScreen extends StatelessWidget {
                                         children: [
                                           TextWidgetWithSize(
                                             text: hotAndNew.name,
-                                            size: width * .10.w,
+                                            size: 35.sp,
                                             family: 'Oswald',
                                             weight: FontWeight.bold,
                                           ),
                                           TextWidgetWithSize(
                                               text: "NEW ARRIVAL",
-                                              size: width * .06.w,
+                                              size: 20.sp,
                                               family: 'Italiana',
                                               weight: FontWeight.bold)
                                         ],
@@ -100,9 +101,10 @@ class HotAndNewScreen extends StatelessWidget {
                                     child: Container(
                                       decoration: glassDecoration,
                                       margin: const EdgeInsets.only(
-                                          bottom: 40, right: 10),
-                                      height: height * .2.h,
-                                      width: width * .15.w,
+                                              bottom: 40, right: 10)
+                                          .r,
+                                      height: 161.h,
+                                      width: 58.w,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,

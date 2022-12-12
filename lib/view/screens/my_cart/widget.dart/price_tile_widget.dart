@@ -4,6 +4,7 @@ import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TotalPriceRowWidget extends StatelessWidget {
   final String leading;
@@ -72,7 +73,7 @@ class PriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: left, right: 50, top: 10),
+      margin: EdgeInsets.only(left: left, right: 50, top: 10).r,
       width: width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,8 +83,8 @@ class PriceWidget extends StatelessWidget {
             style: textStyleSize(size1, FontWeight.w500),
           ),
           SizedBox(
-            height: 25,
-            width: 100,
+            height: 30.sp,
+            width: 100.sp,
             child: Text(
               "₹${cartController.totalPriceCart.value.toString()}",
               textAlign: TextAlign.center,

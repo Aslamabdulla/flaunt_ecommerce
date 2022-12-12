@@ -15,9 +15,14 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 final user = FirebaseAuth.instance.currentUser!;
 final userEmail = user.email ?? user.uid;
 final CollectionReference _mainCollection = _firestore.collection("categories");
+final CollectionReference _subCollection =
+    _firestore.collection('subcategories');
+final CollectionReference _productCollection =
+    _firestore.collection('products');
 final CollectionReference _homeCollection = _firestore.collection("sections");
 final CollectionReference _cartCollection = _firestore.collection("cart");
 final CollectionReference _adminOrderCollection =
@@ -98,17 +103,7 @@ class FirebaseDatabase {
       "useId": userEmail,
       "time": DateTime.now(),
     };
-    Map<String, dynamic> itemData = {};
-    // Map<String,dynamic> data = <String,dynamic> {
-    //   ""
-    // };
-    // final temp = _mainCollection
-    //     .doc("Women")
-    //     .collection("subcategories")
-    //     .doc("Western Wear")
-    //     .collection("products")
-    //     .doc();
-    // temp.set(product.toMap());
+
     final cartPath = _cartCollection.doc(userEmail);
     cartPath.set(data);
 
@@ -126,7 +121,6 @@ class FirebaseDatabase {
     };
     final cartPath = _userOrderCollection.doc(userEmail);
     await cartPath.set(userData);
-    final cartData = cartPath.collection("products");
 
     DocumentReference documentReference = isMainCollection
         ? _mainCollection
@@ -279,7 +273,6 @@ class FirebaseDatabase {
         .doc("details")
         .get();
     await documentReference.then((DocumentSnapshot doc) {
-      var data = {};
       data = doc.data() as Map<String, dynamic>;
     });
     return documentReference;
@@ -296,24 +289,14 @@ class FirebaseDatabase {
   }
 
   static Future<void> addOrder(OrderModel product) async {
-    Map<String, dynamic> data = <String, dynamic>{
-      "useId": user.email ?? user.uid,
-      "time": DateTime.now()
-    };
-    Map<String, dynamic> itemData = {};
-    // Map<String,dynamic> data = <String,dynamic> {
-    //   ""
-    // };
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('MMddkkmm').format(now);
     cartController.orderNumber.value = formattedDate;
-    print(formattedDate);
+
     var tempAddress = [];
     final address = cartController.address.value;
     tempAddress = address.values.toList();
-    print(tempAddress);
-    // final uuid = DateTime.now();
-    // String formattedId = DateFormat().format(now);
+
     final cartPath = await _userOrderCollection
         .doc(user.email ?? user.uid)
         .collection("order_history")
@@ -381,5 +364,49 @@ class FirebaseDatabase {
         .doc("flaunt")
         .collection("products")
         .snapshots();
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> searchProducts(
+      String query) {
+    return _firestore
+        .collection('AllProducts')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .snapshots();
+  }
+
+  static Future<QuerySnapshot<Map<String, dynamic>>> searchFromFirebase(
+      String query) async {
+    var result = _firestore
+        .collection('AllProducts')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .get();
+    return result;
+  }
+
+  // static Future searchFromFirebase(String query) async {
+  //   //  fetchProducts();
+  //   //   for(int)
+  //   print(query);
+  //   final products = [];
+  //   var category = reaCategory();
+  //   category.map((event) => e.);
+  //   List categoryName = [];
+
+  //   var tempProducts = _mainCollection.doc();
+
+  //   List searchResult = [];
+
+  //   // searchResult = await result.map((e) => e).toList();
+  //   print(categoryName.length);
+  // }
+  void loadDate() async {
+    try {} catch (e) {}
+  }
+
+  static fetchProducts() {}
+
+  static clearPercistence() {
+    _firestore.terminate();
+    _firestore.clearPersistence();
   }
 }

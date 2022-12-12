@@ -1,6 +1,7 @@
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WalletPaytileWidgets extends StatelessWidget {
   const WalletPaytileWidgets({
@@ -14,10 +15,11 @@ class WalletPaytileWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    print(width * .3);
     return Container(
       padding: EdgeInsets.only(left: 10),
-      height: height * .18,
-      width: width * .3,
+      height: 150.h,
+      width: 150.w,
       decoration: boxGradientDecorFlauntPay,
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +28,7 @@ class WalletPaytileWidgets extends StatelessWidget {
             kHeight5,
             Icon(
               iconFlauntPay[index],
-              size: 40,
+              size: 40.w,
             ),
             Text(
               textFlauntPay[index],

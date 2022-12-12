@@ -11,8 +11,8 @@ class SecondPage extends StatelessWidget {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
-      height: height.h,
-      width: width.h,
+      height: height,
+      width: width,
       decoration: onBoardSecondImage,
       child: SafeArea(
         child: Padding(

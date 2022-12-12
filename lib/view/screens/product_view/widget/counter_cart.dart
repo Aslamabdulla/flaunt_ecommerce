@@ -22,7 +22,7 @@ class CounterCartWidget extends StatelessWidget {
         kWidth5,
         Obx(() => Text(
               cartController.productCountCart.value.toString(),
-              style: TextStyle(fontSize: 18.sp),
+              style: TextStyle(fontSize: 16.sp),
             )),
         kWidth5,
         CartCountButtonWidget(
@@ -51,8 +51,8 @@ class CartCountButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: const Color.fromRGBO(43, 154, 184, 1))),
-        height: Get.height * .04,
-        width: Get.width * .08,
+        height: 30.h,
+        width: 30.72.w,
         child: Center(
           child: Icon(icon),
         ),

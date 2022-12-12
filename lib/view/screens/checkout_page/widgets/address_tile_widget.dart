@@ -18,11 +18,12 @@ class AddressTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
+    print(width * .25);
     return Container(
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.symmetric(horizontal: 15).w,
       width: width.w,
-      height: height * .2.h,
+      height: 161.h,
       decoration: decorationCartTile,
       child: StreamBuilder<DocumentSnapshot<Object?>>(
           stream: FirebaseDatabase.addressGet(),
@@ -34,24 +35,18 @@ class AddressTileWidget extends StatelessWidget {
             } else if (snapshot.data!.data() == null) {
               return GestureDetector(
                 onTap: () => Get.to(() => const AddressScreen()),
-                child: Container(
-                  width: width * .25.w,
-                  height: height * .05.h,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                  child: Center(
-                    child: Container(
-                      width: width * .25.w,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(15).r),
-                      child: const Center(
-                        child: Text(
-                          "Add Address",
-                          style: TextStyle(
-                              color: kDarkBlue, fontWeight: FontWeight.bold),
-                        ),
+                child: Center(
+                  child: Container(
+                    width: 110.w,
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(15).r),
+                    child: const Center(
+                      child: Text(
+                        "Add Address",
+                        style: TextStyle(
+                            color: kDarkBlue, fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),

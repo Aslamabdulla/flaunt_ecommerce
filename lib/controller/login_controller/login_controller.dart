@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/dependency/shared_pref.dart';
+import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/services/database_services.dart';
 import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/common/snack_bar_widget.dart';
@@ -29,6 +30,7 @@ class LoginController extends GetxController {
   GoogleSignInAccount get user => _user!;
   String? profileImageurl = "";
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  OrderModel? recentOrders;
   final fireAuth = FirebaseAuth.instance;
   Future signout() async {
     await googleSignin.signOut();
@@ -119,13 +121,6 @@ class LoginController extends GetxController {
     DocumentReference subDocumentreference =
         documentReference.collection("account").doc(userEmail);
   }
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   focusNode.dispose();
-  //   super.dispose();
-  // }
 
   Future signIn() async {
     try {

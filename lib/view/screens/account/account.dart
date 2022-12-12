@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
+import 'package:flaunt_ecommenrce/services/firebase_services.dart';
 import 'package:flaunt_ecommenrce/view/screens/account/widgets/my_orders.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/login.dart';
@@ -40,8 +42,8 @@ class AccountPage extends StatelessWidget {
           ClipPath(
             clipper: BackgroundClipper(),
             child: Container(
-              height: height.h,
-              width: width.w,
+              height: height,
+              width: width,
               decoration: customClipperBackground,
             ),
           ),
@@ -53,25 +55,26 @@ class AccountPage extends StatelessWidget {
               children: [
                 kHeight20,
                 ProfileImageCircleAvatar(
-                    height: height.h,
-                    width: width.w,
+                    height: height,
+                    width: width,
                     user: user,
                     profileImage: profileImage),
                 kHeight10,
                 Text(
                   username,
                   style:
-                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   email,
                   style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600),
                 ),
                 kHeight15,
                 Container(
+                    padding: const EdgeInsets.all(5).w,
                     width: 300.w,
-                    height: 280.h,
+                    height: 285.h,
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(.1),
                         borderRadius: BorderRadius.circular(20).w),
@@ -105,12 +108,17 @@ class AccountPage extends StatelessWidget {
                               trailing: Icons.chevron_right,
                             ),
                             AccountListTile(
-                              onTap: () {
+                              onTap: () async {
                                 final googleSignin = GoogleSignIn();
                                 FirebaseAuth.instance.signOut();
+
                                 loginController.signout();
-                                Get.offAll(() => const LoginPage(),
+
+                                await Get.offAll(() => const LoginPage(),
                                     transition: Transition.leftToRight);
+                                await FirebaseDatabase.clearPercistence();
+
+                                print("success");
                               },
                               text: "Logout",
                               leading: Icons.logout_outlined,

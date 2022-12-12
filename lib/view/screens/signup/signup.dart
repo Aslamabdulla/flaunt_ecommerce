@@ -33,8 +33,8 @@ class SignUpPage extends StatelessWidget {
             ClipPath(
               clipper: BackgroundClipper(),
               child: Container(
-                height: height.h,
-                width: width.w,
+                height: height,
+                width: width,
                 decoration: customClipperBackground,
               ),
             ),
@@ -52,7 +52,7 @@ class SignUpPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(width / 4),
                       color: Colors.transparent,
                       child: CircleAvatar(
-                        radius: width / 4.w,
+                        radius: width / 4,
                         backgroundImage:
                             const AssetImage("assets/images/user.jpg"),
                       ),

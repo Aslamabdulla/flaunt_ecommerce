@@ -90,7 +90,7 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
             Container(
               padding: EdgeInsets.only(left: 15),
               width: 200.w,
-              height: 60.h,
+              height: 70.h,
               decoration: glassDecorationGrid,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -99,9 +99,13 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        productList.name,
-                        style: gridstyle,
+                      SizedBox(
+                        width: 150.w,
+                        child: Text(
+                          productList.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: gridstyle,
+                        ),
                       ),
                       Text(
                         "₹${productList.price}",
@@ -110,25 +114,6 @@ Widget image(int index, CartModel productList, String id) => GestureDetector(
                       kHeight5
                     ],
                   ),
-                  // StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  //     stream: FirebaseDatabase.readFav(),
-                  //     builder: (context, snapshot) {
-                  //       if (snapshot.connectionState ==
-                  //           ConnectionState.waiting) {
-                  //         return SizedBox();
-                  //       } else if (snapshot.hasError) {
-                  //         return SizedBox();
-                  //       } else {
-                  //         var fav = snapshot.data!.docs.map((e) => e).toList();
-
-                  //         return fav.contains(productList.productId)
-                  //             ? Icon(Icons.favorite_outline_outlined)
-                  //             : Icon(
-                  //                 Icons.favorite,
-                  //                 color: kRedAccent,
-                  //               );
-                  //       }
-                  //     })
                 ],
               ),
             ),

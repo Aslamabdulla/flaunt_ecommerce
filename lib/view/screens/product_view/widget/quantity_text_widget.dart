@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuantityWidget extends StatelessWidget {
   const QuantityWidget({
@@ -14,22 +15,23 @@ class QuantityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(width * .35);
-    print(height * .06);
     return Container(
-      width: width * .35,
-      height: height * .06,
+      width: 125.w,
+      height: 40.h,
       decoration: BoxDecoration(
           border: Border.all(width: .5),
           borderRadius: BorderRadius.circular(20)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "QUANTITY : ",
-            style: TextStyle(fontWeight: FontWeight.w600),
+            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13.sp),
           ),
-          Text(quantity)
+          Text(
+            quantity,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp),
+          )
         ],
       ),
     );

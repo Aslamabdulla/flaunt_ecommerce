@@ -129,9 +129,8 @@ class MyCartScreen extends StatelessWidget {
                                   index: index,
                                 );
                               },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    height: 10,
+                              separatorBuilder: (context, index) => SizedBox(
+                                    height: 10.sp,
                                   ),
                               itemCount: snapshot.data!.docs.length),
                           kHeight15,

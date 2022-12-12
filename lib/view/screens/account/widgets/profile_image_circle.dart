@@ -19,13 +19,13 @@ class ProfileImageCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: height * .12.h).r,
+      padding: EdgeInsets.only(top: height * .12),
       child: PhysicalModel(
         elevation: 10,
         borderRadius: BorderRadius.circular(width / 4).w,
         color: Colors.transparent,
         child: CircleAvatar(
-          radius: width / 4.w,
+          radius: width / 4,
           backgroundImage: user?.photoURL == null
               ? const AssetImage("assets/images/user.jpg")
               : NetworkImage(profileImage) as ImageProvider,

@@ -48,7 +48,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
               decoration: customClipperBackground,
             ),
           ),
-          SafeArea(child: SafeArea(
+          SafeArea(
             child: Builder(builder: (context) {
               return GetX<CreditCardController>(
                   init: CreditCardController(),
@@ -67,6 +67,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                           bankName: 'Axis Bank',
                           showBackView: creditController.isCvvFocused.value,
                           obscureCardNumber: true,
+                          textStyle: TextStyle(color: kWhite, fontSize: 12.sp),
                           obscureCardCvv: true,
                           isHolderNameVisible: true,
                           cardBgColor: Colors.red,
@@ -180,7 +181,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                     );
                   });
             }),
-          ))
+          )
         ],
       ),
     );

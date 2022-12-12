@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flaunt_ecommenrce/model/product_model/product_model.dart';
 import 'package:flaunt_ecommenrce/view/screens/product_view/product_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -19,8 +20,6 @@ class GridViewCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: GridView.custom(
@@ -94,8 +93,8 @@ Widget image(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 15),
-            height: 60,
+            padding: EdgeInsets.only(left: 5).r,
+            height: 70.h,
             decoration: glassDecorationGrid,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,7 +104,7 @@ Widget image(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: Get.width * .36,
+                      width: 165.w,
                       child: Text(
                         title,
                         overflow: TextOverflow.ellipsis,

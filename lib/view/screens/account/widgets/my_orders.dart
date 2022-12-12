@@ -58,7 +58,7 @@ class MyOrdersScreen extends StatelessWidget {
           SafeArea(
             child: SingleChildScrollView(
               child: StreamBuilder(
-                  stream: FirebaseDatabase.readorders(),
+                  stream: FirebaseDatabase.readorders().asBroadcastStream(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return const Center(

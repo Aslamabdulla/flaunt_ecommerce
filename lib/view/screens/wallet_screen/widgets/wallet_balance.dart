@@ -1,5 +1,6 @@
 import 'package:flaunt_ecommenrce/view/common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WalletBalanceWidget extends StatelessWidget {
   const WalletBalanceWidget({
@@ -10,15 +11,16 @@ class WalletBalanceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    print(width * .7);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.only(left: 15),
-          padding: EdgeInsets.all(20),
+          margin: const EdgeInsets.only(left: 15).r,
+          padding: EdgeInsets.all(20).r,
           decoration: boxGradientDecoration,
-          height: height * .14,
-          width: width * .7,
+          height: 132.h,
+          width: 268.w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,7 +35,7 @@ class WalletBalanceWidget extends StatelessWidget {
                 ],
               ),
               Text(
-                "₹145,76",
+                "₹0.0",
                 style: textStyleSize(28, FontWeight.w600),
               ),
             ],

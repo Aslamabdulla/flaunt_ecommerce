@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:flaunt_ecommenrce/dependency/dependency.dart';
@@ -26,20 +27,25 @@ class CountAndCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = Get.width;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CounterCartWidget(quantity: quantity),
         ElevatedButton.icon(
             style: buttonStyleCart(
-                width * .5, 50, const Color.fromRGBO(43, 154, 184, 1)),
+                192.w, 40.h, const Color.fromRGBO(43, 154, 184, 1)),
             onPressed: () async {
               await cartController.checkCartItem(
                   docId, category, subCategory, id, isMainCollection);
             },
-            icon: const Icon(Icons.add_shopping_cart_outlined),
-            label: const Text("Add to Cart"))
+            icon: Icon(
+              Icons.add_shopping_cart_outlined,
+              size: 20.sp,
+            ),
+            label: Text(
+              "Add to Cart",
+              style: TextStyle(fontSize: 13.sp),
+            ))
       ],
     );
   }

@@ -60,9 +60,9 @@ class GlassTileWidget extends StatelessWidget {
               Column(
                 children: [
                   Text(productName,
-                      style: textStyleSize(15.sp, FontWeight.bold)),
+                      style: textStyleSize(15.sp, FontWeight.w400)),
                   Text("₹$productPrice",
-                      style: textStyleSize(17.sp, FontWeight.bold)),
+                      style: textStyleSize(17.sp, FontWeight.w400)),
                 ],
               )
             ],

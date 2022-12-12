@@ -9,8 +9,10 @@ class DiscountOffers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10).r,
-      height: 150.h,
+      margin: EdgeInsets.only(
+        left: 10,
+      ).r,
+      height: 160.h,
       child: ListView.separated(
         physics: BouncingScrollPhysics(),
         separatorBuilder: (context, index) => SizedBox(

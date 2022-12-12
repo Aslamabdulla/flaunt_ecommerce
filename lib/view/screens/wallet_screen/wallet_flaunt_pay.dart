@@ -39,15 +39,14 @@ class FlauntPayScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 2.5.h,
+              height: height / 2.5,
               decoration: customClipperBackground,
             ),
           ),
           SafeArea(
             child: SingleChildScrollView(
               child: Container(
-                height: height.h,
-                width: width.w,
+                width: width,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,10 +58,10 @@ class FlauntPayScreen extends StatelessWidget {
                         top: 20,
                         left: 20,
                         fontSize: 18.sp),
-                    kHeight20,
+                    kHeight10,
                     Container(
-                        height: 270.h,
-                        width: width.w,
+                        height: 290.h,
+                        width: width,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -72,15 +71,15 @@ class FlauntPayScreen extends StatelessWidget {
                               CreditCard(index: index),
                         )),
                     WalletBalanceWidget(),
-                    kHeight15,
+                    kHeight10,
                     Row(
                       children: [kWidth15, Text("WALLET SETUP")],
                     ),
-                    kHeight20,
+                    kHeight10,
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15),
-                      height: height * .2.h,
-                      width: width.w,
+                      margin: EdgeInsets.only(left: 10),
+                      height: 180.h,
+                      width: width,
                       child: ListView.separated(
                           shrinkWrap: true,
                           physics: BouncingScrollPhysics(),

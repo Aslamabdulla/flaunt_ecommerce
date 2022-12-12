@@ -1,5 +1,6 @@
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../home_screen/widgets/widgets.dart';
 
@@ -25,7 +26,7 @@ class CategoryTileWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            height: 50,
+            height: 60.h,
             width: double.infinity,
             decoration: glassDecorationCustom(
                 kWhite.withOpacity(.8), kWhite.withOpacity(.5)),

@@ -7,6 +7,7 @@ import 'package:flaunt_ecommenrce/view/constants/constants.dart';
 import 'package:flaunt_ecommenrce/view/screens/categories/widgets/categories_upper_tile.dart';
 import 'package:flaunt_ecommenrce/view/screens/categories/widgets/grid_view_categories.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_screen/widgets/row_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoryListWidget extends StatelessWidget {
   CategoryListWidget({
@@ -28,7 +29,7 @@ class CategoryListWidget extends StatelessWidget {
       children: [
         Text(
           category.toUpperCase(),
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
         ),
         kHeight15,
         CategoriesUpperTile(category: category),

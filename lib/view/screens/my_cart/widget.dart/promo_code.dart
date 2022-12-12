@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PromoCodeWidget extends StatelessWidget {
   const PromoCodeWidget({
@@ -13,8 +14,8 @@ class PromoCodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
-      width: width / 2,
+      height: 50.h,
+      width: 192.w,
       child: TextFormField(
         controller: offerController,
         decoration: InputDecoration(
@@ -22,7 +23,7 @@ class PromoCodeWidget extends StatelessWidget {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             filled: true,
             hintText: " Promo Code",
-            hintStyle: TextStyle(fontSize: 12, height: 0)),
+            hintStyle: TextStyle(fontSize: 12.sp, height: 0)),
       ),
     );
   }

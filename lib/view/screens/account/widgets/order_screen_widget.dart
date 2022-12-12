@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flaunt_ecommenrce/dependency/dependency.dart';
 import 'package:flaunt_ecommenrce/model/order_model/order_model.dart';
 import 'package:flaunt_ecommenrce/view/common/widgets/login_button_widget.dart';
 import 'package:flaunt_ecommenrce/view/constants/constants.dart';
@@ -37,18 +38,18 @@ class OrderSceenWidget extends StatelessWidget {
             shrinkWrap: true,
             primary: false,
             itemBuilder: (context, index) {
-              final cartProducts =
+              loginController.recentOrders =
                   OrderModel.fromMap(snapshot.data!.docs[index].data());
               final id = snapshot.data!.docs[index].id;
 
               return GestureDetector(
                 onTap: () => Get.to(() => DeliveryStatusScren(
-                      orderModel: cartProducts,
+                      orderModel: loginController.recentOrders!,
                       id: id,
                     )),
                 child: OrderTileWidget(
                   snapshot: snapshot,
-                  images: cartProducts.imageUrl,
+                  images: loginController.recentOrders!.imageUrl,
                   index: index,
                 ),
               );

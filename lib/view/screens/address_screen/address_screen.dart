@@ -21,6 +21,7 @@ class AddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = ScreenUtil().screenHeight;
     final width = ScreenUtil().screenWidth;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -33,7 +34,7 @@ class AddressScreen extends StatelessWidget {
           ClipPath(
             clipper: ClipperPath(),
             child: Container(
-              height: height / 3.h,
+              height: 220.h,
               decoration: customClipperBackground,
             ),
           ),
@@ -56,7 +57,7 @@ class AddressScreen extends StatelessWidget {
                         RowWidget(
                             mainAxis: MainAxisAlignment.center,
                             text: "Edit Your Delivery Address",
-                            top: height * .18.h,
+                            top: 80.h,
                             left: 0,
                             fontSize: 22.sp),
                         kHeight50,

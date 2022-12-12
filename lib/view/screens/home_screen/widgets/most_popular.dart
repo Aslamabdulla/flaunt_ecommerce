@@ -110,18 +110,18 @@ class MostPopularWidget extends StatelessWidget {
                   width: 140.w,
                   child: Text(
                     product.name,
-                    style: textStyleSize(15, FontWeight.bold),
+                    style: textStyleSize(15, FontWeight.w400),
                     overflow: TextOverflow.ellipsis,
                   )),
               kHeight5,
               Text(
                 product.brand,
-                style: textStyleSize(16, FontWeight.bold),
+                style: textStyleSize(16, FontWeight.w400),
               ),
               kHeight5,
               Text(
                 "₹${product.price}",
-                style: textStyleSize(18, FontWeight.bold),
+                style: textStyleSize(18, FontWeight.w400),
               ),
             ],
           )

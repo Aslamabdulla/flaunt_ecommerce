@@ -23,7 +23,6 @@ class ShippingRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = ScreenUtil().scaleHeight;
     final width = ScreenUtil().screenWidth;
     return Container(
       margin: EdgeInsets.only(left: left, right: 50, top: 10).r,

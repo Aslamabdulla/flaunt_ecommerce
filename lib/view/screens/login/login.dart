@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flaunt_ecommenrce/view/screens/home_bottom_navigation/home_navigation.dart';
-import 'package:flaunt_ecommenrce/view/screens/home_screen/home_screen.dart';
+
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/contents.dart';
 import 'package:flaunt_ecommenrce/view/screens/login/widgets/custom_paint.dart';
 
@@ -33,8 +33,8 @@ class LoginPage extends StatelessWidget {
                     ClipPath(
                       clipper: BackgroundClipper(),
                       child: Container(
-                        height: height.h,
-                        width: width.w,
+                        height: height,
+                        width: width,
                         decoration: customClipperBackground,
                       ),
                     ),
@@ -55,8 +55,8 @@ class LoginPage extends StatelessWidget {
                     ClipPath(
                       clipper: BackgroundClipper(),
                       child: Container(
-                        height: height.h,
-                        width: width.w,
+                        height: height,
+                        width: width,
                         decoration: customClipperBackground,
                       ),
                     ),

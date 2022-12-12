@@ -22,8 +22,8 @@ class TitleWidget extends StatelessWidget {
         SizedBox(
           width: 257.w,
           child: Text(
-            title,
-            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+            title.toUpperCase(),
+            style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600),
           ),
         ),
         SizedBox(
@@ -33,7 +33,7 @@ class TitleWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.end,
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 17.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
